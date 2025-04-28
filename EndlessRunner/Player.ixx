@@ -9,7 +9,7 @@ export class Player
 {
 	/*AnimData dinoAnim;*/
 	Resources res;
-	Texture2D texture_run{ res.getDino() };
+	Texture2D texture_run{ res.getPlayerRun() };
 	Vector2 screenPos{};
 	Vector2 worldPos{};
 

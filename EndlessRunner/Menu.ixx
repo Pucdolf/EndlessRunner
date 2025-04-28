@@ -12,19 +12,16 @@ import <string>;
 
 export class Menu {
 private:
-
 	static constexpr int buttonCount = 5;
-	std::array<const char*, buttonCount> labels = { "Start Game", "Leaderboard","Shop", "Options", "Exit" };
+	std::array<const char*, buttonCount> labels = { "Start Game", "Leaderboard", "Shop", "Options", "Exit" };
 	std::array<Rectangle, buttonCount> buttons;
 	int selected = -1;
 
 	Resources* resources{ nullptr };
 	Board* board{ nullptr };
 	Shop* shop{ nullptr };
-	Texture2D menuBackground;
 
 public:
-
 	void setContext(Resources& res, Board& b, Shop& s) {
 		resources = &res;
 		board = &b;
@@ -32,7 +29,6 @@ public:
 	}
 
 	void showMenu(int screenWidth, int screenHeight) {
-		menuBackground = LoadTexture("textures/main_menu_background.png");
 		bool menuRunning = true;
 
 		while (!WindowShouldClose() && menuRunning) {
@@ -63,9 +59,9 @@ public:
 			ClearBackground(RAYWHITE);
 
 			DrawTexturePro(
-				menuBackground,
-				Rectangle{ 0,0, static_cast<float> (menuBackground.width), static_cast<float>(menuBackground.height) },
-				Rectangle{ 0,0, static_cast<float>(screenWidth), static_cast<float> (screenHeight) },
+				resources->getMenuBackground(),
+				Rectangle{ 0,0, static_cast<float>(resources->getMenuBackground().width), static_cast<float>(resources->getMenuBackground().height) },
+				Rectangle{ 0,0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
 				Vector2{ 0,0 },
 				0.0f,
 				WHITE
@@ -95,12 +91,11 @@ public:
 	}
 
 	void showOptions() {
-		//to do
+		// to do
 	}
 
 	void openShop() {
 		if (shop && resources) {
-			//TraceLog(LOG_INFO, ">>> OPENING SHOP <<<");
 			shop->show(GetScreenWidth(), GetScreenHeight());
 		}
 	}

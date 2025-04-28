@@ -12,7 +12,7 @@ private:
 	Texture2D dinos[DinoCount];
 	Rectangle dinoRecs[DinoCount];
 	Texture2D background;
-
+	Resources resources;
 	std::array<float, DinoCount> scales{ 6.0f, 7.5f, 8.5f, 7.0f };
 	std::array<float, DinoCount> frameWidths;
 	std::array<float, DinoCount> frameHeights;
@@ -24,11 +24,12 @@ private:
 public:
 	void init(Resources& res, int screenWidth, int screenHeight)
 	{
-		dinos[0] = res.getGreenIdle();
-		dinos[1] = res.getBlueIdle();
-		dinos[2] = res.getYellowIdle();
-		dinos[3] = res.getRedIdle();
-		background = LoadTexture("textures/shop_background.png");
+		resources = res;
+		dinos[0] = resources.getGreenIdle();
+		dinos[1] = resources.getBlueIdle();
+		dinos[2] = resources.getYellowIdle();
+		dinos[3] = resources.getRedIdle();
+		/*background = LoadTexture("textures/shop_background.png");*/
 
 		for (int i{ 0 }; i < DinoCount; i++) {
 			frameWidths[i] = static_cast<float>(dinos[i].width / 4);
@@ -61,8 +62,8 @@ public:
 			ClearBackground(RAYWHITE);
 
 			DrawTexturePro(
-				background,
-				Rectangle{ 0, 0, static_cast<float>(background.width), static_cast<float>(background.height) },
+				resources.getShopBackground(),
+				Rectangle{ 0, 0, static_cast<float>(resources.getShopBackground().width), static_cast<float>(resources.getShopBackground().height)},
 				Rectangle{ 0, 0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
 				Vector2{ 0, 0 },
 				0.0f,

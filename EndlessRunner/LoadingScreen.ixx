@@ -31,7 +31,7 @@ public:
 		/*std::thread loader([&]() {*/
 		resources.loadTextures();
 		//progress = 50;
-		board.init(resources.getDino(), resources.getNebula(), screenWidth, screenHeight);
+		board.init(resources.getPlayerRun(), resources.getNebula(), screenWidth, screenHeight);
 		shop.init(resources, screenWidth, screenHeight);
 		//progress = 100;
 		//loadingFinished = true;
@@ -63,7 +63,7 @@ public:
 			DrawTexture(barEmpty, barX, barY, WHITE);
 
 			Rectangle source = { 0,0, barFill.width * loadingProgress, static_cast<float>(barFill.height) };
-			Rectangle dest = { static_cast<float>(barX), static_cast<float>(barY), barFill.width * loadingProgress, static_cast<float>(barFill.height) };
+			Rectangle dest = { static_cast<float>(barX), static_cast<float>(barY), barFill.width * loadingProgress, static_cast<float>(barFill.height)};
 			DrawTexturePro(barFill, source, dest, { 0,0 }, 0.0f, WHITE);
 
 			EndDrawing();

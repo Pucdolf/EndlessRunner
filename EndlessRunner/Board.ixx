@@ -22,7 +22,7 @@ private:
 	/*AnimData nebulae[amountOfNeb]{};
 	int nebulaVel{ -200 };
 	*/
-	
+
 	std::array<Nebula, amountOfNeb> nebulae;
 	float finishLine;
 
@@ -105,7 +105,7 @@ public:
 
 
 	bool checkLoss() const {
-		for (const auto& nebula : nebulae){
+		for (const auto& nebula : nebulae) {
 			if (nebulaCollision(nebula.getCollisionRec(), player.getCollisionRec())) {
 				return true;
 			}

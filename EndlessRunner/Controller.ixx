@@ -51,7 +51,7 @@ public:
 			}
 			else {
 				score += dt;
-				board.draw(resources.getDino(), resources.getNebula());
+				board.draw(resources.getPlayerRun(), resources.getNebula());
 			}
 
 			drawUI();
@@ -59,15 +59,15 @@ public:
 			EndDrawing();
 		}
 
-		resources.unloadTextures();
+		//resources.unloadTextures();
 		CloseWindow();
 	}
 
 private:
 	void scrollBackground(float dt, int windowWidth, int windowHeight) {
-		Texture2D background = resources.getBackground();
-		Texture2D midground = resources.getMidground();
-		Texture2D foreground = resources.getForeground();
+		Texture2D background = resources.getGameBackground();
+		Texture2D midground = resources.getGameMidground();
+		Texture2D foreground = resources.getGameForeground();
 
 		float scale = static_cast<float>(windowHeight) / background.height;
 		float scaledWidth = background.width * scale;
@@ -100,8 +100,8 @@ private:
 	void drawUI()
 	{
 		// Draw lives
-		Texture2D lifeFull = resources.getLifeFull();
-		Texture2D lifeEmpty = resources.getLifeEmpty();
+		Texture2D lifeFull = resources.getHeartIcon();
+		Texture2D lifeEmpty = resources.getLifeLostIcon();
 		for (int i = 0; i < 3; i++) {
 			Texture2D icon = (i < lives) ? lifeFull : lifeEmpty;
 			float x = 10 + i * (icon.width * scale + 5);
@@ -110,7 +110,7 @@ private:
 		}
 
 		// Draw score
-		Texture2D numbers = resources.getNumbers();
+		Texture2D numbers = resources.getNumbersTexture();
 		int s = static_cast<int>(score);
 		std::string scoreText = std::to_string(s);
 

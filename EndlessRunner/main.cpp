@@ -4,7 +4,6 @@ import LoadingScreenModule;
 import ResourcesModule;
 import BoardModule;
 import ShopModule;
-import <atomic>;
 
 int main() {
 
@@ -12,7 +11,7 @@ int main() {
 	const int screenHeight = 720;
 
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-	InitWindow(screenWidth, screenHeight, "Jurrasic Jump");
+	InitWindow(screenWidth, screenHeight, "Dino Rush");
 
 	Resources resources;
 	Board board;
