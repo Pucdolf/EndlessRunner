@@ -155,5 +155,8 @@
     <Image Include="textures\Characters\Player 4\p4_run.png">
       <Filter>Resources\textures\Characters\Player4</Filter>
     </Image>
+    <Image Include="textures\shop_background.png">
+      <Filter>Resources\textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

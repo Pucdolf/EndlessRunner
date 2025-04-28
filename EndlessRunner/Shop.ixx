@@ -69,12 +69,10 @@ public:
 				WHITE
 			);
 
-			DrawText("SHOP", screenWidth / 2 - MeasureText("SHOP", 40) / 2, 40, 40, BLACK);
-
 			for (int i = 0; i < DinoCount; i++) {
 				Rectangle dest = {
 					dinoRecs[i].x + (dinoRecs[i].width - frameWidths[i] * scales[i]) / 2,
-					screenHeight * 0.75f - frameHeights[i] * scales[i],
+					screenHeight * 0.85f - frameHeights[i] * scales[i],
 					frameWidths[i] * scales[i],
 					frameHeights[i] * scales[i]
 				};

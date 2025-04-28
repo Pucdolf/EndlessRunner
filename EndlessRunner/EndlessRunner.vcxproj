@@ -170,6 +170,7 @@
     <Image Include="textures\main_menu_background.png" />
     <Image Include="textures\numbers.png" />
     <Image Include="textures\scarfy.png" />
+    <Image Include="textures\shop_background.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
