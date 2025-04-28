@@ -16,7 +16,6 @@ int main() {
 	Resources resources;
 	Board board;
 	Shop shop;
-	//std::atomic<bool> ready = false;
 
 	LoadingScreen loader;
 	loader.show(screenWidth, screenHeight, resources, board, shop);
