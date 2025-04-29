@@ -87,6 +87,8 @@ public:
 		if (resources && board) {
 
 			int selectedDino = shop->getSelectedDino();
+			int frameCount = shop->getSelectedDinoFrameCount();
+
 			Texture2D selectedDinoTex;
 			switch (selectedDino)
 			{
@@ -101,7 +103,9 @@ public:
 			default:
 				selectedDinoTex = resources->getGreenDinoRun();  break;
 			}
+
 			board->setDinoTex(selectedDinoTex);
+			board->setDinoFrameCount(frameCount);
 			Controller controller(*resources, *board, GetScreenWidth(), GetScreenHeight());
 			controller.run();
 		}

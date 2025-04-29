@@ -7,9 +7,8 @@ import UtilitiesModule;
 
 export class Player
 {
-	/*AnimData dinoAnim;*/
-	//Resources res{};
-	Texture2D texture_run{ /*res.getPlayerRun()*/ };
+
+	Texture2D texture_run{ };
 	Vector2 screenPos{};
 	Vector2 worldPos{};
 
@@ -23,19 +22,17 @@ export class Player
 
 
 	int frame{};
-	const float maxFrames{ 6.f };
+	float maxFrames{};
 	float updateTime{};
 	float runningTime{};
 	const float scale{ 4.0f };
 
-
-
-
 public:
 	Player() = default;
 
-	void init(const Texture2D& dinoTex, int windowWidth, int windowHeight) {
+	void init(const Texture2D& dinoTex, int frameCount ,int windowWidth, int windowHeight) {
 		
+		maxFrames = static_cast<float>(frameCount);
 		texture_run = dinoTex;
 
 		width = static_cast<float>(dinoTex.width / maxFrames);

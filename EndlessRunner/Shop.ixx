@@ -16,13 +16,13 @@ private:
 	std::array<float, DinoCount> scales{ 6.0f, 7.5f, 8.5f, 7.0f };
 	std::array<float, DinoCount> frameWidths;
 	std::array<float, DinoCount> frameHeights;
-	//std::array<int, DinoCount> frameCounts {6,4,4,6};
+	std::array<int, DinoCount> frameCounts{ 6, 4, 4, 6 };
 
-	int frame = 0;
-	float runningTime = 0;
-	float updateTime = 1.0f / 12.0f;
+	int frame{ 0 };
+	float runningTime{ 0 };
+	float updateTime{ 1.0f / 12.0f };
 
-	int selectedDino = 0;
+	int selectedDinoIndex{ 0 };
 
 public:
 	void init(Resources& res, int screenWidth, int screenHeight)
@@ -32,7 +32,7 @@ public:
 		dinos[1] = resources.getBlueIdle();
 		dinos[2] = resources.getYellowIdle();
 		dinos[3] = resources.getRedIdle();
-		/*background = LoadTexture("textures/shop_background.png");*/
+
 
 		for (int i{ 0 }; i < DinoCount; i++) {
 			frameWidths[i] = static_cast<float>(dinos[i].width / 4);
@@ -65,7 +65,7 @@ public:
 			for (int i{ 0 }; i < DinoCount; i++) {
 				if (CheckCollisionPointRec(mouse, dinoRecs[i])) {
 					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-						selectedDino = i;
+						selectedDinoIndex = i;
 					}
 				}
 			}
@@ -76,7 +76,7 @@ public:
 
 			DrawTexturePro(
 				resources.getShopBackground(),
-				Rectangle{ 0, 0, static_cast<float>(resources.getShopBackground().width), static_cast<float>(resources.getShopBackground().height)},
+				Rectangle{ 0, 0, static_cast<float>(resources.getShopBackground().width), static_cast<float>(resources.getShopBackground().height) },
 				Rectangle{ 0, 0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
 				Vector2{ 0, 0 },
 				0.0f,
@@ -95,7 +95,7 @@ public:
 
 				DrawTexturePro(dinos[i], source, dest, Vector2{ 0, 0 }, 0.0f, WHITE);
 
-				if (i == selectedDino) {
+				if (i == selectedDinoIndex) {
 					Rectangle selectionFrame = dinoRecs[i];
 					selectionFrame.y += 50.f; // Przesuniêcie w dó³
 					DrawRectangleLinesEx(selectionFrame, 4.f, GREEN);
@@ -108,7 +108,11 @@ public:
 		}
 	}
 
-	int getSelectedDino() const	{
-		return selectedDino;
+	int getSelectedDino() const {
+		return selectedDinoIndex;
+	}
+
+	int getSelectedDinoFrameCount() const {
+		return frameCounts[selectedDinoIndex];
 	}
 };

@@ -17,21 +17,27 @@ private:
 	std::array<Nebula, amountOfNeb> nebulae;
 	float finishLine{};
 	Texture2D selectedDinoTex{};
+	int selectedDinoFrameCount{ 6 };
 
 public:
 
 	void setDinoTex(const Texture2D& dinoTex) {
 		selectedDinoTex = dinoTex;
 	}
+	void setDinoFrameCount(int frameCount) {
+		selectedDinoFrameCount = frameCount;
+		
+	}
 
 	void init(const Texture2D& dinoTex, const Texture2D& nebulaTex, int windowWidth, int windowHeight) {
-		
+
 		//Gdy nie wybrano w sklepie textury - domyslnie zielona
 		if (selectedDinoTex.id == 0) {
 			selectedDinoTex = dinoTex;
+			selectedDinoFrameCount = 6;
 		}
 
-		player.init(selectedDinoTex, windowWidth, windowHeight);
+		player.init(selectedDinoTex, selectedDinoFrameCount, windowWidth, windowHeight);
 
 		for (int i = 0; i < amountOfNeb; i++)
 		{
@@ -55,7 +61,7 @@ public:
 		finishLine += -200 * deltaTime;
 	}
 
-	void draw(/*const Texture2D& dinoTex, */const Texture2D& nebula) const {
+	void draw(const Texture2D& nebula) const {
 
 
 		for (auto& nebula : nebulae)
