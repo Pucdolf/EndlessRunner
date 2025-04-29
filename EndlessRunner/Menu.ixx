@@ -123,6 +123,7 @@ public:
 
 	void exitGame() const {
 		CloseWindow();
+		resources->unloadTextures();
 	}
 
 	void handleClick(int index) {

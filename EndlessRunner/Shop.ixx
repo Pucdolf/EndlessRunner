@@ -101,7 +101,6 @@ public:
 					DrawRectangleLinesEx(selectionFrame, 4.f, GREEN);
 				}
 
-				DrawTexturePro(dinos[i], source, dest, Vector2{ 0,0 }, 0.f, WHITE);
 			}
 
 			EndDrawing();

@@ -9,6 +9,7 @@ private:
 	//Menu
 	Texture2D menuBackground{};
 	//Loading screen
+	Texture2D loadingScreenBackground{};
 	Texture2D barEmpty{};
 	Texture2D barFill{};
 	//Shop
@@ -43,6 +44,7 @@ public:
 		//Menu
 		menuBackground = LoadTexture("textures/main_menu_background.png");
 		//Loading screen
+		loadingScreenBackground = LoadTexture("textures/loading_screen_background.png");
 		barEmpty = LoadTexture("textures/barempty.png");
 		barFill = LoadTexture("textures/barfill.png");
 		//Shop
@@ -80,6 +82,7 @@ public:
 		UnloadTexture(menuBackground);
 
 		//Loading screen
+		UnloadTexture(loadingScreenBackground);
 		UnloadTexture(barEmpty);
 		UnloadTexture(barFill);
 
@@ -133,6 +136,7 @@ public:
 	Texture2D& getLifeLostIcon() { return lifeLostIcon; }
 	Texture2D& getNumbersTexture() { return numbersTexture; }
 
+	Texture2D& getLoadingScreenBackground() { return loadingScreenBackground; }
 	Texture2D& getBarEmpty() { return barEmpty; }
 	Texture2D& getBarFill() { return barFill; }
 

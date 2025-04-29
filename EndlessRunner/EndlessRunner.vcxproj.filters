@@ -34,31 +34,16 @@
     <Filter Include="Resources\textures\Characters\Player4">
       <UniqueIdentifier>{b88ef0ce-13dc-4b69-bbf1-9cf97ea5b47e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interface">
+      <UniqueIdentifier>{9aae0f1d-e99a-4aed-a074-e7608b3a8cba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Game">
+      <UniqueIdentifier>{8b296e72-d800-46a1-bc51-273167a1ea54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources.ixx">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities.ixx">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.ixx">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionHandling.ixx">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.ixx">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.ixx">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadingScreen.ixx">
-      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="Player.ixx">
       <Filter>Modules\Objects</Filter>
@@ -66,8 +51,29 @@
     <ClCompile Include="Nebula.ixx">
       <Filter>Modules\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingScreen.ixx">
+      <Filter>Modules\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.ixx">
+      <Filter>Modules\Interface</Filter>
+    </ClCompile>
     <ClCompile Include="Shop.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Modules\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.ixx">
+      <Filter>Modules\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources.ixx">
+      <Filter>Modules\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.ixx">
+      <Filter>Modules\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionHandling.ixx">
+      <Filter>Modules\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.ixx">
+      <Filter>Modules\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

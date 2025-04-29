@@ -25,7 +25,7 @@ public:
 		//std::atomic<int> progress = 0;
 
 		auto startTime = std::chrono::high_resolution_clock::now();
-		const int loadingDuration = 1000; //ms
+		const int loadingDuration = 1500; //ms
 
 		//NIE DZIALA
 		/*std::thread loader([&]() {*/
@@ -55,15 +55,27 @@ public:
 			}
 
 			BeginDrawing();
-			ClearBackground(RAYWHITE);
-			DrawText("Loading...", screenWidth / 2 - 50, screenHeight / 2 + 40, 20, DARKGRAY);
+			//ClearBackground(RAYWHITE);
+
+			DrawTexturePro(
+				resources.getLoadingScreenBackground(),
+				Rectangle{ 0,0, static_cast<float>(resources.getLoadingScreenBackground().width), static_cast<float>(resources.getLoadingScreenBackground().height) },
+				Rectangle{ 0,0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
+				Vector2{ 0,0 },
+				0.0f,
+				WHITE
+			);
+			
 
 			int barX = screenWidth / 2 - barEmpty.width / 2;
-			int barY = screenHeight / 2 - barEmpty.height / 2;
-			DrawTexture(barEmpty, barX, barY, WHITE);
+			int barY = screenHeight / 2 + 230;
+
+			DrawText("Loading...", screenWidth / 2 - MeasureText("Loading...", 20) / 2, barY - 30, 20, DARKGRAY);
+
+			DrawTexture(barEmpty, barX, barY, BLACK);
 
 			Rectangle source = { 0,0, barFill.width * loadingProgress, static_cast<float>(barFill.height) };
-			Rectangle dest = { static_cast<float>(barX), static_cast<float>(barY), barFill.width * loadingProgress, static_cast<float>(barFill.height)};
+			Rectangle dest = { static_cast<float>(barX), static_cast<float>(barY), barFill.width * loadingProgress, static_cast<float>(barFill.height) };
 			DrawTexturePro(barFill, source, dest, { 0,0 }, 0.0f, WHITE);
 
 			EndDrawing();
