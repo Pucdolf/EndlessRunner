@@ -21,8 +21,17 @@ private:
 	Texture2D gameBackground{};
 	Texture2D gameMidground{};
 	Texture2D gameForeground{};
-	Texture2D playerRun{};
+
+	//Chaaracters
+	Texture2D greenDinoRun{};
+	Texture2D blueDinoRun{};
+	Texture2D yellowDinoRun{};
+	Texture2D redDinoRun{};
+
+	//Obstacles
 	Texture2D nebula{};
+
+	//Stats
 	Texture2D heartIcon{};
 	Texture2D lifeLostIcon{};
 	Texture2D numbersTexture{};
@@ -49,7 +58,13 @@ public:
 		gameForeground = LoadTexture("textures/foreground.png");
 
 		//Characters
-		playerRun = LoadTexture("textures/Characters/Player 1/p1_run.png");
+		greenDinoRun = LoadTexture("textures/Characters/Player 1/p1_run.png");
+		blueDinoRun = LoadTexture("textures/Characters/Player 2/p2_run.png");
+		yellowDinoRun = LoadTexture("textures/Characters/Player 3/p3_run.png");
+		redDinoRun = LoadTexture("textures/Characters/Player 4/p4_run.png");
+
+
+		//Obstacles
 		nebula = LoadTexture("textures/12_nebula_spritesheet.png");
 
 		//Stats
@@ -81,7 +96,10 @@ public:
 		UnloadTexture(gameForeground);
 
 		//Characters
-		UnloadTexture(playerRun);
+		UnloadTexture(greenDinoRun);
+		UnloadTexture(blueDinoRun);
+		UnloadTexture(yellowDinoRun);
+		UnloadTexture(redDinoRun);
 		UnloadTexture(nebula);
 
 		//Stats
@@ -104,7 +122,11 @@ public:
 	Texture2D& getGameMidground() { return gameMidground; }
 	Texture2D& getGameForeground() { return gameForeground; }
 
-	Texture2D& getPlayerRun() { return playerRun; }
+	Texture2D& getGreenDinoRun() { return greenDinoRun; }
+	Texture2D& getBlueDinoRun() { return blueDinoRun; }
+	Texture2D& getYellowDinoRun() { return yellowDinoRun; }
+	Texture2D& getRedDinoRun() { return redDinoRun; }
+
 	Texture2D& getNebula() { return nebula; }
 
 	Texture2D& getHeartIcon() { return heartIcon; }

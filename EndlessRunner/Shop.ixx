@@ -16,10 +16,13 @@ private:
 	std::array<float, DinoCount> scales{ 6.0f, 7.5f, 8.5f, 7.0f };
 	std::array<float, DinoCount> frameWidths;
 	std::array<float, DinoCount> frameHeights;
+	//std::array<int, DinoCount> frameCounts {6,4,4,6};
 
 	int frame = 0;
 	float runningTime = 0;
 	float updateTime = 1.0f / 12.0f;
+
+	int selectedDino = 0;
 
 public:
 	void init(Resources& res, int screenWidth, int screenHeight)
@@ -58,6 +61,16 @@ public:
 
 			if (IsKeyPressed(KEY_ESCAPE)) return;
 
+			Vector2 mouse = GetMousePosition();
+			for (int i{ 0 }; i < DinoCount; i++) {
+				if (CheckCollisionPointRec(mouse, dinoRecs[i])) {
+					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+						selectedDino = i;
+					}
+				}
+			}
+
+
 			BeginDrawing();
 			ClearBackground(RAYWHITE);
 
@@ -81,9 +94,21 @@ public:
 				Rectangle source = { frame * frameWidths[i], 0.0f, frameWidths[i], frameHeights[i] };
 
 				DrawTexturePro(dinos[i], source, dest, Vector2{ 0, 0 }, 0.0f, WHITE);
+
+				if (i == selectedDino) {
+					Rectangle selectionFrame = dinoRecs[i];
+					selectionFrame.y += 50.f; // Przesuniêcie w dó³
+					DrawRectangleLinesEx(selectionFrame, 4.f, GREEN);
+				}
+
+				DrawTexturePro(dinos[i], source, dest, Vector2{ 0,0 }, 0.f, WHITE);
 			}
 
 			EndDrawing();
 		}
+	}
+
+	int getSelectedDino() const	{
+		return selectedDino;
 	}
 };

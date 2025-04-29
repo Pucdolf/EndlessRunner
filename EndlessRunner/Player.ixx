@@ -8,8 +8,8 @@ import UtilitiesModule;
 export class Player
 {
 	/*AnimData dinoAnim;*/
-	Resources res;
-	Texture2D texture_run{ res.getPlayerRun() };
+	//Resources res{};
+	Texture2D texture_run{ /*res.getPlayerRun()*/ };
 	Vector2 screenPos{};
 	Vector2 worldPos{};
 
@@ -22,10 +22,10 @@ export class Player
 	bool isInAir{ false };
 
 
-	int frame;
+	int frame{};
 	const float maxFrames{ 6.f };
-	float updateTime;
-	float runningTime;
+	float updateTime{};
+	float runningTime{};
 	const float scale{ 4.0f };
 
 
@@ -34,18 +34,8 @@ export class Player
 public:
 	Player() = default;
 
-	void init(const Texture dinoTex, int windowWidth, int windowHeight) {
-		/*dinoAnim.rec.x = 0;
-		dinoAnim.rec.y = 0;
-		dinoAnim.rec.width = dinoTex.width / 6.f;
-		dinoAnim.rec.height = dinoTex.height;
-
-		dinoAnim.pos.x = windowWidth / 2.f - dinoAnim.rec.width / 2.f;
-		dinoAnim.pos.y = windowHeight - dinoAnim.rec.height;
-
-		dinoAnim.frame = 0;
-		dinoAnim.updateTime = 1.0f / 12.0f;
-		dinoAnim.runningTime = 0.0;*/
+	void init(const Texture2D& dinoTex, int windowWidth, int windowHeight) {
+		
 		texture_run = dinoTex;
 
 		width = static_cast<float>(dinoTex.width / maxFrames);

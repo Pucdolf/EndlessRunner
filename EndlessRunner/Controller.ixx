@@ -28,6 +28,8 @@ public:
 
 	void run() {
 
+		board.init(resources.getGreenDinoRun(), resources.getNebula(), windowWidth, windowHeight);
+
 		SetTargetFPS(60);
 		while (!WindowShouldClose()) {
 			float dt = GetFrameTime();
@@ -51,7 +53,7 @@ public:
 			}
 			else {
 				score += dt;
-				board.draw(resources.getPlayerRun(), resources.getNebula());
+				board.draw(/*resources.getPlayerRun(),*/ resources.getNebula());
 			}
 
 			drawUI();

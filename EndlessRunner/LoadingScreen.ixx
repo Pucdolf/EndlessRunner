@@ -31,7 +31,7 @@ public:
 		/*std::thread loader([&]() {*/
 		resources.loadTextures();
 		//progress = 50;
-		board.init(resources.getPlayerRun(), resources.getNebula(), screenWidth, screenHeight);
+		//board.init(resources.getPlayerRun(), resources.getNebula(), screenWidth, screenHeight);
 		shop.init(resources, screenWidth, screenHeight);
 		//progress = 100;
 		//loadingFinished = true;

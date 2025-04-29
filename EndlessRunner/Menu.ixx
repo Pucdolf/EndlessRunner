@@ -85,6 +85,23 @@ public:
 
 	void newGame() {
 		if (resources && board) {
+
+			int selectedDino = shop->getSelectedDino();
+			Texture2D selectedDinoTex;
+			switch (selectedDino)
+			{
+			case 0:
+				selectedDinoTex = resources->getGreenDinoRun();  break;
+			case 1:
+				selectedDinoTex = resources->getBlueDinoRun(); break;
+			case 2:
+				selectedDinoTex = resources->getYellowDinoRun(); break;
+			case 3:
+				selectedDinoTex = resources->getRedDinoRun(); break;
+			default:
+				selectedDinoTex = resources->getGreenDinoRun();  break;
+			}
+			board->setDinoTex(selectedDinoTex);
 			Controller controller(*resources, *board, GetScreenWidth(), GetScreenHeight());
 			controller.run();
 		}
