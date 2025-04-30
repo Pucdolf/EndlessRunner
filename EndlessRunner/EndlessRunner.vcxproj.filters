@@ -75,6 +75,9 @@
     <ClCompile Include="Board.ixx">
       <Filter>Modules\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Dust.ixx">
+      <Filter>Modules\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\12_nebula_spritesheet.png">
@@ -163,6 +166,9 @@
     </Image>
     <Image Include="textures\shop_background.png">
       <Filter>Resources\textures</Filter>
+    </Image>
+    <Image Include="textures\Characters\dust.png">
+      <Filter>Resources\textures\Characters</Filter>
     </Image>
   </ItemGroup>
 </Project>

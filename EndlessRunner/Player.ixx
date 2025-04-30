@@ -27,6 +27,7 @@ export class Player
 	float runningTime{};
 	const float scale{ 4.0f };
 
+
 public:
 	Player() = default;
 
@@ -76,7 +77,6 @@ public:
 		if (runningTime >= updateTime)
 		{
 			runningTime = 0.0f;
-			/*dinoAnim.rec.x = frame * width;*/
 			frame++;
 			if (frame >= maxFrames) frame = 0;
 		}

@@ -28,7 +28,7 @@ public:
 
 	void run() {
 
-		board.init(resources.getGreenDinoRun(), resources.getNebula(), windowWidth, windowHeight);
+		board.init(resources.getGreenDinoRun(), resources.getNebula(), resources.getDustRun(), windowWidth, windowHeight);
 
 		SetTargetFPS(60);
 		while (!WindowShouldClose()) {
@@ -53,7 +53,7 @@ public:
 			}
 			else {
 				score += dt;
-				board.draw(/*resources.getPlayerRun(),*/ resources.getNebula());
+				board.draw(resources.getNebula());
 			}
 
 			drawUI();

@@ -132,6 +132,7 @@
     <ClCompile Include="Board.ixx" />
     <ClCompile Include="CollisionHandling.ixx" />
     <ClCompile Include="Controller.ixx" />
+    <ClCompile Include="Dust.ixx" />
     <ClCompile Include="LoadingScreen.ixx" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.ixx" />
@@ -146,6 +147,7 @@
     <Image Include="textures\back-buildings.png" />
     <Image Include="textures\barempty.png" />
     <Image Include="textures\barfill.png" />
+    <Image Include="textures\Characters\dust.png" />
     <Image Include="textures\Characters\Player 1\p1_death.png" />
     <Image Include="textures\Characters\Player 1\p1_hit.png" />
     <Image Include="textures\Characters\Player 1\p1_idle.png" />

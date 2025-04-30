@@ -24,6 +24,7 @@ private:
 	Texture2D gameForeground{};
 
 	//Chaaracters
+	Texture2D dustRun{};
 	Texture2D greenDinoRun{};
 	Texture2D blueDinoRun{};
 	Texture2D yellowDinoRun{};
@@ -60,6 +61,7 @@ public:
 		gameForeground = LoadTexture("textures/foreground.png");
 
 		//Characters
+		dustRun = LoadTexture("textures/Characters/dust.png");
 		greenDinoRun = LoadTexture("textures/Characters/Player 1/p1_run.png");
 		blueDinoRun = LoadTexture("textures/Characters/Player 2/p2_run.png");
 		yellowDinoRun = LoadTexture("textures/Characters/Player 3/p3_run.png");
@@ -99,6 +101,7 @@ public:
 		UnloadTexture(gameForeground);
 
 		//Characters
+		UnloadTexture(dustRun);
 		UnloadTexture(greenDinoRun);
 		UnloadTexture(blueDinoRun);
 		UnloadTexture(yellowDinoRun);
@@ -125,6 +128,7 @@ public:
 	Texture2D& getGameMidground() { return gameMidground; }
 	Texture2D& getGameForeground() { return gameForeground; }
 
+	Texture2D& getDustRun() { return dustRun; }
 	Texture2D& getGreenDinoRun() { return greenDinoRun; }
 	Texture2D& getBlueDinoRun() { return blueDinoRun; }
 	Texture2D& getYellowDinoRun() { return yellowDinoRun; }
