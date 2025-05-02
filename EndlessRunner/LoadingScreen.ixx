@@ -1,6 +1,7 @@
 module;
 #include "raylib.h"
 #include "chrono"
+#include <string>
 
 export module LoadingScreenModule;
 
@@ -17,8 +18,6 @@ private:
 
 public:
 	void show(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop) {
-		
-
 		auto startTime = std::chrono::high_resolution_clock::now();
 		const int loadingDuration = 3000; //ms
 
@@ -75,22 +74,16 @@ public:
 
 private:
 	void showAuthTiles(int screenWidth, int screenHeight, Resources& resources) {
-
-
-		// Wymiary przycisków
 		constexpr float btnW = 200.0f;
 		constexpr float btnH = 80.0f;
 
-		// Obliczamy x-owe pozycje w 1/4 i 3/4 szerokoœci ekranu:
 		float xLeft = screenWidth * 0.25f - btnW * 0.5f;
 		float xRight = screenWidth * 0.75f - btnW * 0.5f;
 
-		// Pozycja Y – ok. 60% wysokoœci ekranu, czyli poni¿ej logo
 		float btnY = screenHeight * 0.85f - btnH * 0.5f;
 
-		Rectangle signInButton = { xLeft,  btnY, btnW, btnH };
+		Rectangle signInButton = { xLeft, btnY, btnW, btnH };
 		Rectangle logInButton = { xRight, btnY, btnW, btnH };
-
 
 		bool authRunning = true;
 
@@ -130,22 +123,49 @@ private:
 	void handleSignIn(int screenWidth, int screenHeight) {
 		AuthManager auth;
 		std::string username, password;
+		std::string errorMessage;
+		bool usernameError = false;
+		bool passwordError = false;
 		bool validInput = false;
 		bool enteringUsername = true;
 		Rectangle submitButton = { screenWidth / 2 - 100, screenHeight / 2 + 100, 200, 60 };
 
 		while (!WindowShouldClose() && !validInput) {
+			BeginDrawing();
+			ClearBackground(RAYWHITE);
+
+			Color usernameBorder = usernameError ? RED : (enteringUsername ? GREEN : BLACK);
+			DrawText("Enter Username (3-20 chars, alphanumeric):", screenWidth / 2 - 200, screenHeight / 2 - 100, 20, usernameBorder);
+			DrawText(username.c_str(), screenWidth / 2 - 200, screenHeight / 2 - 70, 20, BLACK);
+			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2 - 70, 400, 30, usernameBorder);
+
+			Color passwordBorder = passwordError ? RED : (!enteringUsername ? GREEN : BLACK);
+			DrawText("Enter Password (8+ chars, letters and numbers):", screenWidth / 2 - 200, screenHeight / 2 - 30, 20, passwordBorder);
+			std::string maskedPassword(password.length(), '*');
+			DrawText(maskedPassword.c_str(), screenWidth / 2 - 200, screenHeight / 2, 20, BLACK);
+			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2, 400, 30, passwordBorder);
+
+			DrawRectangleRec(submitButton, LIGHTGRAY);
+			DrawText("Submit", submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2, submitButton.y + 20, 20, BLACK);
+
+			if (!errorMessage.empty()) {
+				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 50, 20, RED);
+			}
+
 			Vector2 mouse = GetMousePosition();
 
-			// Handle keyboard input
 			int key = GetCharPressed();
 			while (key > 0) {
-				if ((key >= 32) && (key <= 125)) { // Printable characters
+				if ((key >= 32) && (key <= 125)) {
 					if (enteringUsername && username.length() < 20) {
 						username += static_cast<char>(key);
+						usernameError = false;
+						errorMessage = "";
 					}
 					else if (!enteringUsername && password.length() < 20) {
 						password += static_cast<char>(key);
+						passwordError = false;
+						errorMessage = "";
 					}
 				}
 				key = GetCharPressed();
@@ -154,9 +174,13 @@ private:
 			if (IsKeyPressed(KEY_BACKSPACE)) {
 				if (enteringUsername && !username.empty()) {
 					username.pop_back();
+					usernameError = false;
+					errorMessage = "";
 				}
 				else if (!enteringUsername && !password.empty()) {
 					password.pop_back();
+					passwordError = false;
+					errorMessage = "";
 				}
 			}
 
@@ -165,24 +189,29 @@ private:
 			}
 
 			if (IsKeyPressed(KEY_ENTER) || (CheckCollisionPointRec(mouse, submitButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
-				if (auth.signIn(username, password)) {
+				SignInResult result = auth.signIn(username, password);
+				if (result == SignInResult::SUCCESS) {
 					validInput = true;
 				}
+				else {
+					usernameError = false;
+					passwordError = false;
+					switch (result) {
+					case SignInResult::USERNAME_TAKEN:
+						errorMessage = "Nazwa uzytkownika zajeta";
+						usernameError = true;
+						break;
+					case SignInResult::INVALID_USERNAME:
+						errorMessage = "Niepoprawna nazwa uzytkownika";
+						usernameError = true;
+						break;
+					case SignInResult::INVALID_PASSWORD:
+						errorMessage = "Niepoprawne haslo";
+						passwordError = true;
+						break;
+					}
+				}
 			}
-
-			BeginDrawing();
-			ClearBackground(RAYWHITE);
-
-			DrawText("Enter Username (3-20 chars, alphanumeric):", screenWidth / 2 - 200, screenHeight / 2 - 100, 20, enteringUsername ? GREEN : BLACK);
-			DrawText(username.c_str(), screenWidth / 2 - 200, screenHeight / 2 - 70, 20, BLACK);
-			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2 - 70, 400, 30, enteringUsername ? GREEN : BLACK);
-
-			DrawText("Enter Password (8+ chars, letters and numbers):", screenWidth / 2 - 200, screenHeight / 2 - 30, 20, !enteringUsername ? GREEN : BLACK);
-			DrawText(password.c_str(), screenWidth / 2 - 200, screenHeight / 2, 20, BLACK);
-			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2, 400, 30, !enteringUsername ? GREEN : BLACK);
-
-			DrawRectangleRec(submitButton, LIGHTGRAY);
-			DrawText("Submit", submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2, submitButton.y + 20, 20, BLACK);
 
 			EndDrawing();
 		}
@@ -191,22 +220,49 @@ private:
 	void handleLogIn(int screenWidth, int screenHeight) {
 		AuthManager auth;
 		std::string username, password;
+		std::string errorMessage;
+		bool usernameError = false;
+		bool passwordError = false;
 		bool loggedIn = false;
 		bool enteringUsername = true;
 		Rectangle submitButton = { screenWidth / 2 - 100, screenHeight / 2 + 100, 200, 60 };
 
 		while (!WindowShouldClose() && !loggedIn) {
+			BeginDrawing();
+			ClearBackground(RAYWHITE);
+
+			Color usernameBorder = usernameError ? RED : (enteringUsername ? GREEN : BLACK);
+			DrawText("Enter Username:", screenWidth / 2 - 100, screenHeight / 2 - 100, 20, usernameBorder);
+			DrawText(username.c_str(), screenWidth / 2 - 100, screenHeight / 2 - 70, 20, BLACK);
+			DrawRectangleLines(screenWidth / 2 - 100, screenHeight / 2 - 70, 200, 30, usernameBorder);
+
+			Color passwordBorder = passwordError ? RED : (!enteringUsername ? GREEN : BLACK);
+			DrawText("Enter Password:", screenWidth / 2 - 100, screenHeight / 2 - 30, 20, passwordBorder);
+			std::string maskedPassword(password.length(), '*');
+			DrawText(maskedPassword.c_str(), screenWidth / 2 - 100, screenHeight / 2, 20, BLACK);
+			DrawRectangleLines(screenWidth / 2 - 100, screenHeight / 2, 200, 30, passwordBorder);
+
+			DrawRectangleRec(submitButton, LIGHTGRAY);
+			DrawText("Submit", submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2, submitButton.y + 20, 20, BLACK);
+
+			if (!errorMessage.empty()) {
+				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 50, 20, RED);
+			}
+
 			Vector2 mouse = GetMousePosition();
 
-			// Handle keyboard input
 			int key = GetCharPressed();
 			while (key > 0) {
 				if ((key >= 32) && (key <= 125)) {
 					if (enteringUsername && username.length() < 20) {
 						username += static_cast<char>(key);
+						usernameError = false;
+						errorMessage = "";
 					}
 					else if (!enteringUsername && password.length() < 20) {
 						password += static_cast<char>(key);
+						passwordError = false;
+						errorMessage = "";
 					}
 				}
 				key = GetCharPressed();
@@ -215,9 +271,13 @@ private:
 			if (IsKeyPressed(KEY_BACKSPACE)) {
 				if (enteringUsername && !username.empty()) {
 					username.pop_back();
+					usernameError = false;
+					errorMessage = "";
 				}
 				else if (!enteringUsername && !password.empty()) {
 					password.pop_back();
+					passwordError = false;
+					errorMessage = "";
 				}
 			}
 
@@ -226,24 +286,25 @@ private:
 			}
 
 			if (IsKeyPressed(KEY_ENTER) || (CheckCollisionPointRec(mouse, submitButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
-				if (auth.logIn(username, password)) {
+				LogInResult result = auth.logIn(username, password);
+				if (result == LogInResult::SUCCESS) {
 					loggedIn = true;
 				}
+				else {
+					usernameError = false;
+					passwordError = false;
+					switch (result) {
+					case LogInResult::USER_NOT_FOUND:
+						errorMessage = "Uzytkownik nieznaleziony";
+						usernameError = true;
+						break;
+					case LogInResult::INCORRECT_PASSWORD:
+						errorMessage = "Niepoprawne haslo";
+						passwordError = true;
+						break;
+					}
+				}
 			}
-
-			BeginDrawing();
-			ClearBackground(RAYWHITE);
-
-			DrawText("Enter Username:", screenWidth / 2 - 100, screenHeight / 2 - 100, 20, enteringUsername ? GREEN : BLACK);
-			DrawText(username.c_str(), screenWidth / 2 - 100, screenHeight / 2 - 70, 20, BLACK);
-			DrawRectangleLines(screenWidth / 2 - 100, screenHeight / 2 - 70, 200, 30, enteringUsername ? GREEN : BLACK);
-
-			DrawText("Enter Password:", screenWidth / 2 - 100, screenHeight / 2 - 30, 20, !enteringUsername ? GREEN : BLACK);
-			DrawText(password.c_str(), screenWidth / 2 - 100, screenHeight / 2, 20, BLACK);
-			DrawRectangleLines(screenWidth / 2 - 100, screenHeight / 2, 200, 30, !enteringUsername ? GREEN : BLACK);
-
-			DrawRectangleRec(submitButton, LIGHTGRAY);
-			DrawText("Submit", submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2, submitButton.y + 20, 20, BLACK);
 
 			EndDrawing();
 		}

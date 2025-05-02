@@ -1,83 +1,107 @@
 module;
-#include "raylib.h"
-#include <regex>
-#include <filesystem>
-#include <ranges>
 #include <string>
+#include <set>
+#include <regex>
+#include <ranges>
+#include <map>
 #include <fstream>
-#include <concepts>
+#include <sstream>
+#include <functional> // for std::hash
 
 export module AuthModule;
 
-template<typename T>
-concept StringLike = requires(T t) {
-    { t.empty() } -> std::convertible_to<bool>;
-    { t.size() } -> std::convertible_to<size_t>;
-    { std::string(t) } -> std::convertible_to<std::string>;
+export enum class SignInResult {
+	SUCCESS,
+	USERNAME_TAKEN,
+	INVALID_USERNAME,
+	INVALID_PASSWORD
+};
+
+export enum class LogInResult {
+	SUCCESS,
+	USER_NOT_FOUND,
+	INCORRECT_PASSWORD
 };
 
 export class AuthManager {
 private:
-    static constexpr const char* USERS_FILE = "users.txt";
-    std::regex usernameRegex{ R"([a-zA-Z0-9]{3,20})" };
-    std::regex passwordRegex{ R"((?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,})" };
+	std::set<std::string> existingUsernames;
+	std::map<std::string, std::string> storedPasswords;
+	const std::string usersFile = "users.txt";
 
-    struct User {
-        std::string username;
-        std::string password;
-    };
+	// Simple hash function for passwords (for demonstration; use a proper cryptographic hash in production)
+	std::string hashPassword(const std::string& password) {
+		std::hash<std::string> hasher;
+		return std::to_string(hasher(password));
+	}
 
-    std::vector<User> loadUsers() {
-        std::vector<User> users;
-        if (std::filesystem::exists(USERS_FILE)) {
-            std::ifstream file(USERS_FILE);
-            std::string line;
-            while (std::getline(file, line)) {
-                auto parts = line | std::ranges::views::split(':') | std::ranges::to<std::vector<std::string>>();
-                if (parts.size() == 2) {
-                    users.push_back({ parts[0], parts[1] });
-                }
-            }
-            file.close();
-        }
-        return users;
-    }
+	// Load users from file
+	void loadUsers() {
+		std::ifstream file(usersFile);
+		if (!file.is_open()) {
+			return; // File doesn't exist yet, which is fine
+		}
 
-    void saveUser(const User& user) {
-        std::ofstream file(USERS_FILE, std::ios::app);
-        file << user.username << ":" << user.password << "\n";
-        file.close();
-    }
+		std::string line;
+		while (std::getline(file, line)) {
+			std::istringstream iss(line);
+			std::string username, hashedPassword;
+			if (std::getline(iss, username, ':') && std::getline(iss, hashedPassword)) {
+				existingUsernames.insert(username);
+				storedPasswords[username] = hashedPassword;
+			}
+		}
+		file.close();
+	}
+
+	// Save a new user to file
+	bool saveUser(const std::string& username, const std::string& hashedPassword) {
+		std::ofstream file(usersFile, std::ios::app); // Append mode
+		if (!file.is_open()) {
+			return false;
+		}
+		file << username << ":" << hashedPassword << "\n";
+		file.close();
+		return true;
+	}
 
 public:
-    bool signIn(StringLike auto& username, StringLike auto& password) {
-        if (!std::regex_match(std::string(username), usernameRegex) || !std::regex_match(std::string(password), passwordRegex)) {
-            DrawText("Invalid username or password format!", 100, 100, 20, RED);
-            return false;
-        }
+	AuthManager() {
+		loadUsers(); // Load existing users at initialization
+	}
 
-        auto users = loadUsers();
-        auto it = std::ranges::find_if(users, [&username](const User& u) { return u.username == std::string(username); });
-        if (it != users.end()) {
-            DrawText("Username already exists!", 100, 150, 20, RED);
-            return false;
-        }
+	SignInResult signIn(const std::string& username, const std::string& password) {
+		if (std::ranges::find(existingUsernames, username) != existingUsernames.end()) {
+			return SignInResult::USERNAME_TAKEN;
+		}
+		std::regex usernameRegex("^[a-zA-Z0-9]{3,20}$");
+		if (!std::regex_match(username, usernameRegex)) {
+			return SignInResult::INVALID_USERNAME;
+		}
+		std::regex passwordRegex("^[A-Za-z\\d]{8,}$");
 
-        saveUser({ std::string(username), std::string(password) });
-        DrawText("Sign In successful!", 100, 200, 20, GREEN);
-        return true;
-    }
+		if (!std::regex_match(password, passwordRegex)) {
+			return SignInResult::INVALID_PASSWORD;
+		}
 
-    bool logIn(StringLike auto& username, StringLike auto& password) {
-        auto users = loadUsers();
-        auto it = std::ranges::find_if(users, [&username, &password](const User& u) {
-            return u.username == std::string(username) && u.password == std::string(password);
-            });
-        if (it != users.end()) {
-            DrawText("Log In successful!", 100, 200, 20, GREEN);
-            return true;
-        }
-        DrawText("Invalid username or password!", 100, 150, 20, RED);
-        return false;
-    }
+		std::string hashedPassword = hashPassword(password);
+		if (!saveUser(username, hashedPassword)) {
+			return SignInResult::INVALID_USERNAME; // Fallback error if file write fails
+		}
+
+		existingUsernames.insert(username);
+		storedPasswords[username] = hashedPassword;
+		return SignInResult::SUCCESS;
+	}
+
+	LogInResult logIn(const std::string& username, const std::string& password) {
+		if (std::ranges::find(existingUsernames, username) == existingUsernames.end()) {
+			return LogInResult::USER_NOT_FOUND;
+		}
+		std::string hashedPassword = hashPassword(password);
+		if (storedPasswords.find(username)->second != hashedPassword) {
+			return LogInResult::INCORRECT_PASSWORD;
+		}
+		return LogInResult::SUCCESS;
+	}
 };
