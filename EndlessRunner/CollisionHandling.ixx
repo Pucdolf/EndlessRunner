@@ -1,3 +1,4 @@
+module;
 #include "raylib.h"
 export module CollisionHandlingModule;
 

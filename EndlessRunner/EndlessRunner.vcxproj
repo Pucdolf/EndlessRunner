@@ -172,6 +172,7 @@
     <Image Include="textures\life_pickable.png" />
     <Image Include="textures\loading_screen.png" />
     <Image Include="textures\main_menu_background.png" />
+    <Image Include="textures\missing_texture.png" />
     <Image Include="textures\mniejsze_logo.png" />
     <Image Include="textures\numbers.png" />
     <Image Include="textures\scarfy.png" />

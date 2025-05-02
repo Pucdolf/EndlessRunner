@@ -1,3 +1,4 @@
+module;
 #include "raylib.h"
 #include <array>
 #include <string>

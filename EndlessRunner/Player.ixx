@@ -1,3 +1,5 @@
+module;
+
 #include "raylib.h"
 
 export module PlayerModule;

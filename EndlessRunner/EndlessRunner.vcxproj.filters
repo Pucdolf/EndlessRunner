@@ -179,5 +179,8 @@
     <Image Include="textures\loading_screen.png">
       <Filter>Resources\textures</Filter>
     </Image>
+    <Image Include="textures\missing_texture.png">
+      <Filter>Resources\textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

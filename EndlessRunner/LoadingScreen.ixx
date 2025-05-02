@@ -1,3 +1,4 @@
+module;
 #include "raylib.h"
 #include "chrono"
 
@@ -6,8 +7,8 @@ export module LoadingScreenModule;
 import ResourcesModule;
 import BoardModule;
 import ShopModule;
-import <thread>;
-import <atomic>;
+//import <thread>;
+//import <atomic>;
 
 export class LoadingScreen {
 private:

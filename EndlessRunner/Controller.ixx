@@ -1,3 +1,4 @@
+module;
 #include "raylib.h"
 export module ControllerModule;
 
@@ -117,10 +118,10 @@ private:
 		std::string scoreText = std::to_string(s);
 
 		int digitWidth = numbers.width / 10;
-		int digitHeight = numbers.height;
+		int  digitHeight = numbers.height;
 
-		int scaledWidth = digitWidth * scale;
-		int totalWidth = scaledWidth * scoreText.length();
+		float  scaledWidth = digitWidth * scale;
+		float totalWidth = scaledWidth * scoreText.length();
 		windowWidth = GetScreenWidth();
 
 		for (int i = 0; i < scoreText.length(); ++i) {

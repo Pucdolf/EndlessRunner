@@ -1,153 +1,149 @@
+module;
 #include "raylib.h"
+
 export module ResourcesModule;
-
 import <array>;
+import <unordered_map>;
+import <string>;
+import  <filesystem>;
+import <ranges>;
 
+template <typename T>
+concept Drawable = requires(T t) { t.draw(); };
 export class Resources {
 private:
+	//Mapa ze strukturami
+	std::unordered_map<std::string, Texture2D> textures;
 
-	//Menu
-	Texture2D menuBackground{};
-	//Loading screen
-	Texture2D loadingScreenBackground{};
-	Texture2D barEmpty{};
-	Texture2D barFill{};
-	//Shop
-	Texture2D dinoShadow{};
-	Texture2D shopBackground{};
-	Texture2D greenDinoIdle{};
-	Texture2D blueDinoIdle{};
-	Texture2D yellowDinoIdle{};
-	Texture2D redDinoIdle{};
-	//Game
-	Texture2D gameBackground{};
-	Texture2D gameMidground{};
-	Texture2D gameForeground{};
-
-	//Chaaracters
-	Texture2D dustRun{};
-	Texture2D greenDinoRun{};
-	Texture2D blueDinoRun{};
-	Texture2D yellowDinoRun{};
-	Texture2D redDinoRun{};
-
-	//Obstacles
-	Texture2D nebula{};
-
-	//Stats
-	Texture2D heartIcon{};
-	Texture2D lifeLostIcon{};
-	Texture2D numbersTexture{};
+	// Stale klucze tekstur 
+	//MENU
+	inline static const std::string MENU_BG = "menu_background";
+	//LOADING SCREEN
+	inline static const std::string LOADING_SCREEN_BG = "loading_screen_background";
+	inline static const std::string BAR_EMPTY = "loading_bar_empty";
+	inline static const std::string BAR_FULL = "loading_bar_full";
+	//SHOP
+	inline static const std::string SHOP_BG = "shop_background";
+	inline static const std::string DINO_SHADOW = "dino_shadow";
+	inline static const std::string GREEN_DINO_IDLE = "green_dino_idle";
+	inline static const std::string BLUE_DINO_IDLE = "blue_dino_idle";
+	inline static const std::string YELLOW_DINO_IDLE = "yellow_dino_idle";
+	inline static const std::string RED_DINO_IDLE = "red_dino_idle";
+	//GAME
+	inline static const std::string GAME_BG = "game_background";
+	inline static const std::string GAME_MG = "game_midground";
+	inline static const std::string GAME_FG = "game_foreground";
+	//CHARACTERS
+	inline static const std::string DUST_RUN = "dust_run";
+	inline static const std::string GREEN_DINO_RUN = "green_dino_run";
+	inline static const std::string BLUE_DINO_RUN = "blue_dino_run";
+	inline static const std::string YELLOW_DINO_RUN = "yellow_dino_run";
+	inline static const std::string RED_DINO_RUN = "red_dino_run";
+	//OBSTACLES
+	inline static const std::string NEBULA = "nebula";
+	//STATS
+	inline static const std::string HEART_ICON = "heart_icon";
+	inline static const std::string LIFE_LOST_ICON = "life_lost_icon";
+	inline static const std::string NUMBERS = "numbers";
 
 
 public:
+	Resources() = default;
+
 	void loadTextures() {
-
-		//Menu
-		menuBackground = LoadTexture("textures/main_menu_background.png");
-		//Loading screen
-		loadingScreenBackground = LoadTexture("textures/loading_screen.png");
-		barEmpty = LoadTexture("textures/barempty.png");
-		barFill = LoadTexture("textures/barfill.png");
-		//Shop
-		dinoShadow = LoadTexture("textures/Characters/shadow_2.png");
-		shopBackground = LoadTexture("textures/shop.png");
-		greenDinoIdle = LoadTexture("textures/Characters/Player 1/p1_idle.png");
-		blueDinoIdle = LoadTexture("textures/Characters/Player 2/p2_idle.png");
-		yellowDinoIdle = LoadTexture("textures/Characters/Player 3/p3_idle.png");
-		redDinoIdle = LoadTexture("textures/Characters/Player 4/p4_idle.png");
-
-		//Game
-		gameBackground = LoadTexture("textures/far-buildings.png");
-		gameMidground = LoadTexture("textures/back-buildings.png");
-		gameForeground = LoadTexture("textures/foreground.png");
-
-		//Characters
-		dustRun = LoadTexture("textures/Characters/dust.png");
-		greenDinoRun = LoadTexture("textures/Characters/Player 1/p1_run.png");
-		blueDinoRun = LoadTexture("textures/Characters/Player 2/p2_run.png");
-		yellowDinoRun = LoadTexture("textures/Characters/Player 3/p3_run.png");
-		redDinoRun = LoadTexture("textures/Characters/Player 4/p4_run.png");
-
-
-		//Obstacles
-		nebula = LoadTexture("textures/12_nebula_spritesheet.png");
-
-		//Stats
-		heartIcon = LoadTexture("textures/life_icon.png");
-		lifeLostIcon = LoadTexture("textures/life_lost_icon.png");
-		numbersTexture = LoadTexture("textures/numbers.png");
-
+		//MENU
+		loadTexture(MENU_BG, "textures/main_menu_background.png");
+		//LOADING SCREEN
+		loadTexture(LOADING_SCREEN_BG, "textures/loading_screen.png");
+		loadTexture(BAR_EMPTY, "textures/barempty.png");
+		loadTexture(BAR_FULL, "textures/barfill.png");
+		//SHOP
+		loadTexture(SHOP_BG, "textures/shop.png");
+		loadTexture(DINO_SHADOW, "textures/Characters/shadow_2.png");
+		loadTexture(GREEN_DINO_IDLE, "textures/Characters/Player 1/p1_idle.png");
+		loadTexture(BLUE_DINO_IDLE, "textures/Characters/Player 2/p2_idle.png");
+		loadTexture(YELLOW_DINO_IDLE, "textures/Characters/Player 3/p3_idle.png");
+		loadTexture(RED_DINO_IDLE, "textures/Characters/Player 4/p4_idle.png");
+		//GAME
+		loadTexture(GAME_BG, "textures/far-buildings.png");
+		loadTexture(GAME_MG, "textures/back-buildings.png");
+		loadTexture(GAME_FG, "textures/foreground.png");
+		//CHARACTERS
+		loadTexture(DUST_RUN, "textures/Characters/dust.png");
+		loadTexture(GREEN_DINO_RUN, "textures/Characters/Player 1/p1_run.png");
+		loadTexture(BLUE_DINO_RUN, "textures/Characters/Player 2/p2_run.png");
+		loadTexture(YELLOW_DINO_RUN, "textures/Characters/Player 3/p3_run.png");
+		loadTexture(RED_DINO_RUN, "textures/Characters/Player 4/p4_run.png");
+		//OBSTACLES
+		loadTexture(NEBULA, "textures/12_nebula_spritesheet.png");
+		//STATS
+		loadTexture(HEART_ICON, "textures/life_icon.png");
+		loadTexture(LIFE_LOST_ICON, "textures/life_lost_icon.png");
+		loadTexture(NUMBERS, "textures/numbers.png");
 
 	}
 
 	void unloadTextures() {
-		//Menu
-		UnloadTexture(menuBackground);
+		
 
-		//Loading screen
-		UnloadTexture(loadingScreenBackground);
-		UnloadTexture(barEmpty);
-		UnloadTexture(barFill);
-
-		//Shop
-
-		UnloadTexture(dinoShadow);
-		UnloadTexture(shopBackground);
-		UnloadTexture(greenDinoIdle);
-		UnloadTexture(blueDinoIdle);
-		UnloadTexture(yellowDinoIdle);
-		UnloadTexture(redDinoIdle);
-
-		//Game
-		UnloadTexture(gameBackground);
-		UnloadTexture(gameMidground);
-		UnloadTexture(gameForeground);
-
-		//Characters
-		UnloadTexture(dustRun);
-		UnloadTexture(greenDinoRun);
-		UnloadTexture(blueDinoRun);
-		UnloadTexture(yellowDinoRun);
-		UnloadTexture(redDinoRun);
-		UnloadTexture(nebula);
-
-		//Stats
-		UnloadTexture(heartIcon);
-		UnloadTexture(lifeLostIcon);
-		UnloadTexture(numbersTexture);
+		for (auto& texture : textures | std::ranges::views::values) {
+			UnloadTexture(texture);
+		}
+		//textures.clear();
 
 	}
 
 	// Gettery
-	Texture2D& getMenuBackground() { return menuBackground; }
-	Texture2D& getShopBackground() { return shopBackground; }
+	Texture2D& getMenuBackground() { return getTexture(MENU_BG); }
+	Texture2D& getShopBackground() { return getTexture(SHOP_BG); }
+	//LOADING SCREEN
+	Texture2D& getLoadingScreenBackground() { return getTexture(LOADING_SCREEN_BG); }
+	Texture2D& getBarEmpty() { return getTexture(BAR_EMPTY); }
+	Texture2D& getBarFill() { return getTexture(BAR_FULL); }
+	//SHOP
+	Texture2D& getdinoShadow() { return getTexture(DINO_SHADOW); }
+	Texture2D& getGreenIdle() { return getTexture(GREEN_DINO_IDLE); }
+	Texture2D& getBlueIdle() { return getTexture(BLUE_DINO_IDLE); }
+	Texture2D& getYellowIdle() { return getTexture(YELLOW_DINO_IDLE); }
+	Texture2D& getRedIdle() { return getTexture(RED_DINO_IDLE); }
+	//GAME
+	Texture2D& getGameBackground() { return getTexture(GAME_BG); }
+	Texture2D& getGameMidground() { return getTexture(GAME_MG); }
+	Texture2D& getGameForeground() { return getTexture(GAME_FG); }
+	//CHARACTERS
+	Texture2D& getDustRun() { return getTexture(DUST_RUN); }
+	Texture2D& getGreenDinoRun() { return getTexture(GREEN_DINO_RUN); }
+	Texture2D& getBlueDinoRun() { return getTexture(BLUE_DINO_RUN); }
+	Texture2D& getYellowDinoRun() { return getTexture(YELLOW_DINO_RUN); }
+	Texture2D& getRedDinoRun() { return getTexture(RED_DINO_RUN); }
+	//OBSTACLES
+	Texture2D& getNebula() { return getTexture(NEBULA); }
+	//STATS
+	Texture2D& getHeartIcon() { return getTexture(HEART_ICON); }
+	Texture2D& getLifeLostIcon() { return getTexture(LIFE_LOST_ICON); }
+	Texture2D& getNumbersTexture() { return getTexture(NUMBERS); }
 
-	Texture2D& getdinoShadow() { return dinoShadow; }
-	Texture2D& getGreenIdle() { return greenDinoIdle; }
-	Texture2D& getBlueIdle() { return blueDinoIdle; }
-	Texture2D& getYellowIdle() { return yellowDinoIdle; }
-	Texture2D& getRedIdle() { return redDinoIdle; }
 
-	Texture2D& getGameBackground() { return gameBackground; }
-	Texture2D& getGameMidground() { return gameMidground; }
-	Texture2D& getGameForeground() { return gameForeground; }
+private:
+	//Pomocnicza metoda do ladowania tekstury
+	void loadTexture(const std::string& key, const std::string& path) {
+		if (std::filesystem::exists(path)) {
+			textures[key] = LoadTexture(path.c_str());
+		}
+		else {
+			textures[key] = LoadTexture("textures/missing_texture.png");
+		}
+	}
 
-	Texture2D& getDustRun() { return dustRun; }
-	Texture2D& getGreenDinoRun() { return greenDinoRun; }
-	Texture2D& getBlueDinoRun() { return blueDinoRun; }
-	Texture2D& getYellowDinoRun() { return yellowDinoRun; }
-	Texture2D& getRedDinoRun() { return redDinoRun; }
-
-	Texture2D& getNebula() { return nebula; }
-
-	Texture2D& getHeartIcon() { return heartIcon; }
-	Texture2D& getLifeLostIcon() { return lifeLostIcon; }
-	Texture2D& getNumbersTexture() { return numbersTexture; }
-
-	Texture2D& getLoadingScreenBackground() { return loadingScreenBackground; }
-	Texture2D& getBarEmpty() { return barEmpty; }
-	Texture2D& getBarFill() { return barFill; }
-
+	//Pomocnicza metoda do pobierania tekstury
+	Texture2D& getTexture(const std::string& key) /*const */ {
+		auto it = textures.find(key);
+		if (it != textures.end()) {
+			return it->second;
+		}
+		//throw std::runtime_error("Texture not found: " + key);
+		textures[key] = LoadTexture("textures/missing_texture.png");
+		return textures[key];
+	}
 
 };
