@@ -21,7 +21,7 @@ private:
 	Texture2D selectedDinoTex{};
 	int selectedDinoFrameCount{ 6 };
 
-	static constexpr int maxDustParticles{ 20 };
+	static constexpr int maxDustParticles{ 1 };
 	std::array<Dust, maxDustParticles> dustParticles;
 	float dustSpawnTimer{ 0.0f };
 	float dustSpawnInterval{ 0.7f };
@@ -61,6 +61,7 @@ public:
 	}
 
 	void update(float deltaTime, int windowHeight) {
+
 		player.update(deltaTime, windowHeight);
 
 		for (auto& nebula : nebulae) {

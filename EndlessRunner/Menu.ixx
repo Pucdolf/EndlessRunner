@@ -68,7 +68,7 @@ public:
                 WHITE
             );
 
-            DrawText("Main Menu", screenWidth / 2 - MeasureText("Main Menu", 40) / 2, 50, 40, BLACK);
+            DrawText("Welcome", screenWidth / 2 - MeasureText("Main Menu", 40) / 2, 50, 40, BLACK);
 
             int fontSize = 20;
             for (int i = 0; i < buttonCount; ++i) {

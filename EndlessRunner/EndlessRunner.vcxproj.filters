@@ -78,6 +78,9 @@
     <ClCompile Include="Dust.ixx">
       <Filter>Modules\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="AuthModule.ixx">
+      <Filter>Modules\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\12_nebula_spritesheet.png">
@@ -182,5 +185,10 @@
     <Image Include="textures\missing_texture.png">
       <Filter>Resources\textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="users.txt">
+      <Filter>Resources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -7,9 +7,8 @@ import <unordered_map>;
 import <string>;
 import  <filesystem>;
 import <ranges>;
+import <concepts>; 
 
-template <typename T>
-concept Drawable = requires(T t) { t.draw(); };
 export class Resources {
 private:
 	//Mapa ze strukturami
@@ -49,7 +48,8 @@ private:
 
 public:
 	Resources() = default;
-
+	
+	
 	void loadTextures() {
 		//MENU
 		loadTexture(MENU_BG, "textures/main_menu_background.png");
@@ -85,7 +85,6 @@ public:
 
 	void unloadTextures() {
 		
-
 		for (auto& texture : textures | std::ranges::views::values) {
 			UnloadTexture(texture);
 		}
