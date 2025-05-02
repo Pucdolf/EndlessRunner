@@ -12,7 +12,7 @@ private:
 	int frame{};
 
 	const float maxFrames{ 5.f };
-	float updateTime{ 1.f / 12.f };
+	float updateTime{ 1.f / 10.f };
 	float runningTime{ 0.f };
 	const float scale{ 3.f };
 	bool isActive{ true };
@@ -63,5 +63,5 @@ public:
 
 	bool getIsActive() const { return isActive; }
 	const Texture2D& getTexture() const { return texture; }
-	int getFrame() const { return frame;  }
+	int getFrame() const { return frame; }
 };

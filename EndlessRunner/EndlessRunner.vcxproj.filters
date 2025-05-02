@@ -170,5 +170,14 @@
     <Image Include="textures\Characters\dust.png">
       <Filter>Resources\textures\Characters</Filter>
     </Image>
+    <Image Include="textures\mniejsze_logo.png">
+      <Filter>Resources\textures</Filter>
+    </Image>
+    <Image Include="textures\Characters\shadow_2.png">
+      <Filter>Resources\textures\Characters</Filter>
+    </Image>
+    <Image Include="textures\loading_screen.png">
+      <Filter>Resources\textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

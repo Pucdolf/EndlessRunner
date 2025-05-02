@@ -25,7 +25,7 @@ public:
 		//std::atomic<int> progress = 0;
 
 		auto startTime = std::chrono::high_resolution_clock::now();
-		const int loadingDuration = 1500; //ms
+		const int loadingDuration = 3000; //ms
 
 		//NIE DZIALA
 		/*std::thread loader([&]() {*/
@@ -65,7 +65,7 @@ public:
 				0.0f,
 				WHITE
 			);
-			
+
 
 			int barX = screenWidth / 2 - barEmpty.width / 2;
 			int barY = screenHeight / 2 + 230;

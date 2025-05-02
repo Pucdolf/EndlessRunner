@@ -31,8 +31,8 @@ export class Player
 public:
 	Player() = default;
 
-	void init(const Texture2D& dinoTex, int frameCount ,int windowWidth, int windowHeight) {
-		
+	void init(const Texture2D& dinoTex, int frameCount, int windowWidth, int windowHeight) {
+
 		maxFrames = static_cast<float>(frameCount);
 		texture_run = dinoTex;
 

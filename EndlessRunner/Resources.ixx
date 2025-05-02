@@ -13,6 +13,7 @@ private:
 	Texture2D barEmpty{};
 	Texture2D barFill{};
 	//Shop
+	Texture2D dinoShadow{};
 	Texture2D shopBackground{};
 	Texture2D greenDinoIdle{};
 	Texture2D blueDinoIdle{};
@@ -45,11 +46,12 @@ public:
 		//Menu
 		menuBackground = LoadTexture("textures/main_menu_background.png");
 		//Loading screen
-		loadingScreenBackground = LoadTexture("textures/loading_screen_background.png");
+		loadingScreenBackground = LoadTexture("textures/loading_screen.png");
 		barEmpty = LoadTexture("textures/barempty.png");
 		barFill = LoadTexture("textures/barfill.png");
 		//Shop
-		shopBackground = LoadTexture("textures/shop_background.png");
+		dinoShadow = LoadTexture("textures/Characters/shadow_2.png");
+		shopBackground = LoadTexture("textures/shop.png");
 		greenDinoIdle = LoadTexture("textures/Characters/Player 1/p1_idle.png");
 		blueDinoIdle = LoadTexture("textures/Characters/Player 2/p2_idle.png");
 		yellowDinoIdle = LoadTexture("textures/Characters/Player 3/p3_idle.png");
@@ -89,6 +91,8 @@ public:
 		UnloadTexture(barFill);
 
 		//Shop
+
+		UnloadTexture(dinoShadow);
 		UnloadTexture(shopBackground);
 		UnloadTexture(greenDinoIdle);
 		UnloadTexture(blueDinoIdle);
@@ -119,6 +123,7 @@ public:
 	Texture2D& getMenuBackground() { return menuBackground; }
 	Texture2D& getShopBackground() { return shopBackground; }
 
+	Texture2D& getdinoShadow() { return dinoShadow; }
 	Texture2D& getGreenIdle() { return greenDinoIdle; }
 	Texture2D& getBlueIdle() { return blueDinoIdle; }
 	Texture2D& getYellowIdle() { return yellowDinoIdle; }

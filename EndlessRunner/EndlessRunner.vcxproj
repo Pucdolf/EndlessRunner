@@ -164,12 +164,15 @@
     <Image Include="textures\Characters\Player 4\p4_hit.png" />
     <Image Include="textures\Characters\Player 4\p4_idle.png" />
     <Image Include="textures\Characters\Player 4\p4_run.png" />
+    <Image Include="textures\Characters\shadow_2.png" />
     <Image Include="textures\far-buildings.png" />
     <Image Include="textures\foreground.png" />
     <Image Include="textures\life_icon.png" />
     <Image Include="textures\life_lost_icon.png" />
     <Image Include="textures\life_pickable.png" />
+    <Image Include="textures\loading_screen.png" />
     <Image Include="textures\main_menu_background.png" />
+    <Image Include="textures\mniejsze_logo.png" />
     <Image Include="textures\numbers.png" />
     <Image Include="textures\scarfy.png" />
     <Image Include="textures\shop_background.png" />

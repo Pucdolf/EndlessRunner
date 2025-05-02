@@ -44,7 +44,7 @@ public:
 
 		player.init(selectedDinoTex, selectedDinoFrameCount, windowWidth, windowHeight);
 
-		for (int i = 0; i < amountOfNeb; i++){
+		for (int i = 0; i < amountOfNeb; i++) {
 
 			float startX = static_cast<float>(windowWidth + 300 * i);
 			float startY = static_cast<float>(windowHeight);
@@ -52,7 +52,7 @@ public:
 
 		}
 
-		for (auto& dust : dustParticles){
+		for (auto& dust : dustParticles) {
 			dust.init(dustTex, 0, 0);
 		}
 
@@ -87,7 +87,7 @@ public:
 			nebula.draw();
 
 
-		for (const auto& dust : dustParticles)		{
+		for (const auto& dust : dustParticles) {
 			dust.draw();
 		}
 
@@ -109,16 +109,16 @@ public:
 		return player.getWorldPos().x >= finishLine;
 	}
 
-	private:
-		void spawnDust() {
-			for (auto& dust : dustParticles) {
-				if (!dust.getIsActive()) {
-					Vector2 playerPos = player.getPosition();
-					float dustX = playerPos.x - 20;
-					float dustY = playerPos.y + player.getCollisionRec().height - 50;
-					dust.init(dust.getTexture(), dustX, dustY);
-					break;
-				}
+private:
+	void spawnDust() {
+		for (auto& dust : dustParticles) {
+			if (!dust.getIsActive()) {
+				Vector2 playerPos = player.getPosition();
+				float dustX = playerPos.x - 20;
+				float dustY = playerPos.y + player.getCollisionRec().height - 50;
+				dust.init(dust.getTexture(), dustX, dustY);
+				break;
 			}
 		}
+	}
 };
