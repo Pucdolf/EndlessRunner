@@ -1,15 +1,15 @@
 module;
 #include "raylib.h"
+#include <string>
+
 export module MenuModule;
 
-import LoadingScreenModule;
 import ResourcesModule;
 import BoardModule;
 import ControllerModule;
 import ShopModule;
 
 import <array>;
-import <string>;
 
 export class Menu {
 private:
@@ -17,6 +17,7 @@ private:
     std::array<const char*, buttonCount> labels = { "Start Game", "Leaderboard", "Shop", "Options", "Exit" };
     std::array<Rectangle, buttonCount> buttons;
     int selected = -1;
+    std::string username;
 
     Resources* resources{ nullptr };
     Board* board{ nullptr };
@@ -27,6 +28,10 @@ public:
         resources = &res;
         board = &b;
         shop = &s;
+    }
+
+    void setUsername(const std::string& user) {
+        username = user;
     }
 
     void showMenu(int screenWidth, int screenHeight) {
@@ -68,7 +73,8 @@ public:
                 WHITE
             );
 
-            DrawText("Welcome", screenWidth / 2 - MeasureText("Main Menu", 40) / 2, 50, 40, BLACK);
+            std::string welcomeText = username.empty() ? "Welcome Guest" : "Welcome " + username;
+            DrawText(welcomeText.c_str(), screenWidth / 2 - MeasureText(welcomeText.c_str(), 40) / 2, 50, 40, BLACK);
 
             int fontSize = 20;
             for (int i = 0; i < buttonCount; ++i) {

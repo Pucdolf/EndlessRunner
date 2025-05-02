@@ -6,22 +6,26 @@ import BoardModule;
 import ShopModule;
 
 int main() {
+    const int screenWidth = 1280;
+    const int screenHeight = 720;
 
-	const int screenWidth = 1280;
-	const int screenHeight = 720;
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    InitWindow(screenWidth, screenHeight, "Dino Rush");
 
-	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-	InitWindow(screenWidth, screenHeight, "Dino Rush");
+    Resources resources;
+    Board board;
+    Shop shop;
 
-	Resources resources;
-	Board board;
-	Shop shop;
+    LoadingScreen loader;
+    std::string username = loader.show(screenWidth, screenHeight, resources, board, shop);
 
-	LoadingScreen loader;
-	loader.show(screenWidth, screenHeight, resources, board, shop);
+    if (!username.empty()) {
+        Menu menu;
+        menu.setContext(resources, board, shop);
+        menu.setUsername(username);
+        menu.showMenu(screenWidth, screenHeight);
+    }
 
-	Menu menu;
-	menu.setContext(resources, board, shop);
-	menu.showMenu(screenWidth, screenHeight);
-	return 0;
+    CloseWindow();
+    return 0;
 }
