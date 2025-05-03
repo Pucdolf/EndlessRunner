@@ -96,31 +96,43 @@ private:
 		Texture2D midground = resources.getGameMidground();
 		Texture2D foreground = resources.getGameForeground();
 
+		//skalowanie
 		float scale = static_cast<float>(windowHeight) / background.height;
 		float scaledWidth = background.width * scale;
+		float fgScaledWidth = foreground.width * scale;
+		float fgEffectiveWidth = fgScaledWidth * 0.75f;
 
-		bgX -= 20 * dt * scale;
-		if (bgX <= -scaledWidth) bgX = 0.0;
+		//Updaetowanie pozycji tla
+		bgX -= 20 * dt;	//20 jednostek/sec
+		mgX -= 40 * dt; //40 jednostek/sec
+		fgX -= 60 * dt; //60 jednostek/sec
 
-		mgX -= 40 * dt * scale;
-		if (mgX <= -scaledWidth) mgX = 0.0;
+		//Resetowanie pozycji tla
+		if (bgX <= -scaledWidth) bgX += scaledWidth;
+		if (mgX <= -scaledWidth) mgX += scaledWidth;
+		if (fgX <= -scaledWidth) fgX += fgEffectiveWidth;
 
-		fgX -= 60 * dt * scale;
-		if (fgX <= -scaledWidth) fgX = 0.0;
+		//Rysowanie background i midground
+		auto drawTileableLayer = [&](Texture2D texture, float xPos) {
+			int numInstances = static_cast<int>(windowWidth / scaledWidth) + 2;
+			for (int i{ 0 }; i < numInstances; i++) {
+				float drawX = xPos + i * scaledWidth;
+				if (drawX < -scaledWidth || drawX > windowWidth) continue;
+				DrawTextureEx(texture, { drawX, 0 }, 0.f, scale, WHITE);
+			}};
 
-		DrawTextureEx(background, { bgX, 0 }, 0.0, scale, WHITE);
-		DrawTextureEx(background, { bgX + scaledWidth, 0 }, 0.0, scale, WHITE);
-		DrawTextureEx(background, { bgX + scaledWidth * scale, 0 }, 0.0, scale, WHITE);
+		//Rysowanie foreground
+		auto drawForegroundLayer = [&](Texture2D texture, float xPos) {
+			int numInstances = static_cast<int>(windowWidth / scaledWidth) + 2;
+			for (int i{ 0 }; i < numInstances; i++) {
+				float drawX = xPos + i * scaledWidth;
+				if (drawX < -scaledWidth || drawX > windowWidth) continue;
+				DrawTextureEx(texture, { drawX, 0 }, 0.f, scale, WHITE);
+			}};
 
-
-		DrawTextureEx(midground, { mgX, 0 }, 0.0, scale, WHITE);
-		DrawTextureEx(midground, { mgX + scaledWidth, 0 }, 0.0, scale, WHITE);
-		DrawTextureEx(midground, { mgX + scaledWidth * scale, 0 }, 0.0, scale, WHITE);
-
-		DrawTextureEx(foreground, { fgX, 0 }, 0.0, scale, WHITE);
-		DrawTextureEx(foreground, { fgX + scaledWidth, 0 }, 0.0, scale, WHITE);
-		DrawTextureEx(foreground, { fgX + scaledWidth * scale, 0 }, 0.0, scale, WHITE);
-
+		drawTileableLayer(background, bgX);
+		drawTileableLayer(midground, bgX);
+		drawForegroundLayer(foreground, fgX);
 	}
 
 
