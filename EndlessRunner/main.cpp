@@ -26,7 +26,7 @@ int main() {
 			menu.setContext(resources, board, shop);
 			menu.setUsername(username);
 			menu.showMenu(screenWidth, screenHeight);
-			break;
+			//break;
 		}
 	}
 

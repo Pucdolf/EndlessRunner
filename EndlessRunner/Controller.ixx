@@ -4,12 +4,15 @@ export module ControllerModule;
 
 import BoardModule;
 import ResourcesModule;
+
 import <string>;
+import <fstream>;
 
 export class Controller {
 private:
 	Resources& resources;
 	Board& board;
+	std::string username;
 	int windowWidth{};
 	int windowHeight{};
 	float scale = 3.0f;
@@ -18,11 +21,24 @@ private:
 	bool gameOver{ false };
 	int lives = 3;
 	float score = 0.0f;
+	bool savedScore{ false };
+
+	void saveScore()
+	{
+		if (username.empty() || savedScore) return;
+		std::ofstream file("scores.txt", std::ios::app);
+		if (file.is_open())
+		{
+			file << username << ":" << static_cast<int>(score) << "\n";
+			file.close();
+			savedScore = true;
+		}
+	}
 
 public:
 
-	Controller(Resources& res, Board& b, int width, int height)
-		: resources(res), board(b), windowWidth(width), windowHeight(height)
+	Controller(Resources& res, Board& b, const std::string& user, int width, int height)
+		: resources(res), board(b), username(user), windowWidth(width), windowHeight(height)
 	{
 
 	}
@@ -48,9 +64,17 @@ public:
 			}
 			if (gameOver) {
 				DrawText("Game Over!", windowWidth / 4, windowHeight / 2, 40, RED);
+				if (!savedScore)
+					saveScore();
+				if (IsKeyPressed(KEY_ENTER))
+					break;
 			}
 			else if (board.checkWin()) {
 				DrawText("You Win!", windowWidth / 4, windowHeight / 2, 40, GREEN);
+				if (!savedScore)
+					saveScore();
+				if (IsKeyPressed(KEY_ENTER))
+					break;
 			}
 			else {
 				score += dt;

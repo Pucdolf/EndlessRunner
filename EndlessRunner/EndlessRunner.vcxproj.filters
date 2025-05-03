@@ -16,9 +16,6 @@
     <Filter Include="Resources\textures">
       <UniqueIdentifier>{a2cfe4fe-f04f-4021-9891-e1d57f0d3046}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Objects">
-      <UniqueIdentifier>{b209e806-295c-4f48-90d9-2b8f980b4ef9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\textures\Characters">
       <UniqueIdentifier>{df566140-5cce-4202-bf5f-a41d606365bc}</UniqueIdentifier>
     </Filter>
@@ -34,52 +31,46 @@
     <Filter Include="Resources\textures\Characters\Player4">
       <UniqueIdentifier>{b88ef0ce-13dc-4b69-bbf1-9cf97ea5b47e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Interface">
-      <UniqueIdentifier>{9aae0f1d-e99a-4aed-a074-e7608b3a8cba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Game">
-      <UniqueIdentifier>{8b296e72-d800-46a1-bc51-273167a1ea54}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.ixx">
-      <Filter>Modules\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Nebula.ixx">
-      <Filter>Modules\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadingScreen.ixx">
-      <Filter>Modules\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.ixx">
-      <Filter>Modules\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Shop.ixx">
-      <Filter>Modules\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities.ixx">
-      <Filter>Modules\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources.ixx">
-      <Filter>Modules\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.ixx">
-      <Filter>Modules\Game</Filter>
+    <ClCompile Include="Board.ixx">
+      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="CollisionHandling.ixx">
-      <Filter>Modules\Game</Filter>
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Board.ixx">
-      <Filter>Modules\Game</Filter>
+    <ClCompile Include="Controller.ixx">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Dust.ixx">
-      <Filter>Modules\Objects</Filter>
+    <ClCompile Include="Resources.ixx">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.ixx">
+      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="AuthModule.ixx">
-      <Filter>Modules\Interface</Filter>
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingScreen.ixx">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.ixx">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.ixx">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Dust.ixx">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Nebula.ixx">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.ixx">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,5 +181,13 @@
     <Text Include="users.txt">
       <Filter>Resources</Filter>
     </Text>
+    <Text Include="scores.txt">
+      <Filter>Resources</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="wisdom.mp3">
+      <Filter>Resources</Filter>
+    </Media>
   </ItemGroup>
 </Project>
