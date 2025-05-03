@@ -20,7 +20,7 @@ public:
     // Modified to return the authenticated username
     std::string show(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop) {
         auto startTime = std::chrono::high_resolution_clock::now();
-        const int loadingDuration = 3000; //ms
+        const int loadingDuration = 2000; //ms
 
         resources.loadTextures();
 
@@ -87,9 +87,9 @@ private:
         Rectangle signInButton = { xLeft, btnY, btnW, btnH };
         Rectangle logInButton = { xRight, btnY, btnW, btnH };
 
-        bool authRunning = true;
+        //bool authRunning = true;
 
-        while (authRunning && !WindowShouldClose()) {
+        while (/*authRunning &&*/ !WindowShouldClose()) {
             Vector2 mouse = GetMousePosition();
 
             BeginDrawing();
@@ -112,14 +112,14 @@ private:
             if (CheckCollisionPointRec(mouse, signInButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 std::string username = handleSignIn(screenWidth, screenHeight);
                 if (!username.empty()) {
-                    authRunning = false;
+                    //authRunning = false;
                     return username;
                 }
             }
             if (CheckCollisionPointRec(mouse, logInButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 std::string username = handleLogIn(screenWidth, screenHeight);
                 if (!username.empty()) {
-                    authRunning = false;
+                    //authRunning = false;
                     return username;
                 }
             }
