@@ -138,6 +138,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.ixx" />
     <ClCompile Include="Nebula.ixx" />
+    <ClCompile Include="Obstacle.ixx" />
     <ClCompile Include="Player.ixx" />
     <ClCompile Include="Resources.ixx" />
     <ClCompile Include="Shop.ixx" />
@@ -176,6 +177,7 @@
     <Image Include="textures\missing_texture.png" />
     <Image Include="textures\mniejsze_logo.png" />
     <Image Include="textures\numbers.png" />
+    <Image Include="textures\registration.png" />
     <Image Include="textures\scarfy.png" />
     <Image Include="textures\shop_background.png" />
   </ItemGroup>

@@ -6,7 +6,7 @@ import <array>;
 import PlayerModule;
 import DustModule;
 import NebulaModule;
-import UtilitiesModule;
+//import UtilitiesModule;
 import ResourcesModule;
 import CollisionHandlingModule;
 
@@ -21,9 +21,10 @@ private:
 	Texture2D selectedDinoTex{};
 	int selectedDinoFrameCount{ 6 };
 
-	static constexpr int maxDustParticles{ 1 };
+	Dust dust{};
+	/*static constexpr int maxDustParticles{ 1 };
 	std::array<Dust, maxDustParticles> dustParticles;
-	float dustSpawnTimer{ 0.0f };
+	*/float dustSpawnTimer{ 0.0f };
 	float dustSpawnInterval{ 0.7f };
 
 public:
@@ -53,9 +54,9 @@ public:
 
 		}
 
-		for (auto& dust : dustParticles) {
+		/*for (auto& dust : dustParticles) {*/
 			dust.init(dustTex, 0, 0);
-		}
+		//}
 
 		finishLine = nebulae.back().getPositionX();
 	}
@@ -68,9 +69,9 @@ public:
 			nebula.update(deltaTime);
 		}
 
-		for (auto& dust : dustParticles) {
+		/*for (auto& dust : dustParticles) {*/
 			dust.update(deltaTime);
-		}
+		//}
 
 		if (player.isOnGround(windowHeight)) {
 			dustSpawnTimer += deltaTime;
@@ -89,9 +90,9 @@ public:
 			nebula.draw();
 
 
-		for (const auto& dust : dustParticles) {
+		/*for (const auto& dust : dustParticles) {*/
 			dust.draw();
-		}
+		//}
 
 
 		player.draw();
@@ -113,14 +114,14 @@ public:
 
 private:
 	void spawnDust() {
-		for (auto& dust : dustParticles) {
+		/*for (auto& dust : dustParticles) {*/
 			if (!dust.getIsActive()) {
 				Vector2 playerPos = player.getPosition();
 				float dustX = playerPos.x - 20;
 				float dustY = playerPos.y + player.getCollisionRec().height - 50;
 				dust.init(dust.getTexture(), dustX, dustY);
-				break;
-			}
+				//break;
+			//}
 		}
 	}
 };

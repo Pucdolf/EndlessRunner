@@ -1,7 +1,7 @@
-module;
-#include "raylib.h"
-export module UtilitiesModule;
-
+//module;
+//#include "raylib.h"
+//export module UtilitiesModule;
+//
 //export struct AnimData
 //{
 //	Rectangle rec;

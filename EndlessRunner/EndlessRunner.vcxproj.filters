@@ -72,6 +72,9 @@
     <ClCompile Include="Player.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Obstacle.ixx">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\12_nebula_spritesheet.png">
@@ -174,6 +177,9 @@
       <Filter>Resources\textures</Filter>
     </Image>
     <Image Include="textures\missing_texture.png">
+      <Filter>Resources\textures</Filter>
+    </Image>
+    <Image Include="textures\registration.png">
       <Filter>Resources\textures</Filter>
     </Image>
   </ItemGroup>

@@ -122,6 +122,7 @@ public:
                 }
             }
 
+            DrawText("Press ESC to return", screenWidth / 2 - MeasureText("Press ESC to return", 20) / 2, screenHeight - 30, 20, BLACK);
             EndDrawing();
         }
     }

@@ -5,7 +5,7 @@ module;
 export module PlayerModule;
 
 import ResourcesModule;
-import UtilitiesModule;
+//import UtilitiesModule;
 
 export class Player
 {

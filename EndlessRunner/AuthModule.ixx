@@ -23,7 +23,7 @@ export enum class LogInResult {
 	INCORRECT_PASSWORD
 };
 
-export class AuthManager {
+export class Authorization {
 private:
 	std::set<std::string> existingUsernames;
 	std::map<std::string, std::string> storedPasswords;
@@ -66,7 +66,7 @@ private:
 	}
 
 public:
-	AuthManager() {
+	Authorization() {
 		loadUsers(); // Load existing users at initialization
 	}
 

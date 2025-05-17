@@ -2,7 +2,7 @@ module;
 #include "raylib.h"
 export module CollisionHandlingModule;
 
-import UtilitiesModule;
+//import UtilitiesModule;
 import <raylib.h>;
 
 export bool nebulaCollision(const Rectangle& a, const Rectangle& rectB, float padding = 50.0f)

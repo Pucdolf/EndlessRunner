@@ -21,6 +21,8 @@ private:
 	inline static const std::string LOADING_SCREEN_BG = "loading_screen_background";
 	inline static const std::string BAR_EMPTY = "loading_bar_empty";
 	inline static const std::string BAR_FULL = "loading_bar_full";
+	//REGISTRATION
+	inline static const std::string REGISTRATION_BG = "registration";
 	//SHOP
 	inline static const std::string SHOP_BG = "shop_background";
 	inline static const std::string DINO_SHADOW = "dino_shadow";
@@ -40,6 +42,9 @@ private:
 	inline static const std::string RED_DINO_RUN = "red_dino_run";
 	//OBSTACLES
 	inline static const std::string NEBULA = "nebula";
+	inline static const std::string PTERO = "pterosaur";
+	inline static const std::string BAT = "bat";
+
 	//STATS
 	inline static const std::string HEART_ICON = "heart_icon";
 	inline static const std::string LIFE_LOST_ICON = "life_lost_icon";
@@ -48,8 +53,8 @@ private:
 
 public:
 	Resources() = default;
-	
-	
+
+
 	void loadTextures() {
 		//MENU
 		loadTexture(MENU_BG, "textures/main_menu_background.png");
@@ -57,6 +62,8 @@ public:
 		loadTexture(LOADING_SCREEN_BG, "textures/loading_screen.png");
 		loadTexture(BAR_EMPTY, "textures/barempty.png");
 		loadTexture(BAR_FULL, "textures/barfill.png");
+		//REGISTRATION
+		loadTexture(REGISTRATION_BG, "textures/registration.png");
 		//SHOP
 		loadTexture(SHOP_BG, "textures/shop.png");
 		loadTexture(DINO_SHADOW, "textures/Characters/shadow_2.png");
@@ -76,6 +83,9 @@ public:
 		loadTexture(RED_DINO_RUN, "textures/Characters/Player 4/p4_run.png");
 		//OBSTACLES
 		loadTexture(NEBULA, "textures/12_nebula_spritesheet.png");
+		loadTexture(PTERO, "textures/pterosaur_sptitesheet.png");
+		loadTexture(BAT, "textures/BatIdleMoving.png");
+
 		//STATS
 		loadTexture(HEART_ICON, "textures/life_icon.png");
 		loadTexture(LIFE_LOST_ICON, "textures/life_lost_icon.png");
@@ -84,7 +94,7 @@ public:
 	}
 
 	void unloadTextures() {
-		
+
 		for (auto& texture : textures | std::ranges::views::values) {
 			UnloadTexture(texture);
 		}
@@ -99,8 +109,10 @@ public:
 	Texture2D& getLoadingScreenBackground() { return getTexture(LOADING_SCREEN_BG); }
 	Texture2D& getBarEmpty() { return getTexture(BAR_EMPTY); }
 	Texture2D& getBarFill() { return getTexture(BAR_FULL); }
+	//REGISTRATION
+	Texture2D& getRegistrationBackground() { return getTexture(REGISTRATION_BG); }
 	//SHOP
-	Texture2D& getdinoShadow() { return getTexture(DINO_SHADOW); }
+	Texture2D& getShadowTexture() { return getTexture(DINO_SHADOW); }
 	Texture2D& getGreenIdle() { return getTexture(GREEN_DINO_IDLE); }
 	Texture2D& getBlueIdle() { return getTexture(BLUE_DINO_IDLE); }
 	Texture2D& getYellowIdle() { return getTexture(YELLOW_DINO_IDLE); }
@@ -117,6 +129,9 @@ public:
 	Texture2D& getRedDinoRun() { return getTexture(RED_DINO_RUN); }
 	//OBSTACLES
 	Texture2D& getNebula() { return getTexture(NEBULA); }
+	Texture2D& getPtero() { return getTexture(PTERO); }
+	Texture2D& getBat() { return getTexture(BAT); }
+
 	//STATS
 	Texture2D& getHeartIcon() { return getTexture(HEART_ICON); }
 	Texture2D& getLifeLostIcon() { return getTexture(LIFE_LOST_ICON); }

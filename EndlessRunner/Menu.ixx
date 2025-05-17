@@ -178,7 +178,7 @@ private:
 				DrawText(entry.c_str(), screenWidth / 2 - MeasureText(entry.c_str(), 30) / 2, 150 + i * 50, 30, BLACK);
 			}
 
-			DrawText("Press ESC to return", screenWidth / 2 - MeasureText("Press ESC to return", 20) / 2, screenHeight - 50, 20, BLACK);
+			DrawText("Press ESC to return", screenWidth / 2 - MeasureText("Press ESC to return", 20) / 2, screenHeight - 30, 20, BLACK);
 			EndDrawing();
 		}
 	}
