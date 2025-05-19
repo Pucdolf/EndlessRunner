@@ -3,125 +3,138 @@ module;
 export module BoardModule;
 
 import <array>;
+import <vector>;
+import <memory>;
+import <random>;
 import PlayerModule;
 import DustModule;
-import NebulaModule;
-//import UtilitiesModule;
+import BatModule;
+import PterodactylModule;
 import ResourcesModule;
 import CollisionHandlingModule;
-
+import ObstacleModule;
+import ObstacleFactoryModule;
+import ConfigModule;
 
 export class Board {
 private:
+    Player player{};
+    std::vector<std::unique_ptr<Obstacle>> obstacles;
+    float lastObstacleX{ 0.f };
+    float minObstacleDistance{ Config::MIN_OBSTACLE_DISTANCE };
+    float maxObstacleDistance{ Config::MAX_OBSTACLE_DISTANCE };
 
-	Player player{};
-	static constexpr int amountOfNeb{ 10 };
-	std::array<Nebula, amountOfNeb> nebulae;
-	float finishLine{};
-	Texture2D selectedDinoTex{};
-	int selectedDinoFrameCount{ 6 };
+    Texture2D selectedDinoTex{};
+    int selectedDinoFrameCount{ 6 };
 
-	Dust dust{};
-	/*static constexpr int maxDustParticles{ 1 };
-	std::array<Dust, maxDustParticles> dustParticles;
-	*/float dustSpawnTimer{ 0.0f };
-	float dustSpawnInterval{ 0.7f };
+    Dust dust{};
+    float dustSpawnTimer{ 0.0f };
+    float dustSpawnInterval{ Config::DUST_SPAWN_INTERVAL };
+
+    std::random_device rd;
+    std::mt19937 gen{ rd() };
+
+    int windowWidth{};
+    int windowHeight{};
+
+    Resources& resources;
+    ObstacleFactory obstacleFactory{};
 
 public:
+    Board(Resources& res) : resources(res) {}
 
-	void setDinoTex(const Texture2D& dinoTex) {
-		selectedDinoTex = dinoTex;
-	}
-	void setDinoFrameCount(int frameCount) {
-		selectedDinoFrameCount = frameCount;
-	}
+    void setDinoTex(const Texture2D& dinoTex) {
+        selectedDinoTex = dinoTex;
+    }
+    void setDinoFrameCount(int frameCount) {
+        selectedDinoFrameCount = frameCount;
+    }
 
-	void init(const Texture2D& dinoTex, const Texture2D& nebulaTex, const Texture2D& dustTex, int windowWidth, int windowHeight) {
+    void init(const Texture2D& dinoTex, const Texture2D& batTex, const Texture2D& pteroTex, const Texture2D& dustTex, int windowWidth, int windowHeight) {
+        if (selectedDinoTex.id == 0) {
+            selectedDinoTex = dinoTex;
+            selectedDinoFrameCount = 6;
+        }
 
-		//Gdy nie wybrano w sklepie textury - domyslnie zielona
-		if (selectedDinoTex.id == 0) {
-			selectedDinoTex = dinoTex;
-			selectedDinoFrameCount = 6;
-		}
+        this->windowWidth = windowWidth;
+        this->windowHeight = windowHeight;
 
-		player.init(selectedDinoTex, selectedDinoFrameCount, windowWidth, windowHeight);
+        float playerWidth = (static_cast<float>(selectedDinoTex.width) / selectedDinoFrameCount) * Config::PLAYER_SCALE;
+        float startX = (windowWidth - playerWidth) / 2.f;
+        player.init(selectedDinoTex, startX, windowHeight, Config::PLAYER_SCALE, selectedDinoFrameCount, Config::ANIMATION_UPDATE_TIME);
 
-		for (int i = 0; i < amountOfNeb; i++) {
+        dust.init(dustTex, 0, 0, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
 
-			float startX = static_cast<float>(windowWidth + 300 * i);
-			float startY = static_cast<float>(windowHeight);
-			nebulae[i].init(nebulaTex, startX, startY);
+        lastObstacleX = static_cast<float>(windowWidth);
+        obstacles.clear();
+        spawnObstacle(batTex, pteroTex, windowWidth, windowHeight);
+    }
 
-		}
+    void update(float deltaTime, int windowHeight) {
+        player.update(deltaTime, windowHeight);
+        for (auto& obstacle : obstacles) {
+            obstacle->update(deltaTime);
+        }
 
-		/*for (auto& dust : dustParticles) {*/
-			dust.init(dustTex, 0, 0);
-		//}
+        obstacles.erase(
+            std::remove_if(obstacles.begin(), obstacles.end(),
+                [](const auto& obs) { return obs->getPositionX() < -100.f; }),
+            obstacles.end()
+        );
 
-		finishLine = nebulae.back().getPositionX();
-	}
+        if (obstacles.empty() || obstacles.back()->getPositionX() < lastObstacleX - getRandomDistance()) {
+            spawnObstacle(resources.getBat(), resources.getPtero(), windowWidth, windowHeight);
+        }
 
-	void update(float deltaTime, int windowHeight) {
+        dust.update(deltaTime);
 
-		player.update(deltaTime, windowHeight);
+        if (player.isOnGround(windowHeight)) {
+            dustSpawnTimer += deltaTime;
+            if (dustSpawnTimer >= dustSpawnInterval) {
+                spawnDust();
+                dustSpawnTimer = 0.f;
+            }
+        }
+    }
 
-		for (auto& nebula : nebulae) {
-			nebula.update(deltaTime);
-		}
+    void draw() const {
+        for (const auto& obstacle : obstacles) {
+            obstacle->draw();
+        }
+        dust.draw();
+        player.draw();
+    }
 
-		/*for (auto& dust : dustParticles) {*/
-			dust.update(deltaTime);
-		//}
+    bool checkLoss() const {
+        for (const auto& obstacle : obstacles) {
+            if (obstacleCollision(obstacle->getCollisionRec(), player.getCollisionRec())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-		if (player.isOnGround(windowHeight)) {
-			dustSpawnTimer += deltaTime;
-			if (dustSpawnTimer >= dustSpawnInterval) {
-				spawnDust();
-				dustSpawnTimer = 0.f;
-			}
-		}
-		finishLine += -200 * deltaTime;
-	}
-
-	void draw(const Texture2D& nebula) const {
-
-
-		for (auto& nebula : nebulae)
-			nebula.draw();
-
-
-		/*for (const auto& dust : dustParticles) {*/
-			dust.draw();
-		//}
-
-
-		player.draw();
-
-	}
-
-	bool checkLoss() const {
-		for (const auto& nebula : nebulae) {
-			if (nebulaCollision(nebula.getCollisionRec(), player.getCollisionRec())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	bool checkWin() const {
-		return player.getWorldPos().x >= finishLine;
-	}
+    const Player& getPlayer() const { return player; }
 
 private:
-	void spawnDust() {
-		/*for (auto& dust : dustParticles) {*/
-			if (!dust.getIsActive()) {
-				Vector2 playerPos = player.getPosition();
-				float dustX = playerPos.x - 20;
-				float dustY = playerPos.y + player.getCollisionRec().height - 50;
-				dust.init(dust.getTexture(), dustX, dustY);
-				//break;
-			//}
-		}
-	}
+    void spawnDust() {
+        if (!dust.getIsActive()) {
+            Vector2 playerPos = player.getPosition();
+            float dustX = playerPos.x - 20;
+            float dustY = playerPos.y + player.getCollisionRec().height - 50;
+            dust.init(dust.getTexture(), dustX, dustY, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
+        }
+    }
+
+    void spawnObstacle(const Texture2D& batTex, const Texture2D& pteroTex, int windowWidth, int windowHeight) {
+        float startX = lastObstacleX + getRandomDistance();
+        float startY = static_cast<float>(windowHeight);
+        obstacles.push_back(obstacleFactory.createObstacle(batTex, pteroTex, startX, startY));
+        lastObstacleX = startX;
+    }
+
+    float getRandomDistance() {
+        std::uniform_real_distribution<float> dis(minObstacleDistance, maxObstacleDistance);
+        return dis(gen);
+    }
 };

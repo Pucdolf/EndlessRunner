@@ -129,9 +129,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedSprite.ixx" />
     <ClCompile Include="AuthModule.ixx" />
+    <ClCompile Include="Bat.ixx" />
     <ClCompile Include="Board.ixx" />
     <ClCompile Include="CollisionHandling.ixx" />
+    <ClCompile Include="Config.ixx" />
     <ClCompile Include="Controller.ixx" />
     <ClCompile Include="Dust.ixx" />
     <ClCompile Include="LoadingScreen.ixx" />
@@ -139,7 +142,9 @@
     <ClCompile Include="Menu.ixx" />
     <ClCompile Include="Nebula.ixx" />
     <ClCompile Include="Obstacle.ixx" />
+    <ClCompile Include="ObstaclesFactory.ixx" />
     <ClCompile Include="Player.ixx" />
+    <ClCompile Include="Pterodactyl.ixx" />
     <ClCompile Include="Resources.ixx" />
     <ClCompile Include="Shop.ixx" />
     <ClCompile Include="Utilities.ixx" />
@@ -177,6 +182,7 @@
     <Image Include="textures\missing_texture.png" />
     <Image Include="textures\mniejsze_logo.png" />
     <Image Include="textures\numbers.png" />
+    <Image Include="textures\pterosaur_spritesheet.png" />
     <Image Include="textures\registration.png" />
     <Image Include="textures\scarfy.png" />
     <Image Include="textures\shop_background.png" />

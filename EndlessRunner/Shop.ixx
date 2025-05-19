@@ -14,7 +14,7 @@ private:
     Rectangle dinoRecs[DinoCount];
     Texture2D background;
     Resources resources;
-    std::array<float, DinoCount> baseScales{ 6.0f, 7.5f, 8.5f, 7.0f }; // Bazowe skale
+    std::array<float, DinoCount> baseScales{ 6.0f, 7.5f, 8.5f, 7.0f }; 
     std::array<float, DinoCount> frameWidths;
     std::array<float, DinoCount> frameHeights;
     std::array<int, DinoCount> frameCounts{ 6, 4, 4, 6 };
