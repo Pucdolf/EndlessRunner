@@ -1,5 +1,6 @@
 module;
 #include "raylib.h"
+#include <iostream>
 export module AnimatedSpriteModule;
 
 import ConfigModule;
@@ -15,7 +16,7 @@ protected:
 
     int frame{ 0 };
     float maxFrames{ 1.f };
-    float updateTime{ Config::ANIMATION_UPDATE_TIME }; // Domyœlna wartoœæ z Config
+    float updateTime{ Config::ANIMATION_UPDATE_TIME };
     float runningTime{ 0.f };
 
     bool isActive{ true };
@@ -24,15 +25,6 @@ public:
     AnimatedSprite() = default;
     virtual ~AnimatedSprite() = default;
 
-    /**
-     * @brief Inicjalizuje obiekt animowanego sprite'a.
-     * @param tex Tekstura sprite'a.
-     * @param startX Pocz¹tkowa pozycja X sprite'a.
-     * @param startY Pocz¹tkowa pozycja Y sprite'a.
-     * @param scaleFactor Wspó³czynnik skali sprite'a.
-     * @param frameCount Liczba klatek animacji.
-     * @param animUpdateTime Czas miêdzy klatkami animacji (w sekundach).
-     */
     virtual void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime = Config::ANIMATION_UPDATE_TIME) {
         texture = tex;
         maxFrames = static_cast<float>(frameCount);
@@ -43,7 +35,9 @@ public:
         frame = 0;
         runningTime = 0.f;
         isActive = true;
-        updateTime = animUpdateTime; // Mo¿liwoœæ nadpisywania czasu animacji
+        updateTime = animUpdateTime;
+        std::cout << "AnimatedSprite initialized: Width per frame: " << width << ", Height: " << height
+            << ", Frame count: " << maxFrames << "\n";
     }
 
     virtual void update(float deltaTime) {
@@ -55,6 +49,9 @@ public:
         if (!isActive) return;
         Rectangle source{ frame * width, 0.f, width, height };
         Rectangle dest{ screenPos.x, screenPos.y, width * scale, height * scale };
+        std::cout << "Drawing frame: " << frame << " of " << maxFrames
+            << ", Source X: " << frame * width << ", Source Width: " << width
+            << ", Dest X: " << screenPos.x << ", Dest Y: " << screenPos.y << "\n";
         DrawTexturePro(texture, source, dest, { 0.f, 0.f }, 0.f, WHITE);
     }
 
@@ -79,6 +76,7 @@ protected:
             runningTime = 0.f;
             frame++;
             if (frame >= maxFrames) frame = 0;
+            std::cout << "Updated animation: Frame: " << frame << " of " << maxFrames << "\n";
         }
     }
 

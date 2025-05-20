@@ -137,7 +137,7 @@ private:
 		bool passwordError = false;
 		bool validInput = false;
 		bool enteringUsername = true;
-		Rectangle submitButton = { screenWidth / 2 - 100, screenHeight / 2 + 100, 200, 60 };
+		Rectangle submitButton = { static_cast<float>(screenWidth / 2 - 100), static_cast<float>(screenHeight / 2 + 100), 200, 60 };
 
 		while (!WindowShouldClose() && !validInput) {
 			BeginDrawing();
@@ -243,7 +243,7 @@ private:
 		bool passwordError = false;
 		bool loggedIn = false;
 		bool enteringUsername = true;
-		Rectangle submitButton = { screenWidth / 2 - 100, screenHeight / 2 + 100, 200, 60 };
+		Rectangle submitButton = { static_cast<float>(screenWidth / 2 - 100), static_cast<float>(screenHeight / 2 + 100), 200, 60 };
 
 		while (!WindowShouldClose() && !loggedIn) {
 			BeginDrawing();

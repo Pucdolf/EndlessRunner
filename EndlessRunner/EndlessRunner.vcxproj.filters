@@ -90,6 +90,9 @@
     <ClCompile Include="ObstaclesFactory.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="StaticObstacle.ixx">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\12_nebula_spritesheet.png">

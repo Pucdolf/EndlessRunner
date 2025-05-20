@@ -111,7 +111,7 @@ private:
 
             board->setDinoTex(selectedDinoTex);
             board->setDinoFrameCount(frameCount);
-            board->init(selectedDinoTex, resources->getBat(), resources->getPtero(), resources->getDustRun(),
+            board->init(selectedDinoTex,/* resources->getBat(), resources->getPtero(), resources->getDustRun(),*/
                 GetScreenWidth(), GetScreenHeight());
             Controller controller(*resources, *board, username, GetScreenWidth(), GetScreenHeight());
             controller.run();

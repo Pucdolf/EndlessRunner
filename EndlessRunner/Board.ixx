@@ -38,10 +38,11 @@ private:
     int windowHeight{};
 
     Resources& resources;
-    ObstacleFactory obstacleFactory{};
+    ObstacleFactory obstacleFactory;
+    BackgroundType currentBgType; // Przechowujemy aktualny typ t³a
 
 public:
-    Board(Resources& res) : resources(res) {}
+    Board(Resources& res) : resources(res), obstacleFactory(res) {}
 
     void setDinoTex(const Texture2D& dinoTex) {
         selectedDinoTex = dinoTex;
@@ -49,8 +50,11 @@ public:
     void setDinoFrameCount(int frameCount) {
         selectedDinoFrameCount = frameCount;
     }
+    void setBackgroundType(BackgroundType bgType) {
+        currentBgType = bgType;
+    }
 
-    void init(const Texture2D& dinoTex, const Texture2D& batTex, const Texture2D& pteroTex, const Texture2D& dustTex, int windowWidth, int windowHeight) {
+    void init(const Texture2D& dinoTex, int windowWidth, int windowHeight) {
         if (selectedDinoTex.id == 0) {
             selectedDinoTex = dinoTex;
             selectedDinoFrameCount = 6;
@@ -63,11 +67,11 @@ public:
         float startX = (windowWidth - playerWidth) / 2.f;
         player.init(selectedDinoTex, startX, windowHeight, Config::PLAYER_SCALE, selectedDinoFrameCount, Config::ANIMATION_UPDATE_TIME);
 
-        dust.init(dustTex, 0, 0, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
+        dust.init(resources.getDustRun(), 0, 0, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
 
         lastObstacleX = static_cast<float>(windowWidth);
         obstacles.clear();
-        spawnObstacle(batTex, pteroTex, windowWidth, windowHeight);
+        spawnObstacle(windowWidth, windowHeight);
     }
 
     void update(float deltaTime, int windowHeight) {
@@ -83,7 +87,7 @@ public:
         );
 
         if (obstacles.empty() || obstacles.back()->getPositionX() < lastObstacleX - getRandomDistance()) {
-            spawnObstacle(resources.getBat(), resources.getPtero(), windowWidth, windowHeight);
+            spawnObstacle(windowWidth, windowHeight);
         }
 
         dust.update(deltaTime);
@@ -126,10 +130,10 @@ private:
         }
     }
 
-    void spawnObstacle(const Texture2D& batTex, const Texture2D& pteroTex, int windowWidth, int windowHeight) {
+    void spawnObstacle(int windowWidth, int windowHeight) {
         float startX = lastObstacleX + getRandomDistance();
         float startY = static_cast<float>(windowHeight);
-        obstacles.push_back(obstacleFactory.createObstacle(batTex, pteroTex, startX, startY));
+        obstacles.push_back(obstacleFactory.createObstacle(startX, startY, currentBgType));
         lastObstacleX = startX;
     }
 

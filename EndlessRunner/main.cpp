@@ -12,7 +12,7 @@ int main() {
     const int screenWidth = Config::DEFAULT_WINDOW_WIDTH;
     const int screenHeight = Config::DEFAULT_WINDOW_HEIGHT;
 
-    /*SetConfigFlags(FLAG_WINDOW_RESIZABLE);*/
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(screenWidth, screenHeight, "Dino Rush");
 
     Resources resources;

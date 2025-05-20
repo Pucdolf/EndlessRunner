@@ -147,6 +147,7 @@
     <ClCompile Include="Pterodactyl.ixx" />
     <ClCompile Include="Resources.ixx" />
     <ClCompile Include="Shop.ixx" />
+    <ClCompile Include="StaticObstacle.ixx" />
     <ClCompile Include="Utilities.ixx" />
   </ItemGroup>
   <ItemGroup>
