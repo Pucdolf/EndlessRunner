@@ -8,7 +8,7 @@ import ConfigModule;
 export class StaticObstacle : public Obstacle {
 public:
     void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime) override {
-        Obstacle::init(tex, startX, startY, scaleFactor, 1, animUpdateTime); // frameCount=1, brak animacji
+        Obstacle::init(tex, startX, startY - tex.height * scaleFactor, scaleFactor, 1, animUpdateTime); // Odejmujemy wysokoœæ tekstury
     }
 
     void update(float deltaTime) override {
@@ -24,7 +24,7 @@ public:
     Rectangle getCollisionRec() const override {
         return Rectangle{
             screenPos.x,
-            screenPos.y,
+            screenPos.y, // Nowa pozycja uwzglêdnia przesuniêcie
             width * scale,
             height * scale
         };

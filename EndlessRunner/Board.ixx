@@ -39,7 +39,7 @@ private:
 
     Resources& resources;
     ObstacleFactory obstacleFactory;
-    BackgroundType currentBgType; // Przechowujemy aktualny typ t³a
+    BackgroundType currentBgType;
 
 public:
     Board(Resources& res) : resources(res), obstacleFactory(res) {}
@@ -132,7 +132,7 @@ private:
 
     void spawnObstacle(int windowWidth, int windowHeight) {
         float startX = lastObstacleX + getRandomDistance();
-        float startY = static_cast<float>(windowHeight);
+        float startY = static_cast<float>(windowHeight); // Wysokoœæ ekranu, reszta jest obs³ugiwana w StaticObstacle
         obstacles.push_back(obstacleFactory.createObstacle(startX, startY, currentBgType));
         lastObstacleX = startX;
     }

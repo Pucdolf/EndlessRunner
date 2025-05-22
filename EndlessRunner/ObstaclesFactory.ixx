@@ -21,29 +21,29 @@ export enum class BackgroundType {
 
 export class ObstacleFactory {
 private:
-    Resources& resources; // Referencja do zasobów
+    Resources& resources;
     std::random_device rd;
     std::mt19937 gen{ rd() };
-    std::uniform_int_distribution<> typeDis{ 0, 2 }; // 0: Bat, 1: Pterodactyl, 2: Statyczna przeszkoda
+    std::uniform_int_distribution<> probabilityDis{ 0, 99 }; // Losowanie z zakresu 0-99 dla procentów
     std::uniform_int_distribution<> staticDis{ 0, 6 }; // Do losowania statycznych przeszkód (maks. 7 opcji)
 
 public:
     ObstacleFactory(Resources& res) : resources(res) {}
 
     std::unique_ptr<Obstacle> createObstacle(float startX, float startY, BackgroundType bgType) {
-        int obstacleType = typeDis(gen); // Losowanie typu przeszkody
+        int roll = probabilityDis(gen); // Losowanie liczby z zakresu 0-99
 
-        if (obstacleType == 0) { // Bat
+        if (roll < 20) { // 0-19: 20% szansy na Bat
             auto bat = std::make_unique<Bat>();
             bat->init(resources.getBat(), startX, startY, Config::OBSTACLE_SCALE, Config::BAT_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
             return bat;
         }
-        else if (obstacleType == 1) { // Pterodactyl
+        else if (roll < 40) { // 20-39: 20% szansy na Pterodactyl
             auto ptero = std::make_unique<Pterodactyl>();
             ptero->init(resources.getPtero(), startX, startY, Config::OBSTACLE_SCALE, Config::PTERODACTYL_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
             return ptero;
         }
-        else { // Statyczna przeszkoda
+        else { // 40-99: 60% szansy na StaticObstacle
             std::vector<Texture2D*> staticObstacles;
             switch (bgType) {
             case BackgroundType::DESERT_DAY:
