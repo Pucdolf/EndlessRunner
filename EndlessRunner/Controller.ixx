@@ -28,7 +28,7 @@ private:
 	Texture2D bgTexture{};
 	Texture2D mgTexture{};
 	Texture2D fgTexture{};
-	Texture2D groungTexture{};
+	Texture2D groundTexture{};
 
 	void saveScore() {
 		if (username.empty() || savedScore) return;
@@ -60,6 +60,7 @@ public:
 			bgTexture = resources.getDesertBackground();
 			mgTexture = resources.getDesertMidground();
 			fgTexture = resources.getDesertForeground();
+			groundTexture = resources.getDesertGround();
 			bgType = BackgroundType::DESERT_DAY;
 		/*	std::cout << "Desert Day - BG: " << bgTexture.width << "x" << bgTexture.height
 				<< ", MG: " << mgTexture.width << "x" << mgTexture.height
@@ -69,6 +70,7 @@ public:
 			bgTexture = resources.getDesertNightBackground();
 			mgTexture = resources.getDesertNightMidground();
 			fgTexture = resources.getDesertNightForeground();
+			groundTexture = resources.getDesertNightGround();
 			bgType = BackgroundType::DESERT_NIGHT;
 			//std::cout << "Desert Night - BG: " << bgTexture.width << "x" << bgTexture.height
 			//	<< ", MG: " << mgTexture.width << "x" << mgTexture.height
@@ -78,6 +80,7 @@ public:
 			bgTexture = resources.getForestBackground();
 			mgTexture = resources.getForestMidground();
 			fgTexture = resources.getForestForeground();
+			groundTexture = resources.getForestGround();
 			bgType = BackgroundType::FOREST_DAY;
 			//std::cout << "Forest Day - BG: " << bgTexture.width << "x" << bgTexture.height
 			//	<< ", MG: " << mgTexture.width << "x" << mgTexture.height
@@ -87,6 +90,7 @@ public:
 			bgTexture = resources.getForestNightBackground();
 			mgTexture = resources.getForestNightMidground();
 			fgTexture = resources.getForestNightForeground();
+			groundTexture = resources.getForestNightGround();
 			bgType = BackgroundType::FOREST_NIGHT;
 			//std::cout << "Forest Night - BG: " << bgTexture.width << "x" << bgTexture.height
 			//	<< ", MG: " << mgTexture.width << "x" << mgTexture.height

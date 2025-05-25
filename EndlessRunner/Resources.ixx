@@ -147,28 +147,32 @@ public:
         loadTexture(TextureKeys::Characters::BAT, "textures/BatIdleMoving.png");
 
         // T³a
-        loadTexture(TextureKeys::Backgrounds::GAME_BG, "textures/far-buildings.png");
+       /* loadTexture(TextureKeys::Backgrounds::GAME_BG, "textures/far-buildings.png");
         loadTexture(TextureKeys::Backgrounds::GAME_MG, "textures/back-buildings.png");
-        loadTexture(TextureKeys::Backgrounds::GAME_FG, "textures/foreground - Copy.png");
+        loadTexture(TextureKeys::Backgrounds::GAME_FG, "textures/foreground - Copy.png");*/
         // Pustynia - dzieñ
         loadTexture(TextureKeys::Backgrounds::DESERT_BG, "textures/Desert/bg_1.png");
         loadTexture(TextureKeys::Backgrounds::DESERT_MG, "textures/Desert/bg_2.png");
-        loadTexture(TextureKeys::Backgrounds::DESERT_FG, "textures/Desert/bg_3 - Copy.png");
-        loadTexture(TextureKeys::Backgrounds::DESERT_GR, "textures/Desert/bg_3 - Copy.png");
+        //loadTexture(TextureKeys::Backgrounds::DESERT_FG, "textures/Desert/bg_3 - Copy.png");
+        loadTexture(TextureKeys::Backgrounds::DESERT_FG, "textures/Desert/bg_3.png");
+        loadTexture(TextureKeys::Backgrounds::DESERT_GR, "textures/Desert/ground.png");
         // Pustynia - noc
         loadTexture(TextureKeys::Backgrounds::DESERT_NIGHT_BG, "textures/Desert/night_bg_1.png");
         loadTexture(TextureKeys::Backgrounds::DESERT_NIGHT_MG, "textures/Desert/night_bg_2.png");
-        loadTexture(TextureKeys::Backgrounds::DESERT_NIGHT_FG, "textures/Desert/night_bg_3 - Copy.png");
+        //loadTexture(TextureKeys::Backgrounds::DESERT_NIGHT_FG, "textures/Desert/night_bg_3 - Copy.png");
+        loadTexture(TextureKeys::Backgrounds::DESERT_NIGHT_FG, "textures/Desert/night_bg_3.png");
         loadTexture(TextureKeys::Backgrounds::DESERT_NIGHT_GR, "textures/Desert/night_ground.png");
         // Las - dzieñ
         loadTexture(TextureKeys::Backgrounds::FOREST_BG, "textures/Forest/bg_1.png");
         loadTexture(TextureKeys::Backgrounds::FOREST_MG, "textures/Forest/bg_2.png");
-        loadTexture(TextureKeys::Backgrounds::FOREST_FG, "textures/Forest/bg_3 - Copy.png");
+        //loadTexture(TextureKeys::Backgrounds::FOREST_FG, "textures/Forest/bg_3 - Copy.png");
+        loadTexture(TextureKeys::Backgrounds::FOREST_FG, "textures/Forest/bg_3.png");
         loadTexture(TextureKeys::Backgrounds::FOREST_GR, "textures/Forest/ground.png");
         // Las - noc
         loadTexture(TextureKeys::Backgrounds::FOREST_NIGHT_BG, "textures/Forest/night_bg_1.png");
         loadTexture(TextureKeys::Backgrounds::FOREST_NIGHT_MG, "textures/Forest/night_bg_2.png");
-        loadTexture(TextureKeys::Backgrounds::FOREST_NIGHT_FG, "textures/Forest/night_bg_3 - Copy.png");
+        //loadTexture(TextureKeys::Backgrounds::FOREST_NIGHT_FG, "textures/Forest/night_bg_3 - Copy.png");
+        loadTexture(TextureKeys::Backgrounds::FOREST_NIGHT_FG, "textures/Forest/night_bg_3.png");
         loadTexture(TextureKeys::Backgrounds::FOREST_NIGHT_GR, "textures/Forest/night_ground.png");
 
         // Przeszkody statyczne
