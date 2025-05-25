@@ -28,7 +28,7 @@ private:
 	Texture2D bgTexture{};
 	Texture2D mgTexture{};
 	Texture2D fgTexture{};
-	Texture2D backgroungTexture{};
+	Texture2D groungTexture{};
 
 	void saveScore() {
 		if (username.empty() || savedScore) return;
@@ -61,36 +61,36 @@ public:
 			mgTexture = resources.getDesertMidground();
 			fgTexture = resources.getDesertForeground();
 			bgType = BackgroundType::DESERT_DAY;
-			std::cout << "Desert Day - BG: " << bgTexture.width << "x" << bgTexture.height
+		/*	std::cout << "Desert Day - BG: " << bgTexture.width << "x" << bgTexture.height
 				<< ", MG: " << mgTexture.width << "x" << mgTexture.height
 				<< ", FG: " << fgTexture.width << "x" << fgTexture.height << "\n";
-			break;
+		*/	break;
 		case 1: // Pustynia noc¹
 			bgTexture = resources.getDesertNightBackground();
 			mgTexture = resources.getDesertNightMidground();
 			fgTexture = resources.getDesertNightForeground();
 			bgType = BackgroundType::DESERT_NIGHT;
-			std::cout << "Desert Night - BG: " << bgTexture.width << "x" << bgTexture.height
-				<< ", MG: " << mgTexture.width << "x" << mgTexture.height
-				<< ", FG: " << fgTexture.width << "x" << fgTexture.height << "\n";
+			//std::cout << "Desert Night - BG: " << bgTexture.width << "x" << bgTexture.height
+			//	<< ", MG: " << mgTexture.width << "x" << mgTexture.height
+			//	<< ", FG: " << fgTexture.width << "x" << fgTexture.height << "\n";
 			break;
 		case 2: // Las za dnia
 			bgTexture = resources.getForestBackground();
 			mgTexture = resources.getForestMidground();
 			fgTexture = resources.getForestForeground();
 			bgType = BackgroundType::FOREST_DAY;
-			std::cout << "Forest Day - BG: " << bgTexture.width << "x" << bgTexture.height
-				<< ", MG: " << mgTexture.width << "x" << mgTexture.height
-				<< ", FG: " << fgTexture.width << "x" << fgTexture.height << "\n";
+			//std::cout << "Forest Day - BG: " << bgTexture.width << "x" << bgTexture.height
+			//	<< ", MG: " << mgTexture.width << "x" << mgTexture.height
+			//	<< ", FG: " << fgTexture.width << "x" << fgTexture.height << "\n";
 			break;
 		case 3: // Las noc¹
 			bgTexture = resources.getForestNightBackground();
 			mgTexture = resources.getForestNightMidground();
 			fgTexture = resources.getForestNightForeground();
 			bgType = BackgroundType::FOREST_NIGHT;
-			std::cout << "Forest Night - BG: " << bgTexture.width << "x" << bgTexture.height
-				<< ", MG: " << mgTexture.width << "x" << mgTexture.height
-				<< ", FG: " << fgTexture.width << "x" << fgTexture.height << "\n";
+			//std::cout << "Forest Night - BG: " << bgTexture.width << "x" << bgTexture.height
+			//	<< ", MG: " << mgTexture.width << "x" << mgTexture.height
+			//	<< ", FG: " << fgTexture.width << "x" << fgTexture.height << "\n";
 			break;
 		default:
 			bgTexture = resources.getDesertBackground();

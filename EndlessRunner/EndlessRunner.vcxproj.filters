@@ -48,9 +48,6 @@
     <ClCompile Include="Resources.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities.ixx">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="AuthModule.ixx">
       <Filter>Modules</Filter>
     </ClCompile>

@@ -148,7 +148,6 @@
     <ClCompile Include="Resources.ixx" />
     <ClCompile Include="Shop.ixx" />
     <ClCompile Include="StaticObstacle.ixx" />
-    <ClCompile Include="Utilities.ixx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\12_nebula_spritesheet.png" />

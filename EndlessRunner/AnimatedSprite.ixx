@@ -36,8 +36,8 @@ public:
         runningTime = 0.f;
         isActive = true;
         updateTime = animUpdateTime;
-        std::cout << "AnimatedSprite initialized: Width per frame: " << width << ", Height: " << height
-            << ", Frame count: " << maxFrames << "\n";
+        /*std::cout << "AnimatedSprite initialized: Width per frame: " << width << ", Height: " << height
+            << ", Frame count: " << maxFrames << "\n";*/
     }
 
     virtual void update(float deltaTime) {
@@ -49,9 +49,9 @@ public:
         if (!isActive) return;
         Rectangle source{ frame * width, 0.f, width, height };
         Rectangle dest{ screenPos.x, screenPos.y, width * scale, height * scale };
-        std::cout << "Drawing frame: " << frame << " of " << maxFrames
+        /*std::cout << "Drawing frame: " << frame << " of " << maxFrames
             << ", Source X: " << frame * width << ", Source Width: " << width
-            << ", Dest X: " << screenPos.x << ", Dest Y: " << screenPos.y << "\n";
+            << ", Dest X: " << screenPos.x << ", Dest Y: " << screenPos.y << "\n";*/
         DrawTexturePro(texture, source, dest, { 0.f, 0.f }, 0.f, WHITE);
     }
 
@@ -76,7 +76,7 @@ protected:
             runningTime = 0.f;
             frame++;
             if (frame >= maxFrames) frame = 0;
-            std::cout << "Updated animation: Frame: " << frame << " of " << maxFrames << "\n";
+            /*std::cout << "Updated animation: Frame: " << frame << " of " << maxFrames << "\n";*/
         }
     }
 
