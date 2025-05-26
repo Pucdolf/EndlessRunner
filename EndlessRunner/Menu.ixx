@@ -111,7 +111,7 @@ private:
 
 			board->setDinoTex(selectedDinoTex);
 			board->setDinoFrameCount(frameCount);
-			board->init(selectedDinoTex, GetScreenWidth(), GetScreenHeight());
+			//board->init(selectedDinoTex, GetScreenWidth(), GetScreenHeight());
 			Controller controller(*resources, *board, username, GetScreenWidth(), GetScreenHeight());
 			controller.run();
 		}
@@ -191,7 +191,7 @@ private:
 
 			// Rysowanie wyników wewn¹trz ramki
 			size_t maxScores = std::min(static_cast<size_t>(10), scores.size());
-			float textY = frameY + 130; // Pocz¹tek tekstu pod tytu³em
+			float textY = frameY + 120; // Pocz¹tek tekstu pod tytu³em
 			for (size_t i = 0; i < maxScores; i++) {
 				std::string entry = std::to_string(i + 1) + ". " + scores[i].username + ": " + std::to_string(scores[i].score);
 				DrawText(entry.c_str(), static_cast<int>(frameX + (frameWidth - MeasureText(entry.c_str(), 30)) / 2),

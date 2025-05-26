@@ -65,6 +65,7 @@ public:
 
         float playerWidth = (static_cast<float>(selectedDinoTex.width) / selectedDinoFrameCount) * Config::PLAYER_SCALE;
         float startX = (windowWidth - playerWidth) / 2.f;
+        // Przekazujemy windowHeight, ale Player sam dostosuje pozycjê Y
         player.init(selectedDinoTex, startX, windowHeight, Config::PLAYER_SCALE, selectedDinoFrameCount, Config::ANIMATION_UPDATE_TIME);
 
         dust.init(resources.getDustRun(), 0, 0, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
@@ -75,6 +76,7 @@ public:
     }
 
     void update(float deltaTime, int windowHeight) {
+        this->windowHeight = windowHeight;
         player.update(deltaTime, windowHeight);
         for (auto& obstacle : obstacles) {
             obstacle->update(deltaTime);
@@ -125,14 +127,15 @@ private:
         if (!dust.getIsActive()) {
             Vector2 playerPos = player.getPosition();
             float dustX = playerPos.x - 20;
-            float dustY = playerPos.y + player.getCollisionRec().height - 50;
+            // Py³ powinien byæ na poziomie trawy, czyli windowHeight - 65
+            float dustY = (windowHeight - 65.f) - (dust.getTexture().height * Config::OBSTACLE_SCALE);
             dust.init(dust.getTexture(), dustX, dustY, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
         }
     }
 
     void spawnObstacle(int windowWidth, int windowHeight) {
         float startX = lastObstacleX + getRandomDistance();
-        float startY = static_cast<float>(windowHeight); // Wysokoœæ ekranu, reszta jest obs³ugiwana w StaticObstacle
+        float startY = static_cast<float>(windowHeight - 65); // Wysokoœæ ekranu, reszta jest obs³ugiwana w StaticObstacle
         obstacles.push_back(obstacleFactory.createObstacle(startX, startY, currentBgType));
         lastObstacleX = startX;
     }
