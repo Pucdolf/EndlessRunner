@@ -63,9 +63,6 @@
     <ClCompile Include="Dust.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Nebula.ixx">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Player.ixx">
       <Filter>Modules</Filter>
     </ClCompile>

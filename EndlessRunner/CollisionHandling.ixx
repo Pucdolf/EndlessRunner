@@ -5,7 +5,7 @@ export module CollisionHandlingModule;
 //import UtilitiesModule;
 import <raylib.h>;
 
-export bool obstacleCollision(const Rectangle& a, const Rectangle& rectB, float padding = 50.0f)
+export bool obstacleCollision(const Rectangle& a, const Rectangle& rectB, float padding = 55.0f)
 {
 	Rectangle rectA = {
 	  a.x + padding,

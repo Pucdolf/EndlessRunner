@@ -140,7 +140,6 @@
     <ClCompile Include="LoadingScreen.ixx" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.ixx" />
-    <ClCompile Include="Nebula.ixx" />
     <ClCompile Include="Obstacle.ixx" />
     <ClCompile Include="ObstaclesFactory.ixx" />
     <ClCompile Include="Player.ixx" />

@@ -141,32 +141,40 @@ private:
 		float mgScaledWidth = mgTexture.width * universalScale;
 		float fgScaledWidth = fgTexture.width * universalScale;
 		float groundScaledWidth = groundTexture.width * universalScale;
-		float fgEffectiveWidth = fgScaledWidth * 0.75f;
 
+		// Przesuwanie z ró¿nymi prêdkoœciami
 		bgX -= 20 * dt;
 		mgX -= 40 * dt;
 		fgX -= 60 * dt;
 		groundX -= 200 * dt;
 
-		if (bgX <= -bgScaledWidth) bgX += bgScaledWidth;
-		if (mgX <= -mgScaledWidth) mgX += mgScaledWidth;
-		if (fgX <= -fgEffectiveWidth) fgX += fgEffectiveWidth;
-		if (groundX <= -groundScaledWidth) groundX += groundScaledWidth;
+		// Resetowanie pozycji, gdy tekstura ca³kowicie wyjdzie poza ekran
+		// U¿ywamy modulo, aby zapewniæ ci¹g³oœæ
+		bgX = fmod(bgX, bgScaledWidth);
+		if (bgX > 0) bgX -= bgScaledWidth; // Zapewniamy, ¿e pierwsza instancja zaczyna siê od lewej krawêdzi
+		mgX = fmod(mgX, mgScaledWidth);
+		if (mgX > 0) mgX -= mgScaledWidth;
+		fgX = fmod(fgX, fgScaledWidth);
+		if (fgX > 0) fgX -= fgScaledWidth;
+		groundX = fmod(groundX, groundScaledWidth);
+		if (groundX > 0) groundX -= groundScaledWidth;
 
 		auto drawTileableLayer = [&](Texture2D texture, float xPos, float scaledWidth) {
+			// Obliczamy, ile instancji tekstury potrzebujemy, aby pokryæ ekran + jedna dodatkowa
 			int numInstances = static_cast<int>(windowWidth / scaledWidth) + 2;
+			// Przesuniêcie pocz¹tkowe, aby pierwsza instancja zaczyna³a siê poza ekranem
+			float startX = xPos;
 			for (int i = 0; i < numInstances; ++i) {
-				float drawX = xPos + i * scaledWidth;
-				if (drawX < -scaledWidth || drawX > windowWidth) continue;
+				float drawX = startX + i * scaledWidth;
 				DrawTextureEx(texture, { drawX, 0 }, 0.0f, universalScale, WHITE);
 			}
 			};
 
-		auto drawForegroundLayer = [&](Texture2D texture, float xPos, float scaledWidth, float effectiveWidth) {
-			int numInstances = static_cast<int>(windowWidth / effectiveWidth) + 2;
+		auto drawForegroundLayer = [&](Texture2D texture, float xPos, float scaledWidth) {
+			int numInstances = static_cast<int>(windowWidth / scaledWidth) + 2;
+			float startX = xPos;
 			for (int i = 0; i < numInstances; ++i) {
-				float drawX = xPos + i * effectiveWidth;
-				if (drawX < -scaledWidth || drawX > windowWidth) continue;
+				float drawX = startX + i * scaledWidth;
 				float textureHeight = texture.height * universalScale;
 				float drawY = windowHeight - textureHeight;
 				DrawTextureEx(texture, { drawX, drawY }, 0.0f, universalScale, WHITE);
@@ -175,7 +183,7 @@ private:
 
 		drawTileableLayer(bgTexture, bgX, bgScaledWidth);
 		drawTileableLayer(mgTexture, mgX, mgScaledWidth);
-		drawForegroundLayer(fgTexture, fgX, fgScaledWidth, fgEffectiveWidth);
+		drawForegroundLayer(fgTexture, fgX, fgScaledWidth);
 		drawTileableLayer(groundTexture, groundX, groundScaledWidth);
 	}
 
