@@ -29,6 +29,7 @@ private:
             inline static const std::string LIFE_LOST_ICON = "life_lost_icon";
             inline static const std::string NUMBERS = "numbers";
             inline static const std::string BUTTON = "button";
+            //inline static const std::string AUTH_FRAME = "auth_frame";
 
         };
 
@@ -124,13 +125,14 @@ public:
         loadTexture(TextureKeys::UI::LOADING_SCREEN_BG, "textures/loading_screen.png");
         loadTexture(TextureKeys::UI::BAR_EMPTY, "textures/barempty.png");
         loadTexture(TextureKeys::UI::BAR_FULL, "textures/barfill.png");
-        loadTexture(TextureKeys::UI::REGISTRATION_BG, "textures/registration.png");
+        loadTexture(TextureKeys::UI::REGISTRATION_BG, "textures/registration_with_table.png");
         loadTexture(TextureKeys::UI::SHOP_BG, "textures/shop.png");
         loadTexture(TextureKeys::UI::LEADERBOARD, "textures/leaderboard.png");
         loadTexture(TextureKeys::UI::HEART_ICON, "textures/life_icon.png");
         loadTexture(TextureKeys::UI::LIFE_LOST_ICON, "textures/life_lost_icon.png");
         loadTexture(TextureKeys::UI::NUMBERS, "textures/numbers.png");
         loadTexture(TextureKeys::UI::BUTTON, "textures/button.png");
+        //loadTexture(TextureKeys::UI::AUTH_FRAME, "textures/registration_table.png");
 
 
         // Postacie i animacje

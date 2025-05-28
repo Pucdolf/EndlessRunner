@@ -17,7 +17,7 @@ private:
 	std::string username;
 	int windowWidth{};
 	int windowHeight{};
-	float scale = 3.0f;
+	float numbScale = 3.5f;
 
 	float bgX{}, mgX{}, fgX{}, groundX{};
 	bool gameOver{ false };
@@ -180,14 +180,14 @@ private:
 	}
 
 	void drawUI() {
-		/*Texture2D lifeFull = resources.getHeartIcon();
+		Texture2D lifeFull = resources.getHeartIcon();
 		Texture2D lifeEmpty = resources.getLifeLostIcon();
-		for (int i = 0; i < 1; i++) {
-			Texture2D icon = (i < lives) ? lifeFull : lifeEmpty;
-			float x = 10 + i * (icon.width * scale + 5);
-			float y = 10;
-			DrawTextureEx(icon, { x, y }, 0.f, scale, WHITE);
-		}*/
+
+		Texture2D icon = (!gameOver) ? lifeFull : lifeEmpty;
+		float x = 10;
+		float y = 10;
+		DrawTextureEx(icon, { x, y }, 0.f, numbScale, WHITE);
+
 
 		Texture2D numbers = resources.getNumbersTexture();
 		int s = static_cast<int>(score);
@@ -196,7 +196,7 @@ private:
 		int digitWidth = numbers.width / 10;
 		int digitHeight = numbers.height;
 
-		float scaledWidth = digitWidth * scale;
+		float scaledWidth = digitWidth * numbScale;
 		float totalWidth = scaledWidth * scoreText.length();
 		windowWidth = GetScreenWidth();
 
@@ -207,7 +207,7 @@ private:
 				static_cast<float>(windowWidth - totalWidth - 10 + i * scaledWidth),
 				10.0f,
 				static_cast<float>(scaledWidth),
-				static_cast<float>(digitHeight * scale)
+				static_cast<float>(digitHeight * numbScale)
 			};
 			DrawTexturePro(numbers, src, dest, { 0, 0 }, 0.0f, WHITE);
 		}

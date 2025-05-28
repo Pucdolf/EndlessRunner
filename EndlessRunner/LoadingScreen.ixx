@@ -152,7 +152,7 @@ private:
 		bool passwordError = false;
 		bool validInput = false;
 		bool enteringUsername = true;
-		Rectangle submitButton = { static_cast<float>(screenWidth / 2 - 100), static_cast<float>(screenHeight / 2 + 100), 200, 60 };
+		Rectangle submitButton = { static_cast<float>(screenWidth / 2 - 100), static_cast<float>(screenHeight / 2 + 200), 200, 60 };
 
 		while (!WindowShouldClose() && !validInput) {
 			BeginDrawing();
@@ -165,16 +165,16 @@ private:
 				WHITE
 			);
 
-			Color usernameBorder = usernameError ? YELLOW : (enteringUsername ? GREEN : BLACK);
-			DrawText("Enter Username (3-20 chars, alphanumeric):", screenWidth / 2 - 200, screenHeight / 2 - 100, 20, usernameBorder);
-			DrawText(username.c_str(), screenWidth / 2 - 200, screenHeight / 2 - 70, 20, BLACK);
-			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2 - 70, 400, 30, usernameBorder);
+			Color usernameBorder = usernameError ? RED : (enteringUsername ? GREEN : BLACK);
+			DrawText("Enter Username (3-20 chars, alphanumeric):", screenWidth / 2 - 220, screenHeight / 2 - 60, 20, usernameBorder);
+			DrawText(username.c_str(), screenWidth / 2 - 150, screenHeight / 2 - 40, 20, BLACK);
+			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2 - 40, 400, 30, usernameBorder);
 
-			Color passwordBorder = passwordError ? YELLOW : (!enteringUsername ? GREEN : BLACK);
-			DrawText("Enter Password (8+ chars, letters and numbers):", screenWidth / 2 - 200, screenHeight / 2 - 30, 20, passwordBorder);
+			Color passwordBorder = passwordError ? RED : (!enteringUsername ? GREEN : BLACK);
+			DrawText("Enter Password (8+ chars, letters and numbers):", screenWidth / 2 - 220, screenHeight / 2 + 10, 20, passwordBorder);
 			std::string maskedPassword(password.length(), '*');
-			DrawText(maskedPassword.c_str(), screenWidth / 2 - 200, screenHeight / 2, 20, BLACK);
-			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2, 400, 30, passwordBorder);
+			DrawText(maskedPassword.c_str(), screenWidth / 2 - 150, screenHeight / 2 + 40, 20, BLACK);
+			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2 + 40, 400, 30, passwordBorder);
 
 			// Rysowanie przycisku "Submit"
 			Texture2D buttonTex = resources.getButtonTexture();
@@ -191,7 +191,7 @@ private:
 			DrawText("Submit", submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2, submitButton.y + 20, 20, BLACK);
 
 			if (!errorMessage.empty()) {
-				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 50, 20, YELLOW);
+				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 90, 20, RED);
 			}
 
 			// Reszta kodu bez zmian...
@@ -255,7 +255,7 @@ private:
 					}
 				}
 			}
-
+			DrawText("Press ESC to return", screenWidth / 2 - MeasureText("Press ESC to return", 20) / 2, screenHeight - 30, 20, BLACK);
 			EndDrawing();
 		}
 		return validInput ? username : "";
@@ -269,7 +269,7 @@ private:
 		bool passwordError = false;
 		bool loggedIn = false;
 		bool enteringUsername = true;
-		Rectangle submitButton = { static_cast<float>(screenWidth / 2 - 100), static_cast<float>(screenHeight / 2 + 100), 200, 60 };
+		Rectangle submitButton = { static_cast<float>(screenWidth / 2 - 100), static_cast<float>(screenHeight / 2 + 200), 200, 60 };
 
 		while (!WindowShouldClose() && !loggedIn) {
 			BeginDrawing();
@@ -284,16 +284,17 @@ private:
 				WHITE
 			);
 
-			Color usernameBorder = usernameError ? YELLOW : (enteringUsername ? GREEN : BLACK);
-			DrawText("Enter Username:", screenWidth / 2 - 100, screenHeight / 2 - 100, 20, usernameBorder);
-			DrawText(username.c_str(), screenWidth / 2 - 100, screenHeight / 2 - 70, 20, BLACK);
-			DrawRectangleLines(screenWidth / 2 - 100, screenHeight / 2 - 70, 200, 30, usernameBorder);
+			Color usernameBorder = usernameError ? RED : (enteringUsername ? GREEN : BLACK);
+			DrawText("Enter Username:", screenWidth / 2 - 100, screenHeight / 2 - 60, 20, usernameBorder);
+			DrawText(username.c_str(), screenWidth / 2 - 150, screenHeight / 2 - 40, 20, BLACK);
+			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2 - 40, 400, 30, usernameBorder);
 
-			Color passwordBorder = passwordError ? YELLOW : (!enteringUsername ? GREEN : BLACK);
-			DrawText("Enter Password:", screenWidth / 2 - 100, screenHeight / 2 - 30, 20, passwordBorder);
+
+			Color passwordBorder = passwordError ? RED : (!enteringUsername ? GREEN : BLACK);
+			DrawText("Enter Password:", screenWidth / 2 - 100, screenHeight / 2 + 10, 20, passwordBorder);
 			std::string maskedPassword(password.length(), '*');
-			DrawText(maskedPassword.c_str(), screenWidth / 2 - 100, screenHeight / 2, 20, BLACK);
-			DrawRectangleLines(screenWidth / 2 - 100, screenHeight / 2, 200, 30, passwordBorder);
+			DrawText(maskedPassword.c_str(), screenWidth / 2 - 150, screenHeight / 2 + 40, 20, BLACK);
+			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2 + 40, 400, 30, passwordBorder);
 
 			// Rysowanie przycisku "Submit"
 			Texture2D buttonTex = resources.getButtonTexture();
@@ -310,7 +311,7 @@ private:
 			DrawText("Submit", submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2, submitButton.y + 20, 20, BLACK);
 
 			if (!errorMessage.empty()) {
-				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 50, 20, YELLOW);
+				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 90, 20, RED);
 			}
 
 			// Reszta kodu bez zmian...
