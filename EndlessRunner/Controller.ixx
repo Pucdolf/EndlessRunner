@@ -8,6 +8,7 @@ export module ControllerModule;
 import BoardModule;
 import ResourcesModule;
 import ObstacleFactoryModule;
+import ConfigModule;
 import <string>;
 
 export class Controller {
@@ -17,11 +18,11 @@ private:
 	std::string username;
 	int windowWidth{};
 	int windowHeight{};
-	float numbScale = 3.5f;
+	float numbScale = Config::UI_NUMB_SCALE; // Zmiana z 3.5f na Config::UI_NUMB_SCALE
 
 	float bgX{}, mgX{}, fgX{}, groundX{};
 	bool gameOver{ false };
-	int lives = 3;
+	int lives = Config::PLAYER_LIVES; // Zmiana z 3 na Config::PLAYER_LIVES
 	float score = 0.0f;
 	bool savedScore{ false };
 
@@ -30,6 +31,7 @@ private:
 	Texture2D fgTexture{};
 	Texture2D groundTexture{};
 
+	// Metoda saveScore pozostaje bez zmian
 	void saveScore() {
 		if (username.empty() || savedScore) return;
 		std::ofstream file("scores.txt", std::ios::app);

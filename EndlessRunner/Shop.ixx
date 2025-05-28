@@ -5,23 +5,24 @@ module;
 export module ShopModule;
 
 import ResourcesModule;
+import ConfigModule;
 
 export class Shop
 {
 private:
-    static constexpr int DinoCount{ 4 };
+    static constexpr int DinoCount{ Config::SHOP_DINO_COUNT }; // Zmiana z 4 na Config::SHOP_DINO_COUNT
     Texture2D dinos[DinoCount];
     Rectangle dinoRecs[DinoCount];
     Texture2D background;
     Resources resources;
-    std::array<float, DinoCount> baseScales{ 6.0f, 7.5f, 8.5f, 7.0f }; 
+    std::array<float, DinoCount> baseScales{ 6.0f, 7.5f, 8.5f, 7.0f };
     std::array<float, DinoCount> frameWidths;
     std::array<float, DinoCount> frameHeights;
     std::array<int, DinoCount> frameCounts{ 6, 4, 4, 6 };
 
     int frame{ 0 };
     float runningTime{ 0 };
-    float updateTime{ 1.0f / 12.0f };
+    float updateTime{ Config::SHOP_ANIMATION_UPDATE_TIME }; // Zmiana z 1.0f / 12.0f na Config::SHOP_ANIMATION_UPDATE_TIME
     int selectedDinoIndex{ 0 };
 
     // Przechowujemy pocz¹tkow¹ rozdzielczoœæ dla skalowania
@@ -45,7 +46,6 @@ public:
             frameHeights[i] = static_cast<float>(dinos[i].height);
         }
     }
-
     void show(int screenWidth, int screenHeight) {
         runningTime = 0;
         frame = 0;

@@ -9,6 +9,7 @@ import ResourcesModule;
 import BoardModule;
 import ShopModule;
 import AuthModule;
+import ConfigModule;
 
 export class LoadingScreen {
 private:
@@ -17,10 +18,9 @@ private:
 	bool loadingFinished = false;
 
 public:
-	// Modified to return the authenticated username
 	std::string show(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop) {
 		auto startTime = std::chrono::high_resolution_clock::now();
-		const int loadingDuration = 2000; //ms
+		const int loadingDuration = Config::LOADING_DURATION_MS; // Zmiana z 2000 na Config::LOADING_DURATION_MS
 
 		resources.loadTextures();
 
@@ -73,11 +73,10 @@ public:
 		}
 		return "";
 	}
-
 private:
 	std::string showAuthTiles(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop) {
-		constexpr float btnW = 200.0f;
-		constexpr float btnH = 80.0f;
+		constexpr float btnW = Config::AUTH_BUTTON_WIDTH;  // Zmiana z 200.0f na Config::AUTH_BUTTON_WIDTH
+		constexpr float btnH = Config::AUTH_BUTTON_HEIGHT; // Zmiana z 80.0f na Config::AUTH_BUTTON_HEIGHT
 
 		float xLeft = screenWidth * 0.25f - btnW * 0.5f;
 		float xRight = screenWidth * 0.75f - btnW * 0.5f;
@@ -372,6 +371,7 @@ private:
 				}
 			}
 
+			DrawText("Press ESC to return", screenWidth / 2 - MeasureText("Press ESC to return", 20) / 2, screenHeight - 30, 20, BLACK);
 			EndDrawing();
 		}
 		return loggedIn ? username : "";

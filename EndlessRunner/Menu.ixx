@@ -12,12 +12,12 @@ import ResourcesModule;
 import BoardModule;
 import ControllerModule;
 import ShopModule;
+import ConfigModule;
 
 import <array>;
 
 export class Menu {
-private:
-	static constexpr int buttonCount = 5;
+	static constexpr int buttonCount = Config::MENU_BUTTON_COUNT; // Zmiana z 5 na Config::MENU_BUTTON_COUNT
 	std::array<const char*, buttonCount> labels = { "Start Game", "LeaderBoard", "Shop", "Log Out", "Exit" };
 	std::array<Rectangle, buttonCount> buttons;
 	int selected = -1;
@@ -70,29 +70,37 @@ public:
 
 			DrawTexturePro(
 				resources->getMenuBackground(),
-				Rectangle{ 0,0, static_cast<float>(resources->getMenuBackground().width), static_cast<float>(resources->getMenuBackground().height) },
-				Rectangle{ 0,0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
-				Vector2{ 0,0 },
+				Rectangle{ 0, 0, static_cast<float>(resources->getMenuBackground().width), static_cast<float>(resources->getMenuBackground().height) },
+				Rectangle{ 0, 0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
+				Vector2{ 0, 0 },
 				0.0f,
 				WHITE
 			);
 
+			// Renderowanie baneru
+			Texture2D banner = resources->getBanner();
+			float bannerScale = Config::BANNER_SCALE; // Zmiana z 3.5f na Config::BANNER_SCALE
+			float bannerHeight = banner.height * bannerScale;
+			float bannerX = screenWidth / 2 - ((banner.width * bannerScale) / 2); // Pozycja baneru od góry ekranu
+			float bannerY = Config::BANNER_Y; // Zmiana z -25 na Config::BANNER_Y
+			DrawTextureEx(banner, { bannerX, bannerY }, 0.0f, bannerScale, WHITE);
+
+			// Renderowanie tekstu powitalnego na banerze
 			std::string welcomeText = username.empty() ? "Welcome Guest" : "Welcome " + username;
-			DrawText(welcomeText.c_str(), screenWidth / 2 - MeasureText(welcomeText.c_str(), 40) / 2, 50, 40, BLACK);
+			int textWidth = MeasureText(welcomeText.c_str(), 30);
+			float textX = (screenWidth - textWidth) / 2.0f; // Centrowanie tekstu
+			DrawText(welcomeText.c_str(), static_cast<int>(textX), static_cast<int>(bannerY + (bannerHeight - 45) / 2), 30, BLACK);
 
 			int fontSize = 20;
 			for (int i = 0; i < buttonCount; ++i) {
-				// Pobieramy teksturê przycisku
 				Texture2D buttonTex = resources->getButtonTexture();
-				// Okreœlamy kolor w zale¿noœci od tego, czy przycisk jest wybrany
 				Color color = (i == selected) ? GRAY : WHITE;
 
-				// Rysujemy teksturê przycisku
 				DrawTexturePro(
 					buttonTex,
 					Rectangle{ 0, 0, static_cast<float>(buttonTex.width), static_cast<float>(buttonTex.height) },
-					buttons[i], // Prostok¹t docelowy (rozmiar przycisku)
-					Vector2{ 0, 0 },
+					buttons[i],
+					Vector2{ 0,0 },
 					0.0f,
 					color
 				);
@@ -106,7 +114,6 @@ public:
 			EndDrawing();
 		}
 	}
-
 private:
 	void newGame() {
 		if (resources && board && shop) {

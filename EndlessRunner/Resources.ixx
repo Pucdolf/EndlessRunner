@@ -29,7 +29,8 @@ private:
             inline static const std::string LIFE_LOST_ICON = "life_lost_icon";
             inline static const std::string NUMBERS = "numbers";
             inline static const std::string BUTTON = "button";
-            //inline static const std::string AUTH_FRAME = "auth_frame";
+            inline static const std::string BANNER = "banner";
+
 
         };
 
@@ -132,7 +133,8 @@ public:
         loadTexture(TextureKeys::UI::LIFE_LOST_ICON, "textures/life_lost_icon.png");
         loadTexture(TextureKeys::UI::NUMBERS, "textures/numbers.png");
         loadTexture(TextureKeys::UI::BUTTON, "textures/button.png");
-        //loadTexture(TextureKeys::UI::AUTH_FRAME, "textures/registration_table.png");
+        loadTexture(TextureKeys::UI::BANNER, "textures/banner4.png");
+
 
 
         // Postacie i animacje
@@ -242,6 +244,8 @@ public:
     Texture2D& getNumbersTexture() { return getTexture(TextureKeys::UI::NUMBERS); }
     Texture2D& getButtonTexture() { return getTexture(TextureKeys::UI::BUTTON); }
     Texture2D& getLeaderboard() { return getTexture(TextureKeys::UI::LEADERBOARD); }
+    Texture2D& getBanner() { return getTexture(TextureKeys::UI::BANNER); }
+
 
     // T³a
     Texture2D& getDesertBackground() { return getTexture(TextureKeys::Backgrounds::DESERT_BG); }
