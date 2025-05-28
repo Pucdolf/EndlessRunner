@@ -180,14 +180,14 @@ private:
 	}
 
 	void drawUI() {
-		Texture2D lifeFull = resources.getHeartIcon();
+		/*Texture2D lifeFull = resources.getHeartIcon();
 		Texture2D lifeEmpty = resources.getLifeLostIcon();
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 1; i++) {
 			Texture2D icon = (i < lives) ? lifeFull : lifeEmpty;
 			float x = 10 + i * (icon.width * scale + 5);
 			float y = 10;
 			DrawTextureEx(icon, { x, y }, 0.f, scale, WHITE);
-		}
+		}*/
 
 		Texture2D numbers = resources.getNumbersTexture();
 		int s = static_cast<int>(score);
