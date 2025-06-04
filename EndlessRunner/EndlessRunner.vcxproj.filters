@@ -31,6 +31,9 @@
     <Filter Include="Resources\textures\Characters\Player4">
       <UniqueIdentifier>{b88ef0ce-13dc-4b69-bbf1-9cf97ea5b47e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\NewFilter1">
+      <UniqueIdentifier>{821fb38e-af9a-4aa9-a4c8-935285ab6bdd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -86,6 +89,57 @@
     </ClCompile>
     <ClCompile Include="StaticObstacle.ixx">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthModule.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedSprite.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="ColissionHandling.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Dust.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingScreen.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleFactory.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Pterodactyl.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticObstacle.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -129,23 +129,40 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="AnimatedSprite.ixx" />
+    <ClCompile Include="AuthModule.cpp" />
     <ClCompile Include="AuthModule.ixx" />
+    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Bat.ixx" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="Board.ixx" />
+    <ClCompile Include="ColissionHandling.cpp" />
     <ClCompile Include="CollisionHandling.ixx" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Config.ixx" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Controller.ixx" />
+    <ClCompile Include="Dust.cpp" />
     <ClCompile Include="Dust.ixx" />
+    <ClCompile Include="LoadingScreen.cpp" />
     <ClCompile Include="LoadingScreen.ixx" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Menu.ixx" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Obstacle.ixx" />
+    <ClCompile Include="ObstacleFactory.cpp" />
     <ClCompile Include="ObstaclesFactory.ixx" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player.ixx" />
+    <ClCompile Include="Pterodactyl.cpp" />
     <ClCompile Include="Pterodactyl.ixx" />
+    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Resources.ixx" />
+    <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Shop.ixx" />
+    <ClCompile Include="StaticObstacle.cpp" />
     <ClCompile Include="StaticObstacle.ixx" />
   </ItemGroup>
   <ItemGroup>
