@@ -111,7 +111,7 @@ private:
 				0.0f,
 				signInColor
 			);
-			DrawText("Sign In", signInButton.x + (signInButton.width - MeasureText("Sign In", 20)) / 2, signInButton.y + 30, 20, BLACK);
+			DrawText("Sign In", static_cast<int>(signInButton.x + (signInButton.width - MeasureText("Sign In", 20)) / 2), static_cast<int>(signInButton.y + 30), 20, BLACK);
 
 			// Rysowanie przycisku "Log In"
 			Color logInColor = CheckCollisionPointRec(mouse, logInButton) ? GRAY : WHITE;
@@ -123,7 +123,7 @@ private:
 				0.0f,
 				logInColor
 			);
-			DrawText("Log In", logInButton.x + (logInButton.width - MeasureText("Log In", 20)) / 2, logInButton.y + 30, 20, BLACK);
+			DrawText("Log In", static_cast<int>(logInButton.x + (logInButton.width - MeasureText("Log In", 20)) / 2), static_cast<int>(logInButton.y + 30), 20, BLACK);
 
 			if (CheckCollisionPointRec(mouse, signInButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 				std::string username = handleSignIn(screenWidth, screenHeight, resources);
@@ -187,7 +187,7 @@ private:
 				0.0f,
 				submitColor
 			);
-			DrawText("Submit", submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2, submitButton.y + 20, 20, BLACK);
+			DrawText("Submit", static_cast<int>(submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2), static_cast<int>(submitButton.y + 20), 20, BLACK);
 
 			if (!errorMessage.empty()) {
 				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 90, 20, RED);
@@ -307,7 +307,7 @@ private:
 				0.0f,
 				submitColor
 			);
-			DrawText("Submit", submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2, submitButton.y + 20, 20, BLACK);
+			DrawText("Submit", static_cast<int>(submitButton.x + (submitButton.width - MeasureText("Submit", 20)) / 2), static_cast<int>(submitButton.y + 20), 20, BLACK);
 
 			if (!errorMessage.empty()) {
 				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 90, 20, RED);

@@ -1,5 +1,6 @@
 module;
 #include "raylib.h"
+#include <concepts> // Dodane dla wsparcia C++20 Concepts
 export module BoardModule;
 
 import <array>;
@@ -15,6 +16,9 @@ import CollisionHandlingModule;
 import ObstacleModule;
 import ObstacleFactoryModule;
 import ConfigModule;
+
+// Importujemy definicjê ObstacleType z ObstacleFactoryModule
+import ObstacleFactoryModule;
 
 export class Board {
 private:
@@ -41,6 +45,26 @@ private:
     ObstacleFactory obstacleFactory;
     BackgroundType currentBgType;
 
+    // Generyczna metoda do aktualizacji przeszkód
+    template<ObstacleType T>
+    void updateObstacles(float deltaTime) {
+        for (auto& obstacle : obstacles) {
+            if constexpr (std::is_base_of_v<Obstacle, T>) {
+                obstacle->update(deltaTime);
+            }
+        }
+    }
+
+    // Generyczna metoda do rysowania przeszkód
+    template<ObstacleType T>
+    void drawObstacles() const {
+        for (const auto& obstacle : obstacles) {
+            if constexpr (std::is_base_of_v<Obstacle, T>) {
+                obstacle->draw();
+            }
+        }
+    }
+
 public:
     Board(Resources& res) : resources(res), obstacleFactory(res) {}
 
@@ -65,8 +89,7 @@ public:
 
         float playerWidth = (static_cast<float>(selectedDinoTex.width) / selectedDinoFrameCount) * Config::PLAYER_SCALE;
         float startX = (windowWidth - playerWidth) / 2.f;
-        // Przekazujemy windowHeight, ale Player sam dostosuje pozycjê Y
-        player.init(selectedDinoTex, startX, windowHeight, Config::PLAYER_SCALE, selectedDinoFrameCount, Config::ANIMATION_UPDATE_TIME);
+        player.init(selectedDinoTex, startX, static_cast<float>(windowHeight), Config::PLAYER_SCALE, selectedDinoFrameCount, Config::ANIMATION_UPDATE_TIME);
 
         dust.init(resources.getDustRun(), 0, 0, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
 
@@ -78,13 +101,11 @@ public:
     void update(float deltaTime, int windowHeight) {
         this->windowHeight = windowHeight;
         player.update(deltaTime, windowHeight);
-        for (auto& obstacle : obstacles) {
-            obstacle->update(deltaTime);
-        }
+        updateObstacles<Obstacle>(deltaTime); 
 
         obstacles.erase(
             std::remove_if(obstacles.begin(), obstacles.end(),
-                [](const auto& obs) { return obs->getPositionX() < -100.f; }),
+                [](const auto& obs) { return obs->getPositionX() < -200.f; }),
             obstacles.end()
         );
 
@@ -104,16 +125,14 @@ public:
     }
 
     void draw() const {
-        for (const auto& obstacle : obstacles) {
-            obstacle->draw();
-        }
+        drawObstacles<Obstacle>(); // Jawne podanie typu
         dust.draw();
         player.draw();
     }
 
     bool checkLoss() const {
         for (const auto& obstacle : obstacles) {
-            if (obstacleCollision(obstacle->getCollisionRec(), player.getCollisionRec())) {
+            if (obstacleCollision(*obstacle, player)) {
                 return true;
             }
         }
@@ -127,7 +146,6 @@ private:
         if (!dust.getIsActive()) {
             Vector2 playerPos = player.getPosition();
             float dustX = playerPos.x - 20;
-            // Py³ powinien byæ na poziomie trawy, czyli windowHeight - 65
             float dustY = (windowHeight - 65.f) - (dust.getTexture().height * Config::OBSTACLE_SCALE);
             dust.init(dust.getTexture(), dustX, dustY, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
         }
@@ -135,7 +153,7 @@ private:
 
     void spawnObstacle(int windowWidth, int windowHeight) {
         float startX = lastObstacleX + getRandomDistance();
-        float startY = static_cast<float>(windowHeight - 65); // Wysokoœæ ekranu, reszta jest obs³ugiwana w StaticObstacle
+        float startY = static_cast<float>(windowHeight - 65);
         obstacles.push_back(obstacleFactory.createObstacle(startX, startY, currentBgType));
         lastObstacleX = startX;
     }
