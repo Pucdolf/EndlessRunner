@@ -1,7 +1,5 @@
 ## 🧖 Dino Rush – Endless Runner in C++ with Raylib
 
-![loading](media/loading.gif)
-
 **Dino Rush** to dynamiczna gra typu **Endless Runner**, w której wcielasz się w dinozaura uciekającego przez losowo generowane, pełne przeszkód światy. Projekt został zrealizowany jako część kursu *Programowanie Komputerów* na Politechnice Śląskiej.
 
 ---
@@ -16,11 +14,12 @@
 
 #### 🌼 Desert – Day
 
-![Desert](https://github.com/user-attachments/assets/96e953fd-faa8-45d6-b2c9-945894ffad9b)
+![Desert](https://github.com/user-attachments/assets/47be073e-584f-4ca9-b85c-3cacbfd1cdf6)
+
 
 #### 🌙 Desert – Night
 
-![DesertNight](https://github.com/user-attachments/assets/e87d20f0-a3ab-4f31-aa54-0dcbc8ab6f97)
+![DesertNight](https://github.com/user-attachments/assets/059314da-c3d4-47f6-95a1-0b88d7328f64)
 
 #### 🌲 Forest – Day
 
@@ -35,8 +34,7 @@
 ### 🛍️ Shop System
 
 Gracze mogą wybrać jednego z wielu dinozaurow, którymi będą grać.
-
-![Shop](https://github.com/user-attachments/assets/da6b51c6-1e9b-489b-8dcf-660e413d35fe)
+![Shop](https://github.com/user-attachments/assets/0cb07ebe-0f76-4a9c-b8ee-741b7746e02e)
 
 ---
 
