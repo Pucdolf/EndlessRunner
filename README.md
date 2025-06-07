@@ -32,11 +32,10 @@
 
 ---
 
-### 🛙 Shop System
+### 🛍️ Shop System
 
 Gracze mogą wybrać jednego z wielu dinozaurow, którymi będą grać.
-
-![shop](media/shop.gif)
+![Shop](https://github.com/user-attachments/assets/da6b51c6-1e9b-489b-8dcf-660e413d35fe)
 
 ---
 
