@@ -12,22 +12,29 @@
 * Możliwość personalizacji postaci przez sklep
 * System logowania i rejestracji użytkownika
 
-#### 🌼 Desert – Day
 
-![Desert](https://github.com/user-attachments/assets/47be073e-584f-4ca9-b85c-3cacbfd1cdf6)
-
-
-#### 🌙 Desert – Night
-
-![DesertNight](https://github.com/user-attachments/assets/059314da-c3d4-47f6-95a1-0b88d7328f64)
-
-#### 🌲 Forest – Day
-
-![gameplay-forest-day](media/gameplay-forest-day.gif)
-
-#### 🌌 Forest – Night
-
-![gameplay-forest-night](media/gameplay-forest-night.gif)
+<table>
+  <tr>
+    <td align="center">
+      <strong>🌼 Desert – Day</strong><br>
+      <img src="https://github.com/user-attachments/assets/47be073e-584f-4ca9-b85c-3cacbfd1cdf6" alt="🌼 Desert – Day" width="300">
+    </td>
+    <td align="center">
+      <strong>🌙 Desert – Night</strong><br>
+      <img src="https://github.com/user-attachments/assets/059314da-c3d4-47f6-95a1-0b88d7328f64" alt="🌙 Desert – Night" width="300">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>🌲 Forest – Day</strong><br>
+      <img src="https://github.com/user-attachments/assets/3a4bc5f0-e65c-49a3-be62-c7956adcaae0" alt="🌲 Forest – Day" width="300">
+    </td>
+    <td align="center">
+      <strong>🌌 Forest – Night</strong><br>
+      <img src="https://github.com/user-attachments/assets/4ae8e4f6-ab47-4380-b239-f1f81f88b536" alt="🌌 Forest – Night" width="300">
+    </td>
+  </tr>
+</table>
 
 ---
 
