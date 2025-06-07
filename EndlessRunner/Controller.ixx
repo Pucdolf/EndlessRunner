@@ -57,7 +57,7 @@ public:
 		int backgroundChoice = dis(gen);
 
 		BackgroundType bgType;
-		switch (backgroundChoice) {
+		switch (/*backgroundChoice*/3) {
 		case 0: // Pustynia dzienna
 			bgTexture = resources.getDesertBackground();
 			mgTexture = resources.getDesertMidground();
