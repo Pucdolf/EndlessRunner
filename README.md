@@ -35,6 +35,7 @@
 ### 🛍️ Shop System
 
 Gracze mogą wybrać jednego z wielu dinozaurow, którymi będą grać.
+
 ![Shop](https://github.com/user-attachments/assets/da6b51c6-1e9b-489b-8dcf-660e413d35fe)
 
 ---
@@ -84,6 +85,3 @@ Semestr 4, 2024/2025
 
 ---
 
-### 📸 Media
-
-Dodaj gify do folderu `media/` w repozytorium i zaktualizuj ścieżki w README.
