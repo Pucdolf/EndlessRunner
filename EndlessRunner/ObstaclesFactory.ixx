@@ -50,7 +50,7 @@ public:
     std::unique_ptr<Obstacle> createObstacle(float startX, float startY, BackgroundType bgType) {
         int roll = probabilityDis(gen); // Losowanie liczby z zakresu 0-99
 
-        if (roll < 0 and  roll <= 20) { // 0-19: 20% szansy na Bat
+        if (roll > 0 and  roll <= 20) { // 0-19: 20% szansy na Bat
             return createSpecificObstacle<Bat>(startX, startY, resources.getBat(), Config::BAT_FRAME_COUNT);
         }
         else if (roll > 20 && roll <= 40) { // 20-39: 20% szansy na Pterodactyl
