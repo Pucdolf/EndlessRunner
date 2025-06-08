@@ -47,10 +47,7 @@ void Board::init(const Texture2D& dinoTex, int windowWidth, int windowHeight) {
 	float startX = static_cast<float>(windowWidth - playerWidth) / 2.f;
 
 	player.init(selectedDinoTex, startX, static_cast<float>(windowHeight), Config::PLAYER_SCALE, selectedDinoFrameCount, Config::ANIMATION_UPDATE_TIME);
-	Vector2 playerPos = player.getPosition();
-	float dustX = playerPos.x - 20;
-	float dustY = (windowHeight - 65.f) - (dust.getTexture().height * Config::OBSTACLE_SCALE);
-	dust.init(resources.getDustRun(), dustX, dustY, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
+	dust.init(resources.getDustRun(), static_cast<float>(windowWidth), static_cast<float>(windowWidth), Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME); //inicjalizacja w niewidocznym miejscu
 
 	lastObstacleX = static_cast<float>(windowWidth);
 	obstacles.clear();
@@ -86,7 +83,7 @@ void Board::draw() const {
 	drawObstacles<Obstacle>();
 	player.draw();
 	dust.draw();
-	
+
 }
 
 bool Board::checkLoss() const {
@@ -102,8 +99,8 @@ const Player& Board::getPlayer() const {
 	return player;
 }
 
-void Board::spawnDust( int windowHeight) {
-	if (!dust.getIsActive()){
+void Board::spawnDust(int windowHeight) {
+	if (!dust.getIsActive()) {
 		Vector2 playerPos = player.getPosition();
 		float dustX = playerPos.x - 20;
 		float dustY = (windowHeight - 65.f) - (dust.getTexture().height * Config::OBSTACLE_SCALE);
@@ -111,14 +108,14 @@ void Board::spawnDust( int windowHeight) {
 	}
 }
 
-void Board::spawnObstacle( int windowHeight) {
+void Board::spawnObstacle(int windowHeight) {
 	float startX = lastObstacleX + getRandomDistance();
 	float startY = static_cast<float>(windowHeight - 65);
 	obstacles.push_back(obstacleFactory.createObstacle(startX, startY, currentBgType));
 	lastObstacleX = startX;
 }
 
-float Board::getRandomDistance(){
+float Board::getRandomDistance() {
 	std::uniform_real_distribution<float> dis(minObstacleDistance, maxObstacleDistance);
 	return dis(gen);
 }

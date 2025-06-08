@@ -33,7 +33,7 @@ export namespace Config {
     /** @brief Minimalna odległość między przeszkodami (w pikselach). */
     inline constexpr float MIN_OBSTACLE_DISTANCE = 200.0f;
     /** @brief Maksymalna odległość między przeszkodami (w pikselach). */
-    inline constexpr float MAX_OBSTACLE_DISTANCE = 600.0f;
+    inline constexpr float MAX_OBSTACLE_DISTANCE = 400.0f;
     /** @brief Czas między zmianami klatek animacji (w sekundach). */
     inline constexpr float ANIMATION_UPDATE_TIME = 1.f / 12.f;
     /** @brief Przyspieszenie grawitacyjne (piksele/s²). */
