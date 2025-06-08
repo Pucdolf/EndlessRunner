@@ -114,25 +114,25 @@ public:
     * @brief Ustawia teksturê dinozaura dla gracza.
     * @param dinoTex Tekstura dinozaura.
     */
-    void setDinoTex(const Texture2D& dinoTex) {
+    void setDinoTex(const Texture2D& dinoTex);/* {
         selectedDinoTex = dinoTex;
-    }
+    }*/
 
     /**
      * @brief Ustawia liczbê klatek animacji dinozaura.
      * @param frameCount Liczba klatek animacji.
      */
-    void setDinoFrameCount(int frameCount) {
+    void setDinoFrameCount(int frameCount); /*{
         selectedDinoFrameCount = frameCount;
-    }
+    }*/
 
     /**
      * @brief Ustawia typ t³a gry.
      * @param bgType Typ t³a (np. DESERT_DAY, FOREST_NIGHT).
      */
-    void setBackgroundType(BackgroundType bgType) {
+    void setBackgroundType(BackgroundType bgType);/* {
         currentBgType = bgType;
-    }
+    }*/
 
     /**
     * @brief Inicjalizuje planszê gry.
@@ -140,7 +140,7 @@ public:
     * @param windowWidth Szerokoœæ okna gry (w pikselach).
     * @param windowHeight Wysokoœæ okna gry (w pikselach).
     */
-    void init(const Texture2D& dinoTex, int windowWidth, int windowHeight) {
+    void init(const Texture2D& dinoTex, int windowWidth, int windowHeight); /* {
         if (selectedDinoTex.id == 0) {
             selectedDinoTex = dinoTex;
             selectedDinoFrameCount = 6;
@@ -158,14 +158,14 @@ public:
         lastObstacleX = static_cast<float>(windowWidth);
         obstacles.clear();
         spawnObstacle(windowWidth, windowHeight);
-    }
+    }*/
 
     /**
      * @brief Aktualizuje stan gry.
      * @param deltaTime Czas od ostatniej klatki (w sekundach).
      * @param windowHeight Aktualna wysokoœæ okna gry (w pikselach).
      */
-    void update(float deltaTime, int windowHeight) {
+    void update(float deltaTime, int windowHeight);/*{
         this->windowHeight = windowHeight;
         player.update(deltaTime, windowHeight);
         updateObstacles<Obstacle>(deltaTime); 
@@ -189,68 +189,68 @@ public:
                 dustSpawnTimer = 0.f;
             }
         }
-    }
+    }*/
 
     /**
      * @brief Rysuje wszystkie elementy gry.
      */
-    void draw() const {
-        drawObstacles<Obstacle>(); // Jawne podanie typu
+    void draw() const;/* {
+        drawObstacles<Obstacle>();
         dust.draw();
         player.draw();
-    }
+    }*/
 
     /**
      * @brief Sprawdza, czy gracz przegra³ (kolizja z przeszkod¹).
      * @return True, jeœli wykryto kolizjê z przeszkod¹.
      */
-    bool checkLoss() const {
+    bool checkLoss() const; /*{
         for (const auto& obstacle : obstacles) {
             if (obstacleCollision(*obstacle, player)) {
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     /**
      * @brief Zwraca referencjê do obiektu gracza.
      * @return Sta³a referencja do gracza.
      */
-    const Player& getPlayer() const { return player; }
+    const Player& getPlayer() const; /*{ return player; }*/
 
 private:
 
     /**
      * @brief Spawnuje efekt py³u, gdy gracz jest na ziemi.
      */
-    void spawnDust() {
+    void spawnDust(int windowHeight); /*{
         if (!dust.getIsActive()) {
             Vector2 playerPos = player.getPosition();
             float dustX = playerPos.x - 20;
             float dustY = (windowHeight - 65.f) - (dust.getTexture().height * Config::OBSTACLE_SCALE);
             dust.init(dust.getTexture(), dustX, dustY, Config::OBSTACLE_SCALE, Config::DUST_FRAME_COUNT, Config::ANIMATION_UPDATE_TIME);
         }
-    }
+    }*/
 
     /**
      * @brief Spawnuje now¹ przeszkodê.
      * @param windowWidth Szerokoœæ okna.
      * @param windowHeight Wysokoœæ okna.
      */
-    void spawnObstacle(int windowWidth, int windowHeight) {
+    void spawnObstacle(int windowHeight);/* {
         float startX = lastObstacleX + getRandomDistance();
         float startY = static_cast<float>(windowHeight - 65);
         obstacles.push_back(obstacleFactory.createObstacle(startX, startY, currentBgType));
         lastObstacleX = startX;
-    }
+    }*/
 
     /**
     * @brief Generuje losow¹ odleg³oœæ miêdzy przeszkodami.
     * @return Losowa odleg³oœæ w pikselach.
     */
-    float getRandomDistance() {
+    float getRandomDistance(); /*{
         std::uniform_real_distribution<float> dis(minObstacleDistance, maxObstacleDistance);
         return dis(gen);
-    }
+    }*/
 };

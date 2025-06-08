@@ -47,21 +47,21 @@ public:
     * @param frameCount Liczba klatek animacji.
     * @param animUpdateTime Czas między zmianami klatek.
     */
-    void init(const Texture2D& dinoTex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime) override {
+    void init(const Texture2D& dinoTex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime = Config::ANIMATION_UPDATE_TIME) override; /*{
         AnimatedSprite::init(dinoTex, startX, startY, scaleFactor, frameCount, animUpdateTime);
         groundLevel = startY - 65.f;
         screenPos.y = groundLevel - height * scale;
         if (texture.id == 0 || texture.width == 0 || texture.height == 0) {
             std::cout << "Error: Invalid texture dimensions!\n";
         }
-    }
+    }*/
 
     /**
      * @brief Aktualizuje stan gracza (ruch, skakanie, animacja).
      * @param deltaTime Czas od ostatniej klatki (w sekundach).
      * @param windowHeight Wysokość okna gry.
      */
-    void update(float deltaTime, int windowHeight) {
+    void update(float deltaTime, int windowHeight); /*{
         groundLevel = windowHeight - 65.f;
 
         if (isOnGround(windowHeight)) {
@@ -90,14 +90,14 @@ public:
         if (!isInAir) {
             updateAnimation(deltaTime);
         }
-    }
+    }*/
 
     /**
     * @brief Sprawdza, czy gracz jest na ziemi.
     * @param windowHeight Wysokość okna gry.
     * @return True, jeśli gracz znajduje się na ziemi.
     */
-    bool isOnGround(int windowHeight) const {
+    bool isOnGround(int windowHeight) const; /*{
         return screenPos.y >= groundLevel - height * scale;
-    }
+    }*/
 };

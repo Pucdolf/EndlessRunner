@@ -10,11 +10,7 @@ module;
 #include <string>
 #include <set>
 #include <regex>
-#include <ranges>
 #include <map>
-#include <fstream>
-#include <sstream>
-#include <functional> // std::hash
 
 export module AuthModule;
 
@@ -62,18 +58,18 @@ private:
 	 * @return Zahashowane has³o jako ci¹g znaków.
 	 * @note U¿ywa std::hash; w produkcji nale¿y u¿yæ bezpiecznego algorytmu.
 	 */
-	std::string hashPassword(const std::string& password) {
+	std::string hashPassword(const std::string& password);/* {
 		std::hash<std::string> hasher;
 		return std::to_string(hasher(password));
-	}
+	}*/
 
 	/**
 	 * @brief Wczytuje dane u¿ytkowników z pliku.
 	 */
-	void loadUsers() {
+	void loadUsers(); /*{
 		std::ifstream file(usersFile);
 		if (!file.is_open()) {
-			return; // File doesn't exist yet, which is fine
+			return;
 		}
 
 		std::string line;
@@ -86,7 +82,7 @@ private:
 			}
 		}
 		file.close();
-	}
+	}*/
 
 	/**
 	 * @brief Zapisuje nowego u¿ytkownika do pliku.
@@ -94,15 +90,15 @@ private:
 	 * @param hashedPassword Zahashowane has³o.
 	 * @return True, jeœli zapis siê powiód³.
 	 */
-	bool saveUser(const std::string& username, const std::string& hashedPassword) {
-		std::ofstream file(usersFile, std::ios::app); // Append mode
-		if (!file.is_open()) {
-			return false;
-		}
-		file << username << ":" << hashedPassword << "\n";
-		file.close();
-		return true;
-	}
+	bool saveUser(const std::string& username, const std::string& hashedPassword);//{
+	//	std::ofstream file(usersFile, std::ios::app); // Append mode
+	//	if (!file.is_open()) {
+	//		return false;
+	//	}
+	//	file << username << ":" << hashedPassword << "\n";
+	//	file.close();
+	//	return true;
+	//}
 
 public:
 	/**
@@ -110,7 +106,7 @@ public:
 	* @note Wczytuje istniej¹cych u¿ytkowników przy inicjalizacji.
 	*/
 	Authorization() {
-		loadUsers(); 
+		loadUsers();
 	}
 
 	/**
@@ -119,7 +115,7 @@ public:
 	 * @param password Has³o (min. 8 znaków, litery i cyfry).
 	 * @return Wynik operacji rejestracji.
 	 */
-	SignInResult signIn(const std::string& username, const std::string& password) {
+	SignInResult signIn(const std::string& username, const std::string& password); /*{
 		if (std::ranges::find(existingUsernames, username) != existingUsernames.end()) {
 			return SignInResult::USERNAME_TAKEN;
 		}
@@ -127,21 +123,21 @@ public:
 		if (!std::regex_match(username, usernameRegex)) {
 			return SignInResult::INVALID_USERNAME;
 		}
-		std::regex passwordRegex("^[A-Za-z\\d]{8,}$");
 
+		std::regex passwordRegex("^[A-Za-z\\d]{8,}$");
 		if (!std::regex_match(password, passwordRegex)) {
 			return SignInResult::INVALID_PASSWORD;
 		}
 
 		std::string hashedPassword = hashPassword(password);
 		if (!saveUser(username, hashedPassword)) {
-			return SignInResult::INVALID_USERNAME; // Fallback error if file write fails
+			return SignInResult::INVALID_USERNAME; 
 		}
 
 		existingUsernames.insert(username);
 		storedPasswords[username] = hashedPassword;
 		return SignInResult::SUCCESS;
-	}
+	}*/
 
 	/**
 	 * @brief Loguje istniej¹cego u¿ytkownika.
@@ -149,7 +145,7 @@ public:
 	 * @param password Has³o.
 	 * @return Wynik operacji logowania.
 	 */
-	LogInResult logIn(const std::string& username, const std::string& password) {
+	LogInResult logIn(const std::string& username, const std::string& password); /*{
 		if (std::ranges::find(existingUsernames, username) == existingUsernames.end()) {
 			return LogInResult::USER_NOT_FOUND;
 		}
@@ -158,5 +154,5 @@ public:
 			return LogInResult::INCORRECT_PASSWORD;
 		}
 		return LogInResult::SUCCESS;
-	}
+	}*/
 };

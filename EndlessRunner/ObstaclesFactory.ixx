@@ -87,7 +87,7 @@ public:
      * @param bgType Typ t≥a gry.
      * @return Unikalny wskaünik do stworzonej przeszkody.
      */
-    std::unique_ptr<Obstacle> createObstacle(float startX, float startY, BackgroundType bgType) {
+    std::unique_ptr<Obstacle> createObstacle(float startX, float startY, BackgroundType bgType); /*{
         int roll = probabilityDis(gen); 
 
         if (roll > 0 and  roll <= 20) { 
@@ -113,6 +113,7 @@ public:
                 staticObstacles = {
                     &resources.getSmallCactus(),
                     &resources.getBigCactus(),
+					&resources.getSkulls(),
                     &resources.getSkulls2(),
                     &resources.getRockDustNight(),
                     &resources.getBigRockDustNight()
@@ -145,5 +146,5 @@ public:
 
             return createSpecificObstacle<StaticObstacle>(startX, startY, *selectedTex, 1);
         }
-    }
+    }*/
 };

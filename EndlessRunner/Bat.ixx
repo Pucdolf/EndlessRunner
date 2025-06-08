@@ -30,32 +30,32 @@ public:
      * @param frameCount Liczba klatek animacji.
      * @param animUpdateTime Czas miêdzy zmianami klatek.
      */
-    void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime) override {
+    void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime = Config::ANIMATION_UPDATE_TIME) override; /*{
         Obstacle::init(tex, startX, startY - 150.f, scaleFactor, frameCount, animUpdateTime);
-    }
+    }*/
 
 
     /**
     * @brief Aktualizuje stan nietoperza.
     * @param deltaTime Czas od ostatniej klatki (w sekundach).
     */
-    void update(float deltaTime) override {
-        Obstacle::update(deltaTime); // Upewniamy siê, ¿e animacja jest aktualizowana
-    }
+    void update(float deltaTime) override; /*{
+        Obstacle::update(deltaTime); 
+    }*/
 
 
     /**
     * @brief Rysuje nietoperza na ekranie.
     */
-    void draw() const override {
+    void draw() const override; /*{
         AnimatedSprite::draw();
-    }
+    }*/
 
     /**
     * @brief Zwraca prostok¹t kolizji nietoperza.
     * @return Prostok¹t kolizji w przestrzeni ekranu.
     */
-    Rectangle getCollisionRec() const override {
+    Rectangle getCollisionRec() const override; /*{
         return AnimatedSprite::getCollisionRec();
-    }
+    }*/
 };

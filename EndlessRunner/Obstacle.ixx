@@ -22,10 +22,12 @@ import ConfigModule;
  */
 export class Obstacle : public AnimatedSprite {
 protected:
+
     /** @brief Prêdkoœæ przesuwania przeszkody w lewo (piksele/s). */
-    float velocity{ -200.f }; // Prêdkoœæ przesuwania w lewo
+    float velocity{ -200.f }; 
 
 public:
+
     Obstacle() = default;
     virtual ~Obstacle() = default;
 
@@ -38,18 +40,18 @@ public:
      * @param frameCount Liczba klatek animacji.
      * @param animUpdateTime Czas miêdzy zmianami klatek.
      */
-    virtual void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime) override {
+    virtual void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime = Config::ANIMATION_UPDATE_TIME) override; /*{
         AnimatedSprite::init(tex, startX, startY, scaleFactor, frameCount, animUpdateTime);
-    }
+    }*/
 
     /**
     * @brief Aktualizuje stan przeszkody (ruch i animacjê).
     * @param deltaTime Czas od ostatniej klatki (w sekundach).
     */
-    virtual void update(float deltaTime) override {
+    virtual void update(float deltaTime) override;/* {
         AnimatedSprite::update(deltaTime);
         screenPos.x += velocity * deltaTime;
-    }
+    }*/
 
     /**
     * @brief Rysuje przeszkodê na ekranie.
@@ -66,5 +68,5 @@ public:
      * @brief Zwraca pozycjê X przeszkody.
      * @return Wspó³rzêdna X przeszkody.
      */
-    virtual float getPositionX() const { return screenPos.x; }
+    virtual float getPositionX() const; /*{ return screenPos.x; }*/
 };

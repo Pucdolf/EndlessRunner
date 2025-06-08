@@ -30,15 +30,15 @@ public:
     * @param frameCount Liczba klatek animacji.
     * @param animUpdateTime Czas miêdzy zmianami klatek.
     */
-    void init(const Texture2D& dustTex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime) override {
+    void init(const Texture2D& dustTex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime) override;/* {
         AnimatedSprite::init(dustTex, startX, startY, scaleFactor, frameCount, animUpdateTime);
-    }
+    }*/
 
     /**
      * @brief Aktualizuje stan py³u (animacjê i aktywnoœæ).
      * @param deltaTime Czas od ostatniej klatki (w sekundach).
      */
-    void update(float deltaTime) override {
+    void update(float deltaTime) override; /*{
         if (!isActive) return;
         runningTime += deltaTime;
         if (runningTime >= updateTime) {
@@ -49,17 +49,17 @@ public:
                 frame = static_cast<int>(maxFrames) - 1;
             }
         }
-    }
+    }*/
 
     /**
     * @brief Rysuje py³ z efektem zanikania (alpha).
     */
-    void draw() const override {
+    void draw() const override; /*{
         if (!isActive) return;
         Rectangle source{ frame * width, 0.f, width, height };
         Rectangle dest{ screenPos.x, screenPos.y, width * scale, height * scale };
         float alpha = (frame < maxFrames - 1) ? 1.f : 1.f - (runningTime / updateTime);
         Color color{ 255, 255, 255, static_cast<unsigned char>(255 * alpha) };
         DrawTexturePro(texture, source, dest, { 0.f, 0.f }, 0.f, color);
-    }
+    }*/
 };

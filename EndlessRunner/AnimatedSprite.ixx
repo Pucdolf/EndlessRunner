@@ -8,7 +8,6 @@
 
 module;
 #include "raylib.h"
-#include <iostream>
 export module AnimatedSpriteModule;
 
 import ConfigModule;
@@ -22,6 +21,7 @@ import ConfigModule;
  */
 export class AnimatedSprite {
 protected:
+    
     /** @brief Pozycja sprite'a na ekranie (w pikselach). */
     Vector2 screenPos{ 0.f, 0.f };
     /** @brief Skala sprite'a (mno¿nik rozmiaru). */
@@ -59,8 +59,8 @@ public:
     * @param frameCount Liczba klatek w animacji.
     * @param animUpdateTime Czas miêdzy zmianami klatek (domyœlnie Config::ANIMATION_UPDATE_TIME).
     */
-    virtual void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime = Config::ANIMATION_UPDATE_TIME) {
-        texture = tex;
+    virtual void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime = Config::ANIMATION_UPDATE_TIME); 
+        /*{texture = tex;
         maxFrames = static_cast<float>(frameCount);
         width = static_cast<float>(tex.width) / maxFrames;
         height = static_cast<float>(tex.height);
@@ -71,81 +71,82 @@ public:
         isActive = true;
         updateTime = animUpdateTime;
     
-    }
+    }*/
 
     /**
      * @brief Aktualizuje stan sprite'a (np. animacjê).
      * @param deltaTime Czas od ostatniej klatki (w sekundach).
      */
-    virtual void update(float deltaTime) {
+    virtual void update(float deltaTime); 
+    /*{
         if (!isActive) return;
         updateAnimation(deltaTime);
-    }
+    }*/
 
     /**
     * @brief Rysuje sprite'a na ekranie.
     */
-    virtual void draw() const {
+    virtual void draw() const; /*{
         if (!isActive) return;
         Rectangle source{ frame * width, 0.f, width, height };
         Rectangle dest{ screenPos.x, screenPos.y, width * scale, height * scale };
         DrawTexturePro(texture, source, dest, { 0.f, 0.f }, 0.f, WHITE);
-    }
+    }*/
 
     /**
      * @brief Zwraca prostok¹t kolizji sprite'a.
      * @return Prostok¹t kolizji w przestrzeni ekranu.
      */
-    virtual Rectangle getCollisionRec() const {
+    virtual Rectangle getCollisionRec() const; /*{
         return Rectangle{
             screenPos.x,
             screenPos.y,
             width * scale,
             height * scale
         };
-    }
+    }*/
 
     /**
     * @brief Zwraca aktualn¹ pozycjê sprite'a.
     * @return Wektor z wspó³rzêdnymi X i Y.
     */
-    Vector2 getPosition() const { return screenPos; }
+    Vector2 getPosition() const; /*{ return screenPos; }*/
 
     /**
      * @brief Sprawdza, czy sprite jest aktywny.
      * @return True, jeœli sprite jest aktywny.
      */
-    bool getIsActive() const { return isActive; }
+    bool getIsActive() const; /*{ return isActive; }*/
 
     /**
     * @brief Zwraca teksturê sprite'a.
     * @return Referencja do tekstury.
     */
-    const Texture2D& getTexture() const { return texture; }
+    const Texture2D& getTexture() const; /*{ return texture; }*/
 
     /**
     * @brief Zwraca aktualn¹ klatkê animacji.
     * @return Indeks aktualnej klatki.
     */
-    int getFrame() const { return frame; }
+    int getFrame() const; /*{ return frame; }*/
 
 protected:
     /**
      * @brief Aktualizuje animacjê sprite'a.
      * @param deltaTime Czas od ostatniej klatki (w sekundach).
      */
-    void updateAnimation(float deltaTime) {
+    void updateAnimation(float deltaTime); /*{
         runningTime += deltaTime;
         if (runningTime >= updateTime) {
             runningTime = 0.f;
             frame++;
             if (frame >= maxFrames) frame = 0;
         }
-    }
+    }*/
 
     /**
     * @brief Ustawia aktywnoœæ sprite'a.
     * @param active True, aby aktywowaæ sprite; false, aby dezaktywowaæ.
     */
-    void setActive(bool active) { isActive = active; }
+    void setActive(bool active); /*{ isActive = active; }*/
 };

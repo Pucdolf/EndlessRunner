@@ -8,14 +8,13 @@
 module;
 #include "raylib.h"
 #include <iostream>
+#include <unordered_map>
+#include <string>
+#include <filesystem>
+#include <ranges>
+#include <concepts>
 
 export module ResourcesModule;
-import <array>;
-import <unordered_map>;
-import <string>;
-import <filesystem>;
-import <ranges>;
-import <concepts>;
 
 
 /**
@@ -176,7 +175,7 @@ public:
     /**
      * @brief £aduje wszystkie tekstury gry z predefiniowanych œcie¿ek.
      */
-    void loadTextures() {
+    void loadTextures(); /*{
         loadTexture<Texture2D>(TextureKeys::UI::MENU_BG, "textures/main_menu_background.png");
         loadTexture<Texture2D>(TextureKeys::UI::LOADING_SCREEN_BG, "textures/loading_screen.png");
         loadTexture<Texture2D>(TextureKeys::UI::BAR_EMPTY, "textures/barempty.png");
@@ -236,16 +235,16 @@ public:
         loadTexture<Texture2D>(TextureKeys::Obstacles::BIG_TREE_N, "textures/Forest/big_tree_n.png");
         loadTexture<Texture2D>(TextureKeys::Obstacles::LOG_N, "textures/Forest/log_n.png");
         loadTexture<Texture2D>(TextureKeys::Obstacles::SPIKES_N, "textures/Forest/spikes_n.png");
-    }
+    }*/
 
     /**
      * @brief Zwalnia wszystkie za³adowane tekstury z pamiêci.
      */
-    void unloadTextures() {
+    void unloadTextures(); /*{
         for (auto& texture : textures | std::ranges::views::values) {
             UnloadTexture(texture);
         }
-    }
+    }*/
 
 
     /**

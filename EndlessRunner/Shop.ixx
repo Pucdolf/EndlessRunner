@@ -64,8 +64,8 @@ public:
     * @param screenWidth Szerokoœæ ekranu.
     * @param screenHeight Wysokoœæ ekranu.
     */
-    void init(Resources& res, int screenWidth, int screenHeight)
-    {
+    void init(Resources& res, int screenWidth, int screenHeight);
+    /*{
         resources = res;
         dinos[0] = resources.getGreenIdle();
         dinos[1] = resources.getBlueIdle();
@@ -79,14 +79,14 @@ public:
             frameWidths[i] = static_cast<float>(dinos[i].width / 4);
             frameHeights[i] = static_cast<float>(dinos[i].height);
         }
-    }
+    }*/
 
     /**
      * @brief Wyœwietla interfejs sklepu.
      * @param screenWidth Szerokoœæ ekranu.
      * @param screenHeight Wysokoœæ ekranu.
      */
-    void show(int screenWidth, int screenHeight) {
+    void show(int screenWidth, int screenHeight);/* {
         runningTime = 0;
         frame = 0;
 
@@ -154,7 +154,7 @@ public:
 
                 if (i == selectedDinoIndex) {
                     Rectangle selectionFrame = dinoRecs[i];
-                    selectionFrame.y += 50.f * heightScale; // Przesuniêcie w dó³, skalowane
+                    selectionFrame.y += 50.f * heightScale; 
                     DrawRectangleLinesEx(selectionFrame, 4.f * widthScale, GREEN);
                 }
             }
@@ -162,22 +162,22 @@ public:
             DrawText("Press ESC to return", screenWidth / 2 - MeasureText("Press ESC to return", 20) / 2, screenHeight - 30, 20, BLACK);
             EndDrawing();
         }
-    }
+    }*/
 
     /**
      * @brief Zwraca indeks wybranego dinozaura.
      * @return Indeks wybranego dinozaura.
      */
-    int getSelectedDino() const {
+    int getSelectedDino() const; /*{
         return selectedDinoIndex;
-    }
+    }*/
 
 
     /**
      * @brief Zwraca liczbê klatek animacji wybranego dinozaura.
      * @return Liczba klatek animacji.
      */
-    int getSelectedDinoFrameCount() const {
+    int getSelectedDinoFrameCount() const;/* {
         return frameCounts[selectedDinoIndex];
-    }
+    }*/
 };

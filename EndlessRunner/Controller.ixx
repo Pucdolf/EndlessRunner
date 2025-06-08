@@ -141,7 +141,7 @@ public:
 		}
 
 		board.setBackgroundType(bgType);
-		board.init(resources.getGreenDinoRun(), windowWidth, windowHeight);
+		board.init(resources.getGreenDinoRun(), GetScreenWidth(), GetScreenWidth());
 		SetTargetFPS(60);
 
 		while (!WindowShouldClose()) {

@@ -102,12 +102,6 @@
     <ClCompile Include="Board.cpp">
       <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>
-    <ClCompile Include="ColissionHandling.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Config.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
     <ClCompile Include="Controller.cpp">
       <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>

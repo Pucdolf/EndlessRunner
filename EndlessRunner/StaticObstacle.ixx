@@ -29,39 +29,39 @@ public:
      * @param frameCount Liczba klatek (zawsze 1 dla statycznych).
      * @param animUpdateTime Czas miêdzy zmianami klatek (nieu¿ywany).
      */
-    void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime) override {
+    void init(const Texture2D& tex, float startX, float startY, float scaleFactor, int frameCount, float animUpdateTime = Config::ANIMATION_UPDATE_TIME) override;/* {
         Obstacle::init(tex, startX, startY - tex.height * scaleFactor, scaleFactor, 1, animUpdateTime); 
-    }
+    }*/
 
     /**
      * @brief Aktualizuje pozycjê przeszkody.
      * @param deltaTime Czas od ostatniej klatki (w sekundach).
      */
-    void update(float deltaTime) override {
+    void update(float deltaTime) override; /*{
         screenPos.x += velocity * deltaTime; 
-    }
+    }*/
 
 
     /**
     * @brief Rysuje przeszkodê na ekranie.
     */
-    void draw() const override {
+    void draw() const override;/* {
         Rectangle source{ 0.f, 0.f, width, height };
         Rectangle dest{ screenPos.x, screenPos.y, width * scale, height * scale };
         DrawTexturePro(texture, source, dest, { 0.f, 0.f }, 0.f, WHITE);
-    }
+    }*/
 
 
     /**
     * @brief Zwraca prostok¹t kolizji przeszkody.
     * @return Prostok¹t kolizji w przestrzeni ekranu.
     */
-    Rectangle getCollisionRec() const override {
+    Rectangle getCollisionRec() const override;/* {
         return Rectangle{
             screenPos.x,
             screenPos.y,
             width * scale,
             height * scale
         };
-    }
+    }*/
 };

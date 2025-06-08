@@ -16,7 +16,7 @@ int main() {
     InitWindow(screenWidth, screenHeight, "Dino Rush");
 
     Resources resources;
-    Board board(resources);  // Przekazujemy resources do konstruktora Board
+    Board board(resources);
     Shop shop;
 
     LoadingScreen loader;

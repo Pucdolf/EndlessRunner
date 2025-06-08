@@ -137,9 +137,7 @@
     <ClCompile Include="Bat.ixx" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Board.ixx" />
-    <ClCompile Include="ColissionHandling.cpp" />
     <ClCompile Include="CollisionHandling.ixx" />
-    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Config.ixx" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Controller.ixx" />
