@@ -290,53 +290,102 @@ public:
     Texture2D& getGameBackground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::GAME_BG); }
     /** @brief Pobiera teksturê ogólnego planu œrodkowego gry. @return Referencja do tekstury. */
     Texture2D& getGameMidground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::GAME_MG); }
+    /** @brief Pobiera teksturê ogólnego przedniego planu gry. @return Referencja do tekstury. */
     Texture2D& getGameForeground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::GAME_FG); }
+    /** @brief Pobiera teksturê animacji py³u podczas biegu. @return Referencja do tekstury. */
     Texture2D& getDustRun() { return getTexture<Texture2D>(TextureKeys::Characters::DUST_RUN); }
+    /** @brief Pobiera teksturê zielonego dinozaura w biegu. @return Referencja do tekstury. */
     Texture2D& getGreenDinoRun() { return getTexture<Texture2D>(TextureKeys::Characters::GREEN_DINO_RUN); }
+    /** @brief Pobiera teksturê niebieskiego dinozaura w biegu. @return Referencja do tekstury. */
     Texture2D& getBlueDinoRun() { return getTexture<Texture2D>(TextureKeys::Characters::BLUE_DINO_RUN); }
+    /** @brief Pobiera teksturê ¿ó³tego dinozaura w biegu. @return Referencja do tekstury. */
     Texture2D& getYellowDinoRun() { return getTexture<Texture2D>(TextureKeys::Characters::YELLOW_DINO_RUN); }
+    /** @brief Pobiera teksturê czerwonego dinozaura w biegu. @return Referencja do tekstury. */
     Texture2D& getRedDinoRun() { return getTexture<Texture2D>(TextureKeys::Characters::RED_DINO_RUN); }
+    /** @brief Pobiera teksturê mg³awicy. @return Referencja do tekstury. */
     Texture2D& getNebula() { return getTexture<Texture2D>(TextureKeys::Characters::NEBULA); }
+    /** @brief Pobiera teksturê pterozaura. @return Referencja do tekstury. */
     Texture2D& getPtero() { return getTexture<Texture2D>(TextureKeys::Characters::PTERO); }
+    /** @brief Pobiera teksturê nietoperza. @return Referencja do tekstury. */
     Texture2D& getBat() { return getTexture<Texture2D>(TextureKeys::Characters::BAT); }
+    /** @brief Pobiera teksturê ikony ¿ycia. @return Referencja do tekstury. */
     Texture2D& getHeartIcon() { return getTexture<Texture2D>(TextureKeys::UI::HEART_ICON); }
+    /** @brief Pobiera teksturê ikony utraconego ¿ycia. @return Referencja do tekstury. */
     Texture2D& getLifeLostIcon() { return getTexture<Texture2D>(TextureKeys::UI::LIFE_LOST_ICON); }
+    /** @brief Pobiera teksturê liczb. @return Referencja do tekstury. */
     Texture2D& getNumbersTexture() { return getTexture<Texture2D>(TextureKeys::UI::NUMBERS); }
+    /** @brief Pobiera teksturê przycisku. @return Referencja do tekstury. */
     Texture2D& getButtonTexture() { return getTexture<Texture2D>(TextureKeys::UI::BUTTON); }
+    /** @brief Pobiera teksturê tablicy wyników. @return Referencja do tekstury. */
     Texture2D& getLeaderboard() { return getTexture<Texture2D>(TextureKeys::UI::LEADERBOARD); }
+    /** @brief Pobiera teksturê baneru. @return Referencja do tekstury. */
     Texture2D& getBanner() { return getTexture<Texture2D>(TextureKeys::UI::BANNER); }
+    /** @brief Pobiera teksturê t³a pustyni za dnia. @return Referencja do tekstury. */
     Texture2D& getDesertBackground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::DESERT_BG); }
+    /** @brief Pobiera teksturê œrodkowego planu pustyni za dnia. @return Referencja do tekstury. */
     Texture2D& getDesertMidground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::DESERT_MG); }
+    /** @brief Pobiera teksturê przedniego planu pustyni za dnia. @return Referencja do tekstury. */
     Texture2D& getDesertForeground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::DESERT_FG); }
+    /** @brief Pobiera teksturê ziemi pustyni za dnia. @return Referencja do tekstury. */
     Texture2D& getDesertGround() { return getTexture<Texture2D>(TextureKeys::Backgrounds::DESERT_GR); }
+    /** @brief Pobiera teksturê t³a lasu za dnia. @return Referencja do tekstury. */
     Texture2D& getForestBackground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::FOREST_BG); }
+    /** @brief Pobiera teksturê œrodkowego planu lasu za dnia. @return Referencja do tekstury. */
     Texture2D& getForestMidground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::FOREST_MG); }
+    /** @brief Pobiera teksturê przedniego planu lasu za dnia. @return Referencja do tekstury. */
     Texture2D& getForestForeground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::FOREST_FG); }
+    /** @brief Pobiera teksturê ziemi lasu za dnia. @return Referencja do tekstury. */
     Texture2D& getForestGround() { return getTexture<Texture2D>(TextureKeys::Backgrounds::FOREST_GR); }
+    /** @brief Pobiera teksturê t³a pustyni w nocy. @return Referencja do tekstury. */
     Texture2D& getDesertNightBackground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::DESERT_NIGHT_BG); }
+    /** @brief Pobiera teksturê œrodkowego planu pustyni w nocy. @return Referencja do tekstury. */
     Texture2D& getDesertNightMidground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::DESERT_NIGHT_MG); }
+    /** @brief Pobiera teksturê przedniego planu pustyni w nocy. @return Referencja do tekstury. */
     Texture2D& getDesertNightForeground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::DESERT_NIGHT_FG); }
+    /** @brief Pobiera teksturê ziemi pustyni w nocy. @return Referencja do tekstury. */
     Texture2D& getDesertNightGround() { return getTexture<Texture2D>(TextureKeys::Backgrounds::DESERT_NIGHT_GR); }
+    /** @brief Pobiera teksturê t³a lasu w nocy. @return Referencja do tekstury. */
     Texture2D& getForestNightBackground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::FOREST_NIGHT_BG); }
+    /** @brief Pobiera teksturê œrodkowego planu lasu w nocy. @return Referencja do tekstury. */
     Texture2D& getForestNightMidground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::FOREST_NIGHT_MG); }
+    /** @brief Pobiera teksturê przedniego planu lasu w nocy. @return Referencja do tekstury. */
     Texture2D& getForestNightForeground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::FOREST_NIGHT_FG); }
+    /** @brief Pobiera teksturê ziemi lasu w nocy. @return Referencja do tekstury. */
     Texture2D& getForestNightGround() { return getTexture<Texture2D>(TextureKeys::Backgrounds::FOREST_NIGHT_GR); }
+    /** @brief Pobiera teksturê ma³ego kaktusa. @return Referencja do tekstury. */
     Texture2D& getSmallCactus() { return getTexture<Texture2D>(TextureKeys::Obstacles::SMALL_CACTUS); }
+    /** @brief Pobiera teksturê du¿ego kaktusa. @return Referencja do tekstury. */
     Texture2D& getBigCactus() { return getTexture<Texture2D>(TextureKeys::Obstacles::BIG_CACTUS); }
+    /** @brief Pobiera teksturê czaszek (wariant 1). @return Referencja do tekstury. */
     Texture2D& getSkulls() { return getTexture<Texture2D>(TextureKeys::Obstacles::SKULLS); }
+    /** @brief Pobiera teksturê czaszek (wariant 2). @return Referencja do tekstury. */
     Texture2D& getSkulls2() { return getTexture<Texture2D>(TextureKeys::Obstacles::SKULLS2); }
+    /** @brief Pobiera teksturê kamienia (pustynia za dnia). @return Referencja do tekstury. */
     Texture2D& getRockDust() { return getTexture<Texture2D>(TextureKeys::Obstacles::ROCK_D); }
+    /** @brief Pobiera teksturê du¿ego kamienia (pustynia za dnia). @return Referencja do tekstury. */
     Texture2D& getBigRockDust() { return getTexture<Texture2D>(TextureKeys::Obstacles::BIG_ROCK_D); }
+    /** @brief Pobiera teksturê kamienia (pustynia w nocy). @return Referencja do tekstury. */
     Texture2D& getRockDustNight() { return getTexture<Texture2D>(TextureKeys::Obstacles::ROCK_D_N); }
+    /** @brief Pobiera teksturê du¿ego kamienia (pustynia w nocy). @return Referencja do tekstury. */
     Texture2D& getBigRockDustNight() { return getTexture<Texture2D>(TextureKeys::Obstacles::BIG_ROCK_D_N); }
+    /** @brief Pobiera teksturê kamienia (las). @return Referencja do tekstury. */
     Texture2D& getRockForest() { return getTexture<Texture2D>(TextureKeys::Obstacles::ROCK_F); }
+    /** @brief Pobiera teksturê du¿ego kamienia (las). @return Referencja do tekstury. */
     Texture2D& getBigRockForest() { return getTexture<Texture2D>(TextureKeys::Obstacles::BIG_ROCK_F); }
+    /** @brief Pobiera teksturê ma³ego drzewa (las za dnia). @return Referencja do tekstury. */
     Texture2D& getSmallTree() { return getTexture<Texture2D>(TextureKeys::Obstacles::SMALL_TREE); }
+    /** @brief Pobiera teksturê du¿ego drzewa (las za dnia). @return Referencja do tekstury. */
     Texture2D& getBigTree() { return getTexture<Texture2D>(TextureKeys::Obstacles::BIG_TREE); }
+    /** @brief Pobiera teksturê k³ody (las za dnia). @return Referencja do tekstury. */
     Texture2D& getLog() { return getTexture<Texture2D>(TextureKeys::Obstacles::LOG); }
+    /** @brief Pobiera teksturê kolców (las za dnia). @return Referencja do tekstury. */
     Texture2D& getSpikes() { return getTexture<Texture2D>(TextureKeys::Obstacles::SPIKES); }
+    /** @brief Pobiera teksturê ma³ego drzewa (las w nocy). @return Referencja do tekstury. */
     Texture2D& getSmallTreeNight() { return getTexture<Texture2D>(TextureKeys::Obstacles::SMALL_TREE_N); }
+    /** @brief Pobiera teksturê du¿ego drzewa (las w nocy). @return Referencja do tekstury. */
     Texture2D& getBigTreeNight() { return getTexture<Texture2D>(TextureKeys::Obstacles::BIG_TREE_N); }
+    /** @brief Pobiera teksturê k³ody (las w nocy). @return Referencja do tekstury. */
     Texture2D& getLogNight() { return getTexture<Texture2D>(TextureKeys::Obstacles::LOG_N); }
+    /** @brief Pobiera teksturê kolców (las w nocy). @return Referencja do tekstury. */
     Texture2D& getSpikesNight() { return getTexture<Texture2D>(TextureKeys::Obstacles::SPIKES_N); }
 };
