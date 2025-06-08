@@ -1,3 +1,10 @@
+/**
+ * @file Resources.ixx
+ * @brief Modu³ definiuj¹cy klasê Resources, zarz¹dzaj¹c¹ teksturami gry.
+ *
+ * Klasa Resources odpowiada za ³adowanie, przechowywanie i udostêpnianie tekstur u¿ywanych w grze.
+ */
+
 module;
 #include "raylib.h"
 #include <iostream>
@@ -10,6 +17,14 @@ import <filesystem>;
 import <ranges>;
 import <concepts>;
 
+
+/**
+ * @concept TextureType
+ * @brief Koncept dla typów tekstur zgodnych z Texture2D.
+ *
+ * Typy spe³niaj¹ce ten koncept musz¹ byæ typu Texture2D oraz posiadaæ pola `id`, `width` i `height` konwertowalne odpowiednio na `unsigned int` i `int`.
+ * @tparam T Typ obiektu do sprawdzenia.
+ */
 export template<typename T>
 concept TextureType = std::same_as<T, Texture2D>&& requires(T t) {
     { t.id } -> std::convertible_to<unsigned int>;
@@ -17,89 +32,125 @@ concept TextureType = std::same_as<T, Texture2D>&& requires(T t) {
     { t.height } -> std::convertible_to<int>;
 };
 
+/**
+ * @class Resources
+ * @brief Klasa zarz¹dzaj¹ca teksturami gry.
+ *
+ * Odpowiada za ³adowanie, przechowywanie i udostêpnianie tekstur dla elementów gry, takich jak t³a, sprite'y i interfejs u¿ytkownika.
+ */
 export class Resources {
 private:
+    /** @brief Mapa przechowuj¹ca tekstury z kluczami w formacie std::string. */
     std::unordered_map<std::string, Texture2D> textures;
 
+    /**
+     * @struct TextureKeys
+     * @brief Struktura grupuj¹ca klucze tekstur wed³ug kategorii.
+     */
     struct TextureKeys {
+        /**
+          * @struct UI
+          * @brief Klucze dla tekstur interfejsu u¿ytkownika.
+          */
         struct UI {
-            inline static const std::string MENU_BG = "menu_background";
-            inline static const std::string LOADING_SCREEN_BG = "loading_screen_background";
-            inline static const std::string BAR_EMPTY = "loading_bar_empty";
-            inline static const std::string BAR_FULL = "loading_bar_full";
-            inline static const std::string REGISTRATION_BG = "registration";
-            inline static const std::string SHOP_BG = "shop_background";
-            inline static const std::string LEADERBOARD = "leaderboard";
-            inline static const std::string HEART_ICON = "heart_icon";
-            inline static const std::string LIFE_LOST_ICON = "life_lost_icon";
-            inline static const std::string NUMBERS = "numbers";
-            inline static const std::string BUTTON = "button";
-            inline static const std::string BANNER = "banner";
+            inline static const std::string MENU_BG = "menu_background"; /**< T³o menu g³ównego. */
+            inline static const std::string LOADING_SCREEN_BG = "loading_screen_background"; /**< T³o ekranu ³adowania. */
+            inline static const std::string BAR_EMPTY = "loading_bar_empty"; /**< Pusty pasek ³adowania. */
+            inline static const std::string BAR_FULL = "loading_bar_full"; /**< Wype³niony pasek ³adowania. */
+            inline static const std::string REGISTRATION_BG = "registration"; /**< T³o ekranu rejestracji. */
+            inline static const std::string SHOP_BG = "shop_background"; /**< T³o sklepu. */
+            inline static const std::string LEADERBOARD = "leaderboard"; /**< T³o tablicy wyników. */
+            inline static const std::string HEART_ICON = "heart_icon"; /**< Ikona ¿ycia. */
+            inline static const std::string LIFE_LOST_ICON = "life_lost_icon"; /**< Ikona utraconego ¿ycia. */
+            inline static const std::string NUMBERS = "numbers"; /**< Tekstura cyfr. */
+            inline static const std::string BUTTON = "button"; /**< Tekstura przycisku. */
+            inline static const std::string BANNER = "banner"; /**< Tekstura baneru. */
         };
 
+        /**
+          * @struct Characters
+          * @brief Klucze dla tekstur postaci i animacji.
+          */
         struct Characters {
-            inline static const std::string DINO_SHADOW = "dino_shadow";
-            inline static const std::string DUST_RUN = "dust_run";
-            inline static const std::string GREEN_DINO_IDLE = "green_dino_idle";
-            inline static const std::string BLUE_DINO_IDLE = "blue_dino_idle";
-            inline static const std::string YELLOW_DINO_IDLE = "yellow_dino_idle";
-            inline static const std::string RED_DINO_IDLE = "red_dino_idle";
-            inline static const std::string GREEN_DINO_RUN = "green_dino_run";
-            inline static const std::string BLUE_DINO_RUN = "blue_dino_run";
-            inline static const std::string YELLOW_DINO_RUN = "yellow_dino_run";
-            inline static const std::string RED_DINO_RUN = "red_dino_run";
-            inline static const std::string NEBULA = "nebula";
-            inline static const std::string PTERO = "pterosaur";
-            inline static const std::string BAT = "bat";
+            inline static const std::string DINO_SHADOW = "dino_shadow"; /**< Cieñ dinozaura. */
+            inline static const std::string DUST_RUN = "dust_run"; /**< Efekt py³u podczas biegu. */
+            inline static const std::string GREEN_DINO_IDLE = "green_dino_idle"; /**< Zielony dinozaur w stanie bezczynnoœci. */
+            inline static const std::string BLUE_DINO_IDLE = "blue_dino_idle"; /**< Niebieski dinozaur w stanie bezczynnoœci. */
+            inline static const std::string YELLOW_DINO_IDLE = "yellow_dino_idle"; /**< ¯ó³ty dinozaur w stanie bezczynnoœci. */
+            inline static const std::string RED_DINO_IDLE = "red_dino_idle"; /**< Czerwony dinozaur w stanie bezczynnoœci. */
+            inline static const std::string GREEN_DINO_RUN = "green_dino_run"; /**< Zielony dinozaur podczas biegu. */
+            inline static const std::string BLUE_DINO_RUN = "blue_dino_run"; /**< Niebieski dinozaur podczas biegu. */
+            inline static const std::string YELLOW_DINO_RUN = "yellow_dino_run"; /**< ¯ó³ty dinozaur podczas biegu. */
+            inline static const std::string RED_DINO_RUN = "red_dino_run"; /**< Czerwony dinozaur podczas biegu. */
+            inline static const std::string NEBULA = "nebula"; /**< Tekstura mg³awicy. */
+            inline static const std::string PTERO = "pterosaur"; /**< Tekstura pterodaktyla. */
+            inline static const std::string BAT = "bat"; /**< Tekstura nietoperza. */
         };
 
+        /**
+          * @struct Backgrounds
+          * @brief Klucze dla tekstur t³a gry.
+          */
         struct Backgrounds {
-            inline static const std::string GAME_BG = "game_background";
-            inline static const std::string GAME_MG = "game_midground";
-            inline static const std::string GAME_FG = "game_foreground";
-            inline static const std::string DESERT_BG = "desert_background";
-            inline static const std::string DESERT_MG = "desert_midground";
-            inline static const std::string DESERT_FG = "desert_foreground";
-            inline static const std::string DESERT_GR = "desert_ground";
-            inline static const std::string DESERT_NIGHT_BG = "desert_night_background";
-            inline static const std::string DESERT_NIGHT_MG = "desert_night_midground";
-            inline static const std::string DESERT_NIGHT_FG = "desert_night_foreground";
-            inline static const std::string DESERT_NIGHT_GR = "desert_night_ground";
-            inline static const std::string FOREST_BG = "forest_background";
-            inline static const std::string FOREST_MG = "forest_midground";
-            inline static const std::string FOREST_FG = "forest_foreground";
-            inline static const std::string FOREST_GR = "forest_ground";
-            inline static const std::string FOREST_NIGHT_BG = "forest_night_background";
-            inline static const std::string FOREST_NIGHT_MG = "forest_night_midground";
-            inline static const std::string FOREST_NIGHT_FG = "forest_night_foreground";
-            inline static const std::string FOREST_NIGHT_GR = "forest_night_ground";
+            inline static const std::string GAME_BG = "game_background"; /**< Ogólne t³o gry. */
+            inline static const std::string GAME_MG = "game_midground"; /**< Ogólny plan œrodkowy gry. */
+            inline static const std::string GAME_FG = "game_foreground"; /**< Ogólny plan przedni gry. */
+            inline static const std::string DESERT_BG = "desert_background"; /**< T³o pustyni za dnia. */
+            inline static const std::string DESERT_MG = "desert_midground"; /**< Plan œrodkowy pustyni za dnia. */
+            inline static const std::string DESERT_FG = "desert_foreground"; /**< Plan przedni pustyni za dnia. */
+            inline static const std::string DESERT_GR = "desert_ground"; /**< Pod³o¿e pustyni za dnia. */
+            inline static const std::string DESERT_NIGHT_BG = "desert_night_background"; /**< T³o pustyni w nocy. */
+            inline static const std::string DESERT_NIGHT_MG = "desert_night_midground"; /**< Plan œrodkowy pustyni w nocy. */
+            inline static const std::string DESERT_NIGHT_FG = "desert_night_foreground"; /**< Plan przedni pustyni w nocy. */
+            inline static const std::string DESERT_NIGHT_GR = "desert_night_ground"; /**< Pod³o¿e pustyni w nocy. */
+            inline static const std::string FOREST_BG = "forest_background"; /**< T³o lasu za dnia. */
+            inline static const std::string FOREST_MG = "forest_midground"; /**< Plan œrodkowy lasu za dnia. */
+            inline static const std::string FOREST_FG = "forest_foreground"; /**< Plan przedni lasu za dnia. */
+            inline static const std::string FOREST_GR = "forest_ground"; /**< Pod³o¿e lasu za dnia. */
+            inline static const std::string FOREST_NIGHT_BG = "forest_night_background"; /**< T³o lasu w nocy. */
+            inline static const std::string FOREST_NIGHT_MG = "forest_night_midground"; /**< Plan œrodkowy lasu w nocy. */
+            inline static const std::string FOREST_NIGHT_FG = "forest_night_foreground"; /**< Plan przedni lasu w nocy. */
+            inline static const std::string FOREST_NIGHT_GR = "forest_night_ground"; /**< Pod³o¿e lasu w nocy. */
         };
 
+        /**
+          * @struct Obstacles
+          * @brief Klucze dla tekstur przeszkód statycznych.
+          */
         struct Obstacles {
-            inline static const std::string SMALL_CACTUS = "small_cactus";
-            inline static const std::string BIG_CACTUS = "big_cactus";
-            inline static const std::string SKULLS = "skulls";
-            inline static const std::string SKULLS2 = "skulls2";
-            inline static const std::string ROCK_D = "rock_d";
-            inline static const std::string BIG_ROCK_D = "big_rock_d";
-            inline static const std::string ROCK_D_N = "rock_d_n";
-            inline static const std::string BIG_ROCK_D_N = "big_rock_d_n";
-            inline static const std::string ROCK_F = "rock";
-            inline static const std::string BIG_ROCK_F = "big_rock";
-            inline static const std::string SMALL_TREE = "small_tree";
-            inline static const std::string BIG_TREE = "big_tree";
-            inline static const std::string LOG = "log";
-            inline static const std::string SPIKES = "spikes";
-            inline static const std::string SMALL_TREE_N = "small_tree_n";
-            inline static const std::string BIG_TREE_N = "big_tree_n";
-            inline static const std::string LOG_N = "log_n";
-            inline static const std::string SPIKES_N = "spikes_n";
+            inline static const std::string SMALL_CACTUS = "small_cactus"; /**< Ma³y kaktus. */
+            inline static const std::string BIG_CACTUS = "big_cactus"; /**< Du¿y kaktus. */
+            inline static const std::string SKULLS = "skulls"; /**< Czaszki (pierwszy wariant). */
+            inline static const std::string SKULLS2 = "skulls2"; /**< Czaszki (drugi wariant). */
+            inline static const std::string ROCK_D = "rock_d"; /**< Kamieñ pustynny za dnia. */
+            inline static const std::string BIG_ROCK_D = "big_rock_d"; /**< Du¿y kamieñ pustynny za dnia. */
+            inline static const std::string ROCK_D_N = "rock_d_n"; /**< Kamieñ pustynny w nocy. */
+            inline static const std::string BIG_ROCK_D_N = "big_rock_d_n"; /**< Du¿y kamieñ pustynny w nocy. */
+            inline static const std::string ROCK_F = "rock"; /**< Kamieñ leœny. */
+            inline static const std::string BIG_ROCK_F = "big_rock"; /**< Du¿y kamieñ leœny. */
+            inline static const std::string SMALL_TREE = "small_tree"; /**< Ma³e drzewo leœne. */
+            inline static const std::string BIG_TREE = "big_tree"; /**< Du¿e drzewo leœne. */
+            inline static const std::string LOG = "log"; /**< K³oda leœna. */
+            inline static const std::string SPIKES = "spikes"; /**< Kolce leœne. */
+            inline static const std::string SMALL_TREE_N = "small_tree_n"; /**< Ma³e drzewo leœne w nocy. */
+            inline static const std::string BIG_TREE_N = "big_tree_n"; /**< Du¿e drzewo leœne w nocy. */
+            inline static const std::string LOG_N = "log_n"; /**< K³oda leœna w nocy. */
+            inline static const std::string SPIKES_N = "spikes_n"; /**< Kolce leœne w nocy. */
         };
     };
 
 public:
+    /**
+     * @brief Konstruktor domyœlny klasy Resources.
+     */
     Resources() = default;
 
+    /**
+    * @brief £aduje teksturê i zapisuje j¹ pod okreœlonym kluczem.
+    * @tparam T Typ tekstury (musi spe³niaæ koncept TextureType).
+    * @param key Klucz, pod którym tekstura bêdzie przechowywana.
+    * @param path Œcie¿ka do pliku tekstury.
+    */
     template<TextureType T>
     void loadTexture(const std::string& key, const std::string& path) {
         if (std::filesystem::exists(path)) {
@@ -122,6 +173,9 @@ public:
         }
     }
 
+    /**
+     * @brief £aduje wszystkie tekstury gry z predefiniowanych œcie¿ek.
+     */
     void loadTextures() {
         loadTexture<Texture2D>(TextureKeys::UI::MENU_BG, "textures/main_menu_background.png");
         loadTexture<Texture2D>(TextureKeys::UI::LOADING_SCREEN_BG, "textures/loading_screen.png");
@@ -184,12 +238,22 @@ public:
         loadTexture<Texture2D>(TextureKeys::Obstacles::SPIKES_N, "textures/Forest/spikes_n.png");
     }
 
+    /**
+     * @brief Zwalnia wszystkie za³adowane tekstury z pamiêci.
+     */
     void unloadTextures() {
         for (auto& texture : textures | std::ranges::views::values) {
             UnloadTexture(texture);
         }
     }
 
+
+    /**
+     * @brief Pobiera teksturê na podstawie klucza.
+     * @tparam T Typ tekstury (musi spe³niaæ koncept TextureType).
+     * @param key Klucz tekstury.
+     * @return Referencja do tekstury; jeœli klucz nie istnieje, ³aduje domyœln¹ teksturê zastêpcz¹.
+     */
     template<TextureType T>
     T& getTexture(const std::string& key) {
         auto it = textures.find(key);
@@ -200,18 +264,31 @@ public:
         return textures[key];
     }
 
+    /** @brief Pobiera teksturê t³a menu. @return Referencja do tekstury. */
     Texture2D& getMenuBackground() { return getTexture<Texture2D>(TextureKeys::UI::MENU_BG); }
+    /** @brief Pobiera teksturê t³a sklepu. @return Referencja do tekstury. */
     Texture2D& getShopBackground() { return getTexture<Texture2D>(TextureKeys::UI::SHOP_BG); }
+    /** @brief Pobiera teksturê ekranu ³adowania. @return Referencja do tekstury. */
     Texture2D& getLoadingScreenBackground() { return getTexture<Texture2D>(TextureKeys::UI::LOADING_SCREEN_BG); }
+    /** @brief Pobiera teksturê pustego paska ³adowania. @return Referencja do tekstury. */
     Texture2D& getBarEmpty() { return getTexture<Texture2D>(TextureKeys::UI::BAR_EMPTY); }
+    /** @brief Pobiera teksturê pe³nego paska ³adowania. @return Referencja do tekstury. */
     Texture2D& getBarFill() { return getTexture<Texture2D>(TextureKeys::UI::BAR_FULL); }
+    /** @brief Pobiera teksturê t³a rejestracji. @return Referencja do tekstury. */
     Texture2D& getRegistrationBackground() { return getTexture<Texture2D>(TextureKeys::UI::REGISTRATION_BG); }
+    /** @brief Pobiera teksturê cienia dinozaura. @return Referencja do tekstury. */
     Texture2D& getShadowTexture() { return getTexture<Texture2D>(TextureKeys::Characters::DINO_SHADOW); }
+    /** @brief Pobiera teksturê zielonego dinozaura w stanie bezczynnoœci. @return Referencja do tekstury. */
     Texture2D& getGreenIdle() { return getTexture<Texture2D>(TextureKeys::Characters::GREEN_DINO_IDLE); }
+    /** @brief Pobiera teksturê niebieskiego dinozaura w stanie bezczynnoœci. @return Referencja do tekstury. */
     Texture2D& getBlueIdle() { return getTexture<Texture2D>(TextureKeys::Characters::BLUE_DINO_IDLE); }
+    /** @brief Pobiera teksturê ¿ó³tego dinozaura w stanie bezczynnoœci. @return Referencja do tekstury. */
     Texture2D& getYellowIdle() { return getTexture<Texture2D>(TextureKeys::Characters::YELLOW_DINO_IDLE); }
+    /** @brief Pobiera teksturê czerwonego dinozaura w stanie bezczynnoœci. @return Referencja do tekstury. */
     Texture2D& getRedIdle() { return getTexture<Texture2D>(TextureKeys::Characters::RED_DINO_IDLE); }
+    /** @brief Pobiera teksturê ogólnego t³a gry. @return Referencja do tekstury. */
     Texture2D& getGameBackground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::GAME_BG); }
+    /** @brief Pobiera teksturê ogólnego planu œrodkowego gry. @return Referencja do tekstury. */
     Texture2D& getGameMidground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::GAME_MG); }
     Texture2D& getGameForeground() { return getTexture<Texture2D>(TextureKeys::Backgrounds::GAME_FG); }
     Texture2D& getDustRun() { return getTexture<Texture2D>(TextureKeys::Characters::DUST_RUN); }

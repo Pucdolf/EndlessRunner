@@ -1,3 +1,10 @@
+/**
+ * @file ObstacleFactory.ixx
+ * @brief Modu³ definiuj¹cy klasê ObstacleFactory, tworz¹c¹ przeszkody.
+ *
+ * Klasa ObstacleFactory generuje losowe przeszkody na podstawie typu t³a gry.
+ */
+
 module;
 #include "raylib.h"
 export module ObstacleFactoryModule;
@@ -12,7 +19,14 @@ import <memory>;
 import <random>;
 import <vector>;
 
-// Concept dla typów dziedzicz¹cych po Obstacle
+
+/**
+ * @concept ObstacleType
+ * @brief Koncept dla typów przeszkód dziedzicz¹cych po klasie Obstacle.
+ *
+ * Typy spe³niaj¹ce ten koncept musz¹ dziedziczyæ po Obstacle oraz implementowaæ metody `init`, `update`, `draw` i `getCollisionRec` z okreœlonymi sygnaturami.
+ * @tparam T Typ obiektu do sprawdzenia.
+ */
 export template<typename T>
 concept ObstacleType = std::derived_from<T, Obstacle>&& requires(T t, const Texture2D& tex, float x, float y, float scale, int frames, float time) {
     { t.init(tex, x, y, scale, frames, time) } -> std::same_as<void>;
@@ -21,6 +35,10 @@ concept ObstacleType = std::derived_from<T, Obstacle>&& requires(T t, const Text
     { t.getCollisionRec() } -> std::same_as<Rectangle>;
 };
 
+/**
+ * @enum BackgroundType
+ * @brief Typy t³a gry.
+ */
 export enum class BackgroundType {
     DESERT_DAY,
     DESERT_NIGHT,
@@ -28,15 +46,26 @@ export enum class BackgroundType {
     FOREST_NIGHT
 };
 
+/**
+ * @class ObstacleFactory
+ * @brief Klasa odpowiedzialna za tworzenie przeszkód.
+ *
+ * Generuje losowe przeszkody (Bat, Pterodactyl, StaticObstacle) z uwzglêdnieniem typu t³a.
+ */
 export class ObstacleFactory {
 private:
+    /** @brief Referencja do zasobów gry. */
     Resources& resources;
+    /** @brief Generator liczb losowych. */
     std::random_device rd;
+    /** @brief Silnik losuj¹cy. */
     std::mt19937 gen{ rd() };
-    std::uniform_int_distribution<> probabilityDis{ 0, 99 }; // Losowanie z zakresu 0-99 dla procentów
-    std::uniform_int_distribution<> staticDis{ 0, 6 }; // Do losowania statycznych przeszkód (maks. 7 opcji)
+    /** @brief Rozk³ad losuj¹cy prawdopodobieñstwo (0-99). */
+    std::uniform_int_distribution<> probabilityDis{ 0, 99 };
+    /** @brief Rozk³ad losuj¹cy statyczne przeszkody (0-6). */
+    std::uniform_int_distribution<> staticDis{ 0, 6 }; 
 
-    // Szablonowa metoda do tworzenia przeszkód
+   
     template<ObstacleType T>
     std::unique_ptr<Obstacle> createSpecificObstacle(float startX, float startY, const Texture2D& tex, int frameCount) {
         auto obstacle = std::make_unique<T>();
@@ -45,18 +74,29 @@ private:
     }
 
 public:
+    /**
+     * @brief Konstruktor klasy ObstacleFactory.
+     * @param res Referencja do zasobów gry.
+     */
     ObstacleFactory(Resources& res) : resources(res) {}
 
+    /**
+     * @brief Tworzy now¹ przeszkodê.
+     * @param startX Pocz¹tkowa pozycja X.
+     * @param startY Pocz¹tkowa pozycja Y.
+     * @param bgType Typ t³a gry.
+     * @return Unikalny wskaŸnik do stworzonej przeszkody.
+     */
     std::unique_ptr<Obstacle> createObstacle(float startX, float startY, BackgroundType bgType) {
-        int roll = probabilityDis(gen); // Losowanie liczby z zakresu 0-99
+        int roll = probabilityDis(gen); 
 
-        if (roll > 0 and  roll <= 20) { // 0-19: 20% szansy na Bat
+        if (roll > 0 and  roll <= 20) { 
             return createSpecificObstacle<Bat>(startX, startY, resources.getBat(), Config::BAT_FRAME_COUNT);
         }
-        else if (roll > 20 && roll <= 40) { // 20-39: 20% szansy na Pterodactyl
+        else if (roll > 20 && roll <= 40) { 
             return createSpecificObstacle<Pterodactyl>(startX, startY, resources.getPtero(), Config::PTERODACTYL_FRAME_COUNT);
         }
-        else { // 40-99: 60% szansy na StaticObstacle
+        else { 
             std::vector<Texture2D*> staticObstacles;
             switch (bgType) {
             case BackgroundType::DESERT_DAY:

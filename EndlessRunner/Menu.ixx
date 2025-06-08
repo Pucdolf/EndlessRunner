@@ -1,3 +1,10 @@
+/**
+ * @file Menu.ixx
+ * @brief Modu³ definiuj¹cy klasê Menu, obs³uguj¹c¹ menu g³ówne gry.
+ *
+ * Klasa Menu zarz¹dza interfejsem menu, w tym opcjami gry, leaderboardem i sklepem.
+ */
+
 module;
 #include "raylib.h"
 #include <string>
@@ -16,28 +23,57 @@ import ConfigModule;
 
 import <array>;
 
+/**
+ * @class Menu
+ * @brief Klasa obs³uguj¹ca menu g³ówne gry.
+ *
+ * Wyœwietla przyciski menu, obs³uguje leaderboard, sklep i rozpoczêcie gry.
+ */
 export class Menu {
-	static constexpr int buttonCount = Config::MENU_BUTTON_COUNT; // Zmiana z 5 na Config::MENU_BUTTON_COUNT
+	/** @brief Liczba przycisków w menu. */
+	static constexpr int buttonCount = Config::MENU_BUTTON_COUNT; 
+	/** @brief Etykiety przycisków menu. */
 	std::array<const char*, buttonCount> labels = { "Start Game", "LeaderBoard", "Shop", "Log Out", "Exit" };
+	/** @brief Prostok¹ty przycisków menu. */
 	std::array<Rectangle, buttonCount> buttons;
+	/** @brief Indeks wybranego przycisku (-1, jeœli brak). */
 	int selected = -1;
+	/** @brief Nazwa u¿ytkownika. */
 	std::string username;
 
+	/** @brief WskaŸnik do zasobów gry. */
 	Resources* resources{ nullptr };
+	/** @brief WskaŸnik do planszy gry. */
 	Board* board{ nullptr };
+	/** @brief WskaŸnik do sklepu. */
 	Shop* shop{ nullptr };
 
 public:
+	/**
+	* @brief Ustawia kontekst menu (zasoby, plansza, sklep).
+	* @param res Referencja do zasobów gry.
+	* @param b Referencja do planszy gry.
+	* @param s Referencja do sklepu.
+	*/
 	void setContext(Resources& res, Board& b, Shop& s) {
 		resources = &res;
 		board = &b;
 		shop = &s;
 	}
 
+	/**
+	* @brief Ustawia nazwê u¿ytkownika.
+	* @param user Nazwa u¿ytkownika.
+	*/
 	void setUsername(const std::string& user) {
 		username = user;
 	}
 
+	/**
+	 * @brief Wyœwietla menu g³ówne.
+	 * @param screenWidth Szerokoœæ ekranu.
+	 * @param screenHeight Wysokoœæ ekranu.
+	 */
 	void showMenu(int screenWidth, int screenHeight) {
 		bool menuRunning = true;
 
@@ -77,18 +113,17 @@ public:
 				WHITE
 			);
 
-			// Renderowanie baneru
+		
 			Texture2D banner = resources->getBanner();
-			float bannerScale = Config::BANNER_SCALE; // Zmiana z 3.5f na Config::BANNER_SCALE
+			float bannerScale = Config::BANNER_SCALE; 
 			float bannerHeight = banner.height * bannerScale;
-			float bannerX = screenWidth / 2 - ((banner.width * bannerScale) / 2); // Pozycja baneru od góry ekranu
-			float bannerY = Config::BANNER_Y; // Zmiana z -25 na Config::BANNER_Y
+			float bannerX = screenWidth / 2 - ((banner.width * bannerScale) / 2); 
+			float bannerY = Config::BANNER_Y; 
 			DrawTextureEx(banner, { bannerX, bannerY }, 0.0f, bannerScale, WHITE);
 
-			// Renderowanie tekstu powitalnego na banerze
 			std::string welcomeText = username.empty() ? "Welcome Guest" : "Welcome " + username;
 			int textWidth = MeasureText(welcomeText.c_str(), 30);
-			float textX = (screenWidth - textWidth) / 2.0f; // Centrowanie tekstu
+			float textX = (screenWidth - textWidth) / 2.0f; 
 			DrawText(welcomeText.c_str(), static_cast<int>(textX), static_cast<int>(bannerY + (bannerHeight - 45) / 2), 30, BLACK);
 
 			int fontSize = 20;
@@ -115,6 +150,9 @@ public:
 		}
 	}
 private:
+	/**
+	 * @brief Rozpoczyna now¹ grê.
+	 */
 	void newGame() {
 		if (resources && board && shop) {
 			int selectedDino = shop->getSelectedDino();
@@ -137,13 +175,23 @@ private:
 		}
 	}
 
+	/**
+	 * @struct ScoreEntry
+	 * @brief Struktura przechowuj¹ca dane wyniku (nazwa u¿ytkownika i punkty).
+	 */
 	struct ScoreEntry {
+		/** @brief Nazwa u¿ytkownika. */
 		std::string username;
+		/** @brief Wynik u¿ytkownika. */
 		int score;
 	};
 
+	/**
+	* @brief Wyœwietla tablicê wyników.
+	* @param screenWidth Szerokoœæ ekranu.
+	* @param screenHeight Wysokoœæ ekranu.
+	*/
 	void showLeaderboard(int screenWidth, int screenHeight) {
-		// Mapa przechowuj¹ca najlepszy wynik dla ka¿dego u¿ytkownika
 		std::map<std::string, int> bestScores;
 		std::ifstream file("scores.txt");
 		if (file.is_open()) {
@@ -161,13 +209,11 @@ private:
 			file.close();
 		}
 
-		// Przekszta³camy mapê na wektor wyników
 		std::vector<ScoreEntry> scores;
 		for (const auto& entry : bestScores) {
 			scores.push_back({ entry.first, entry.second });
 		}
 
-		// Sortujemy malej¹co wed³ug wyniku
 		std::sort(scores.begin(), scores.end(),
 			[](const ScoreEntry& a, const ScoreEntry& b) { return a.score > b.score; });
 
@@ -192,12 +238,12 @@ private:
 				WHITE
 			);
 
-			// Rysowanie tekstury ramki leaderboarda
+		
 			Texture2D leaderboardFrame = resources->getLeaderboard();
 			float frameScale = std::min(
 				static_cast<float>(screenWidth) / leaderboardFrame.width,
 				static_cast<float>(screenHeight) / leaderboardFrame.height
-			) * 0.8f; // Skalowanie do 80% ekranu
+			) * 0.8f; 
 			float frameWidth = leaderboardFrame.width * frameScale;
 			float frameHeight = leaderboardFrame.height * frameScale;
 			float frameX = (screenWidth - frameWidth) / 2;
@@ -205,11 +251,9 @@ private:
 
 			DrawTextureEx(leaderboardFrame, { frameX, frameY }, 0.0f, frameScale, WHITE);
 
-			// Rysowanie tytu³u "Leaderboard" na górze ramki
 			DrawText("Leaderboard", static_cast<int>(frameX + (frameWidth - MeasureText("Leaderboard", 40)) / 2),
 				static_cast<int>(frameY + 70), 40, BLACK);
 
-			// Rysowanie wyników wewn¹trz ramki
 			size_t maxScores = std::min(static_cast<size_t>(10), scores.size());
 			float textY = frameY + 120; // Pocz¹tek tekstu pod tytu³em
 			for (size_t i = 0; i < maxScores; i++) {
@@ -218,7 +262,6 @@ private:
 					static_cast<int>(textY + i * 40), 30, BLACK);
 			}
 
-			// Rysowanie tekstu "Press ESC to return" pod ramk¹
 			DrawText("Press ESC to return", screenWidth / 2 - MeasureText("Press ESC to return", 20) / 2,
 				screenHeight - 30, 20, BLACK);
 
@@ -226,17 +269,28 @@ private:
 		}
 	}
 
+	/**
+	 * @brief Otwiera sklep.
+	 */
 	void openShop() {
 		if (shop && resources) {
 			shop->show(GetScreenWidth(), GetScreenHeight());
 		}
 	}
 
+	/**
+	 * @brief Wylogowuje u¿ytkownika.
+	 * @param menuRunning Flaga wskazuj¹ca, czy menu powinno byæ nadal aktywne.
+	 */
 	void LogOut(bool& menuRunning) const {
 		CloseWindow();
 		menuRunning = false;
 	}
 
+	/**
+	* @brief Zamyka grê.
+	* @param menuRunning Flaga wskazuj¹ca, czy menu powinno byæ nadal aktywne.
+	*/
 	void exitGame(bool& menuRunning) {
 		resources->unloadTextures();
 		menuRunning = false;
@@ -245,6 +299,11 @@ private:
 
 	}
 
+	/**
+	 * @brief Obs³uguje klikniêcie przycisku menu.
+	 * @param index Indeks klikniêtego przycisku.
+	 * @param menuRunning Flaga wskazuj¹ca, czy menu powinno byæ nadal aktywne.
+	 */
 	void handleClick(int index, bool& menuRunning) {
 		switch (index) {
 		case 0: newGame(); break;

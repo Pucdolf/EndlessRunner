@@ -1,3 +1,9 @@
+/**
+ * @file LoadingScreen.ixx
+ * @brief Modu³ definiuj¹cy klasê LoadingScreen, obs³uguj¹c¹ ekran ³adowania i uwierzytelniania.
+ *
+ * Klasa LoadingScreen zarz¹dza ekranem ³adowania oraz interfejsem rejestracji i logowania.
+ */
 module;
 #include "raylib.h"
 #include "chrono"
@@ -11,13 +17,31 @@ import ShopModule;
 import AuthModule;
 import ConfigModule;
 
+/**
+ * @class LoadingScreen
+ * @brief Klasa obs³uguj¹ca ekran ³adowania i uwierzytelniania.
+ *
+ * Wyœwietla pasek ³adowania, a nastêpnie interfejs rejestracji lub logowania u¿ytkownika.
+ */
 export class LoadingScreen {
 private:
+	/** @brief Tekstura pustego paska ³adowania. */
 	Texture2D barEmpty;
+	/** @brief Tekstura wype³nionego paska ³adowania. */
 	Texture2D barFill;
+	/** @brief Flaga wskazuj¹ca zakoñczenie ³adowania. */
 	bool loadingFinished = false;
 
 public:
+	/**
+	 * @brief Wyœwietla ekran ³adowania, a nastêpnie ekran uwierzytelniania.
+	 * @param screenWidth Szerokoœæ ekranu.
+	 * @param screenHeight Wysokoœæ ekranu.
+	 * @param resources Referencja do zasobów gry.
+	 * @param board Referencja do planszy gry.
+	 * @param shop Referencja do sklepu.
+	 * @return Nazwa u¿ytkownika po udanym uwierzytelnieniu lub pusty ci¹g.
+	 */
 	std::string show(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop) {
 		auto startTime = std::chrono::high_resolution_clock::now();
 		const int loadingDuration = Config::LOADING_DURATION_MS; // Zmiana z 2000 na Config::LOADING_DURATION_MS
@@ -74,9 +98,18 @@ public:
 		return "";
 	}
 private:
+	/**
+	 * @brief Wyœwietla ekran wyboru miêdzy rejestracj¹ a logowaniem.
+	 * @param screenWidth Szerokoœæ ekranu.
+	 * @param screenHeight Wysokoœæ ekranu.
+	 * @param resources Referencja do zasobów gry.
+	 * @param board Referencja do planszy gry.
+	 * @param shop Referencja do sklepu.
+	 * @return Nazwa u¿ytkownika po udanym uwierzytelnieniu lub pusty ci¹g.
+	 */
 	std::string showAuthTiles(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop) {
-		constexpr float btnW = Config::AUTH_BUTTON_WIDTH;  // Zmiana z 200.0f na Config::AUTH_BUTTON_WIDTH
-		constexpr float btnH = Config::AUTH_BUTTON_HEIGHT; // Zmiana z 80.0f na Config::AUTH_BUTTON_HEIGHT
+		constexpr float btnW = Config::AUTH_BUTTON_WIDTH;  
+		constexpr float btnH = Config::AUTH_BUTTON_HEIGHT;
 
 		float xLeft = screenWidth * 0.25f - btnW * 0.5f;
 		float xRight = screenWidth * 0.75f - btnW * 0.5f;
@@ -143,6 +176,13 @@ private:
 		return "";
 	}
 
+	/**
+	* @brief Obs³uguje proces rejestracji u¿ytkownika.
+	* @param screenWidth Szerokoœæ ekranu.
+	* @param screenHeight Wysokoœæ ekranu.
+	* @param resources Referencja do zasobów gry.
+	* @return Nazwa u¿ytkownika po udanej rejestracji lub pusty ci¹g.
+	*/
 	std::string handleSignIn(int screenWidth, int screenHeight, Resources& resources) {
 		Authorization auth;
 		std::string username, password;
@@ -175,7 +215,6 @@ private:
 			DrawText(maskedPassword.c_str(), screenWidth / 2 - 150, screenHeight / 2 + 40, 20, BLACK);
 			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2 + 40, 400, 30, passwordBorder);
 
-			// Rysowanie przycisku "Submit"
 			Texture2D buttonTex = resources.getButtonTexture();
 			Vector2 mouse = GetMousePosition();
 			Color submitColor = CheckCollisionPointRec(mouse, submitButton) ? GRAY : WHITE;
@@ -193,7 +232,6 @@ private:
 				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 90, 20, RED);
 			}
 
-			// Reszta kodu bez zmian...
 			Vector2 mousePos = GetMousePosition();
 
 			int key = GetCharPressed();
@@ -260,6 +298,13 @@ private:
 		return validInput ? username : "";
 	}
 
+	/**
+	 * @brief Obs³uguje proces logowania u¿ytkownika.
+	 * @param screenWidth Szerokoœæ ekranu.
+	 * @param screenHeight Wysokoœæ ekranu.
+	 * @param resources Referencja do zasobów gry.
+	 * @return Nazwa u¿ytkownika po udanym logowaniu lub pusty ci¹g.
+	 */
 	std::string handleLogIn(int screenWidth, int screenHeight, Resources& resources) {
 		Authorization auth;
 		std::string username, password;
@@ -295,7 +340,6 @@ private:
 			DrawText(maskedPassword.c_str(), screenWidth / 2 - 150, screenHeight / 2 + 40, 20, BLACK);
 			DrawRectangleLines(screenWidth / 2 - 200, screenHeight / 2 + 40, 400, 30, passwordBorder);
 
-			// Rysowanie przycisku "Submit"
 			Texture2D buttonTex = resources.getButtonTexture();
 			Vector2 mouse = GetMousePosition();
 			Color submitColor = CheckCollisionPointRec(mouse, submitButton) ? GRAY : WHITE;
@@ -313,7 +357,6 @@ private:
 				DrawText(errorMessage.c_str(), screenWidth / 2 - MeasureText(errorMessage.c_str(), 20) / 2, screenHeight / 2 + 90, 20, RED);
 			}
 
-			// Reszta kodu bez zmian...
 			Vector2 mousePos = GetMousePosition();
 
 			int key = GetCharPressed();

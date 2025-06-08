@@ -1,3 +1,9 @@
+/**
+ * @file Controller.ixx
+ * @brief Modu³ definiuj¹cy klasê Controller, zarz¹dzaj¹c¹ g³ówn¹ pêtl¹ gry.
+ *
+ * Klasa Controller odpowiada za renderowanie t³a, interfejsu u¿ytkownika i obs³ugê stanu gry.
+ */
 module;
 #include "raylib.h"
 #include <iostream>
@@ -11,27 +17,56 @@ import ObstacleFactoryModule;
 import ConfigModule;
 import <string>;
 
+/**
+ * @class Controller
+ * @brief Klasa zarz¹dzaj¹ca g³ówn¹ pêtl¹ gry i renderowaniem.
+ *
+ * Odpowiada za inicjalizacjê gry, aktualizacjê stanu, renderowanie t³a i UI oraz zapis wyników.
+ */
 export class Controller {
 private:
+	/** @brief Referencja do zasobów gry. */
 	Resources& resources;
+	/** @brief Referencja do planszy gry. */
 	Board& board;
+	/** @brief Nazwa u¿ytkownika. */
 	std::string username;
+	/** @brief Szerokoœæ okna gry. */
 	int windowWidth{};
+	/** @brief Wysokoœæ okna gry. */
 	int windowHeight{};
-	float numbScale = Config::UI_NUMB_SCALE; // Zmiana z 3.5f na Config::UI_NUMB_SCALE
+	/** @brief Skala elementów interfejsu u¿ytkownika. */
+	float numbScale = Config::UI_NUMB_SCALE;
 
-	float bgX{}, mgX{}, fgX{}, groundX{};
+	/** @brief Pozycja X t³a (background). */
+	float bgX{};
+	/** @brief Pozycja X warstwy œrodkowej (midground). */
+	float mgX{};
+	/** @brief Pozycja X warstwy przedniej (foreground). */
+	float fgX{};
+	/** @brief Pozycja X ziemi. */
+	float groundX{};
+	/** @brief Flaga wskazuj¹ca na przegran¹. */
 	bool gameOver{ false };
-	int lives = Config::PLAYER_LIVES; // Zmiana z 3 na Config::PLAYER_LIVES
+	/** @brief Liczba ¿yæ gracza. */
+	int lives = Config::PLAYER_LIVES; 
+	/** @brief Aktualny wynik gracza. */
 	float score = 0.0f;
+	/** @brief Flaga wskazuj¹ca, czy wynik zosta³ zapisany. */
 	bool savedScore{ false };
 
+	/** @brief Tekstura t³a. */
 	Texture2D bgTexture{};
+	/** @brief Tekstura warstwy œrodkowej. */
 	Texture2D mgTexture{};
+	/** @brief Tekstura warstwy przedniej. */
 	Texture2D fgTexture{};
+	/** @brief Tekstura ziemi. */
 	Texture2D groundTexture{};
 
-	// Metoda saveScore pozostaje bez zmian
+	/**
+	 * @brief Zapisuje wynik gracza do pliku.
+	 */
 	void saveScore() {
 		if (username.empty() || savedScore) return;
 		std::ofstream file("scores.txt", std::ios::app);
@@ -46,10 +81,21 @@ private:
 	}
 
 public:
+	/**
+	 * @brief Konstruktor klasy Controller.
+	 * @param res Referencja do zasobów gry.
+	 * @param b Referencja do planszy gry.
+	 * @param user Nazwa u¿ytkownika.
+	 * @param width Szerokoœæ okna.
+	 * @param height Wysokoœæ okna.
+	 */
 	Controller(Resources& res, Board& b, const std::string& user, int width, int height)
 		: resources(res), board(b), username(user), windowWidth(width), windowHeight(height) {
 	}
 
+	/**
+	 * @brief Uruchamia g³ówn¹ pêtlê gry.
+	 */
 	void run() {
 		std::random_device rd;
 		std::mt19937 gen(rd());
@@ -135,6 +181,12 @@ public:
 	}
 
 private:
+	/**
+	* @brief Przewija t³o gry (paralaksa).
+	* @param dt Czas od ostatniej klatki (w sekundach).
+	* @param windowWidth Szerokoœæ okna.
+	* @param windowHeight Wysokoœæ okna.
+	*/
 	void scrollBackground(float dt, int windowWidth, int windowHeight) {
 		float avgHeight = (bgTexture.height + mgTexture.height + fgTexture.height) / 3.0f;
 		float universalScale = static_cast<float>(windowHeight) / avgHeight;
@@ -189,6 +241,9 @@ private:
 		drawTileableLayer(groundTexture, groundX, groundScaledWidth);
 	}
 
+	/**
+	 * @brief Rysuje interfejs u¿ytkownika (np. wynik, ikony ¿yæ).
+	 */
 	void drawUI() {
 		Texture2D lifeFull = resources.getHeartIcon();
 		Texture2D lifeEmpty = resources.getLifeLostIcon();

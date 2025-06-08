@@ -1,3 +1,10 @@
+/**
+ * @file Shop.ixx
+ * @brief Modu³ definiuj¹cy klasê Shop, obs³uguj¹c¹ wybór dinozaurów.
+ *
+ * Klasa Shop pozwala graczowi wybraæ dinozaura do gry.
+ */
+
 module;
 #include "raylib.h"
 #include <array>
@@ -7,29 +14,56 @@ export module ShopModule;
 import ResourcesModule;
 import ConfigModule;
 
+
+/**
+ * @class Shop
+ * @brief Klasa obs³uguj¹ca interfejs sklepu w grze.
+ *
+ * Wyœwietla dostêpne dinozaury i pozwala na ich wybór.
+ */
 export class Shop
 {
 private:
-    static constexpr int DinoCount{ Config::SHOP_DINO_COUNT }; // Zmiana z 4 na Config::SHOP_DINO_COUNT
+    /** @brief Liczba dinozaurów w sklepie. */
+    static constexpr int DinoCount{ Config::SHOP_DINO_COUNT }; 
+    /** @brief Tekstury dinozaurów. */
     Texture2D dinos[DinoCount];
+    /** @brief Prostok¹ty klikalnych obszarów dinozaurów. */
     Rectangle dinoRecs[DinoCount];
+    /** @brief Tekstura t³a sklepu. */
     Texture2D background;
+    /** @brief Obiekt zasobów gry. */
     Resources resources;
+    /** @brief Bazowe skale dla ka¿dego dinozaura. */
     std::array<float, DinoCount> baseScales{ 6.0f, 7.5f, 8.5f, 7.0f };
+    /** @brief Szerokoœci klatek animacji dinozaurów. */
     std::array<float, DinoCount> frameWidths;
+    /** @brief Wysokoœci klatek animacji dinozaurów. */
     std::array<float, DinoCount> frameHeights;
+    /** @brief Liczby klatek animacji dla ka¿dego dinozaura. */
     std::array<int, DinoCount> frameCounts{ 6, 4, 4, 6 };
 
+    /** @brief Aktualna klatka animacji. */
     int frame{ 0 };
+    /** @brief Czas od ostatniej zmiany klatki. */
     float runningTime{ 0 };
-    float updateTime{ Config::SHOP_ANIMATION_UPDATE_TIME }; // Zmiana z 1.0f / 12.0f na Config::SHOP_ANIMATION_UPDATE_TIME
+    /** @brief Czas miêdzy zmianami klatek. */
+    float updateTime{ Config::SHOP_ANIMATION_UPDATE_TIME }; 
+    /** @brief Indeks wybranego dinozaura. */
     int selectedDinoIndex{ 0 };
 
-    // Przechowujemy pocz¹tkow¹ rozdzielczoœæ dla skalowania
+    /** @brief Pocz¹tkowa szerokoœæ ekranu (dla skalowania). */
     int initialScreenWidth{ 0 };
+    /** @brief Pocz¹tkowa wysokoœæ ekranu (dla skalowania). */
     int initialScreenHeight{ 0 };
 
 public:
+    /**
+    * @brief Inicjalizuje sklep.
+    * @param res Referencja do zasobów gry.
+    * @param screenWidth Szerokoœæ ekranu.
+    * @param screenHeight Wysokoœæ ekranu.
+    */
     void init(Resources& res, int screenWidth, int screenHeight)
     {
         resources = res;
@@ -46,6 +80,12 @@ public:
             frameHeights[i] = static_cast<float>(dinos[i].height);
         }
     }
+
+    /**
+     * @brief Wyœwietla interfejs sklepu.
+     * @param screenWidth Szerokoœæ ekranu.
+     * @param screenHeight Wysokoœæ ekranu.
+     */
     void show(int screenWidth, int screenHeight) {
         runningTime = 0;
         frame = 0;
@@ -60,16 +100,14 @@ public:
             }
 
             if (IsKeyPressed(KEY_ESCAPE)) return;
-
-            // Aktualizujemy rozdzielczoœæ w ka¿dej klatce
+          
             screenWidth = GetScreenWidth();
             screenHeight = GetScreenHeight();
 
-            // Obliczamy wspó³czynnik skalowania wzglêdem pocz¹tkowej rozdzielczoœci
             float widthScale = static_cast<float>(screenWidth) / initialScreenWidth;
             float heightScale = static_cast<float>(screenHeight) / initialScreenHeight;
 
-            // Aktualizujemy prostok¹ty w ka¿dej klatce
+           
             for (int i{ 0 }; i < DinoCount; i++) {
                 dinoRecs[i] = Rectangle{
                     static_cast<float>(i * screenWidth / DinoCount),
@@ -101,7 +139,6 @@ public:
             );
 
             for (int i = 0; i < DinoCount; i++) {
-                // Skalujemy dinozaury proporcjonalnie do zmiany rozdzielczoœci
                 float currentScale = baseScales[i] * (widthScale + heightScale) / 2.0f;
 
                 Rectangle dest = {
@@ -127,10 +164,19 @@ public:
         }
     }
 
+    /**
+     * @brief Zwraca indeks wybranego dinozaura.
+     * @return Indeks wybranego dinozaura.
+     */
     int getSelectedDino() const {
         return selectedDinoIndex;
     }
 
+
+    /**
+     * @brief Zwraca liczbê klatek animacji wybranego dinozaura.
+     * @return Liczba klatek animacji.
+     */
     int getSelectedDinoFrameCount() const {
         return frameCounts[selectedDinoIndex];
     }
