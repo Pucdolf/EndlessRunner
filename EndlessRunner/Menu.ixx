@@ -11,8 +11,7 @@ module;
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-#include <map>
-
+#include <array>
 export module MenuModule;
 
 import ResourcesModule;
@@ -21,7 +20,6 @@ import ControllerModule;
 import ShopModule;
 import ConfigModule;
 
-import <array>;
 
 /**
  * @class Menu
@@ -55,26 +53,26 @@ public:
 	* @param b Referencja do planszy gry.
 	* @param s Referencja do sklepu.
 	*/
-	void setContext(Resources& res, Board& b, Shop& s) {
+	void setContext(Resources& res, Board& b, Shop& s);/* {
 		resources = &res;
 		board = &b;
 		shop = &s;
-	}
+	}*/
 
 	/**
 	* @brief Ustawia nazwê u¿ytkownika.
 	* @param user Nazwa u¿ytkownika.
 	*/
-	void setUsername(const std::string& user) {
+	void setUsername(const std::string& user); /*{
 		username = user;
-	}
+	}*/
 
 	/**
 	 * @brief Wyœwietla menu g³ówne.
 	 * @param screenWidth Szerokoœæ ekranu.
 	 * @param screenHeight Wysokoœæ ekranu.
 	 */
-	void showMenu(int screenWidth, int screenHeight) {
+	void showMenu(int screenWidth, int screenHeight); /*{
 		bool menuRunning = true;
 
 		while (!WindowShouldClose() && menuRunning) {
@@ -148,32 +146,33 @@ public:
 
 			EndDrawing();
 		}
-	}
+	}*/
+
 private:
 	/**
 	 * @brief Rozpoczyna now¹ grê.
 	 */
-	void newGame() {
-		if (resources && board && shop) {
-			int selectedDino = shop->getSelectedDino();
-			int frameCount = shop->getSelectedDinoFrameCount();
+	void newGame(); //{
+	//	if (resources && board && shop) {
+	//		int selectedDino = shop->getSelectedDino();
+	//		int frameCount = shop->getSelectedDinoFrameCount();
 
-			Texture2D selectedDinoTex;
-			switch (selectedDino) {
-			case 0: selectedDinoTex = resources->getGreenDinoRun(); break;
-			case 1: selectedDinoTex = resources->getBlueDinoRun(); break;
-			case 2: selectedDinoTex = resources->getYellowDinoRun(); break;
-			case 3: selectedDinoTex = resources->getRedDinoRun(); break;
-			default: selectedDinoTex = resources->getGreenDinoRun(); break;
-			}
+	//		Texture2D selectedDinoTex;
+	//		switch (selectedDino) {
+	//		case 0: selectedDinoTex = resources->getGreenDinoRun(); break;
+	//		case 1: selectedDinoTex = resources->getBlueDinoRun(); break;
+	//		case 2: selectedDinoTex = resources->getYellowDinoRun(); break;
+	//		case 3: selectedDinoTex = resources->getRedDinoRun(); break;
+	//		default: selectedDinoTex = resources->getGreenDinoRun(); break;
+	//		}
 
-			board->setDinoTex(selectedDinoTex);
-			board->setDinoFrameCount(frameCount);
-			//board->init(selectedDinoTex, GetScreenWidth(), GetScreenHeight());
-			Controller controller(*resources, *board, username, GetScreenWidth(), GetScreenHeight());
-			controller.run();
-		}
-	}
+	//		board->setDinoTex(selectedDinoTex);
+	//		board->setDinoFrameCount(frameCount);
+	//		//board->init(selectedDinoTex, GetScreenWidth(), GetScreenHeight());
+	//		Controller controller(*resources, *board, username, GetScreenWidth(), GetScreenHeight());
+	//		controller.run();
+	//	}
+	//}
 
 	/**
 	 * @struct ScoreEntry
@@ -191,7 +190,7 @@ private:
 	* @param screenWidth Szerokoœæ ekranu.
 	* @param screenHeight Wysokoœæ ekranu.
 	*/
-	void showLeaderboard(int screenWidth, int screenHeight) {
+	void showLeaderboard(int screenWidth, int screenHeight);/* {
 		std::map<std::string, int> bestScores;
 		std::ifstream file("scores.txt");
 		if (file.is_open()) {
@@ -255,7 +254,7 @@ private:
 				static_cast<int>(frameY + 70), 40, BLACK);
 
 			size_t maxScores = std::min(static_cast<size_t>(10), scores.size());
-			float textY = frameY + 120; // Pocz¹tek tekstu pod tytu³em
+			float textY = frameY + 120; 
 			for (size_t i = 0; i < maxScores; i++) {
 				std::string entry = std::to_string(i + 1) + ". " + scores[i].username + ": " + std::to_string(scores[i].score);
 				DrawText(entry.c_str(), static_cast<int>(frameX + (frameWidth - MeasureText(entry.c_str(), 30)) / 2),
@@ -267,7 +266,7 @@ private:
 
 			EndDrawing();
 		}
-	}
+	}*/
 
 	/**
 	 * @brief Otwiera sklep.

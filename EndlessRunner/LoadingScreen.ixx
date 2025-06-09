@@ -42,61 +42,62 @@ public:
 	 * @param shop Referencja do sklepu.
 	 * @return Nazwa u¿ytkownika po udanym uwierzytelnieniu lub pusty ci¹g.
 	 */
-	std::string show(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop) {
-		auto startTime = std::chrono::high_resolution_clock::now();
-		const int loadingDuration = Config::LOADING_DURATION_MS; // Zmiana z 2000 na Config::LOADING_DURATION_MS
+	std::string show(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop); //{
+	//	auto startTime = std::chrono::high_resolution_clock::now();
+	//	const int loadingDuration = Config::LOADING_DURATION_MS; 
 
-		resources.loadTextures();
+	//	resources.loadTextures();
 
-		barEmpty = resources.getBarEmpty();
-		barFill = resources.getBarFill();
+	//	barEmpty = resources.getBarEmpty();
+	//	barFill = resources.getBarFill();
 
-		shop.init(resources, screenWidth, screenHeight);
+	//	shop.init(resources, screenWidth, screenHeight);
 
-		while (!loadingFinished && !WindowShouldClose()) {
-			screenWidth = GetScreenWidth();
-			screenHeight = GetScreenHeight();
+	//	while (!loadingFinished && !WindowShouldClose()) {
+	//		screenWidth = GetScreenWidth();
+	//		screenHeight = GetScreenHeight();
 
-			auto now = std::chrono::high_resolution_clock::now();
-			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - startTime);
-			float loadingProgress = static_cast<float>(duration.count()) / loadingDuration;
+	//		auto now = std::chrono::high_resolution_clock::now();
+	//		auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - startTime);
+	//		float loadingProgress = static_cast<float>(duration.count()) / loadingDuration;
 
-			if (loadingProgress > 1.f) {
-				loadingProgress = 1.f;
-				loadingFinished = true;
-			}
+	//		if (loadingProgress > 1.f) {
+	//			loadingProgress = 1.f;
+	//			loadingFinished = true;
+	//		}
 
-			BeginDrawing();
-			DrawTexturePro(
-				resources.getLoadingScreenBackground(),
-				Rectangle{ 0,0, static_cast<float>(resources.getLoadingScreenBackground().width), static_cast<float>(resources.getLoadingScreenBackground().height) },
-				Rectangle{ 0,0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
-				Vector2{ 0,0 },
-				0.0f,
-				WHITE
-			);
+	//		BeginDrawing();
+	//		DrawTexturePro(
+	//			resources.getLoadingScreenBackground(),
+	//			Rectangle{ 0,0, static_cast<float>(resources.getLoadingScreenBackground().width), static_cast<float>(resources.getLoadingScreenBackground().height) },
+	//			Rectangle{ 0,0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
+	//			Vector2{ 0,0 },
+	//			0.0f,
+	//			WHITE
+	//		);
 
-			int barX = screenWidth / 2 - barEmpty.width / 2;
-			int barY = screenHeight / 2 + 230;
+	//		int barX = screenWidth / 2 - barEmpty.width / 2;
+	//		int barY = screenHeight / 2 + 230;
 
-			DrawText("Loading...", screenWidth / 2 - MeasureText("Loading...", 20) / 2, barY - 30, 20, BLACK);
-			DrawTexture(barEmpty, barX, barY, BLACK);
+	//		DrawText("Loading...", screenWidth / 2 - MeasureText("Loading...", 20) / 2, barY - 30, 20, BLACK);
+	//		DrawTexture(barEmpty, barX, barY, BLACK);
 
-			Rectangle source = { 0,0, barFill.width * loadingProgress, static_cast<float>(barFill.height) };
-			Rectangle dest = { static_cast<float>(barX), static_cast<float>(barY), barFill.width * loadingProgress, static_cast<float>(barFill.height) };
-			DrawTexturePro(barFill, source, dest, { 0,0 }, 0.0f, WHITE);
+	//		Rectangle source = { 0,0, barFill.width * loadingProgress, static_cast<float>(barFill.height) };
+	//		Rectangle dest = { static_cast<float>(barX), static_cast<float>(barY), barFill.width * loadingProgress, static_cast<float>(barFill.height) };
+	//		DrawTexturePro(barFill, source, dest, { 0,0 }, 0.0f, WHITE);
 
-			EndDrawing();
-		}
+	//		EndDrawing();
+	//	}
 
-		UnloadTexture(barEmpty);
-		UnloadTexture(barFill);
+	//	//UnloadTexture(barEmpty);
+	//	//UnloadTexture(barFill);
 
-		if (loadingFinished) {
-			return showAuthTiles(screenWidth, screenHeight, resources, board, shop);
-		}
-		return "";
-	}
+	//	if (loadingFinished) {
+	//		return showAuthTiles(screenWidth, screenHeight, resources, board, shop);
+	//	}
+	//	return "";
+	//}
+
 private:
 	/**
 	 * @brief Wyœwietla ekran wyboru miêdzy rejestracj¹ a logowaniem.
@@ -107,8 +108,8 @@ private:
 	 * @param shop Referencja do sklepu.
 	 * @return Nazwa u¿ytkownika po udanym uwierzytelnieniu lub pusty ci¹g.
 	 */
-	std::string showAuthTiles(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop) {
-		constexpr float btnW = Config::AUTH_BUTTON_WIDTH;  
+	std::string showAuthTiles(int screenWidth, int screenHeight, Resources& resources, Board& board, Shop& shop); /*{
+		constexpr float btnW = Config::AUTH_BUTTON_WIDTH;
 		constexpr float btnH = Config::AUTH_BUTTON_HEIGHT;
 
 		float xLeft = screenWidth * 0.25f - btnW * 0.5f;
@@ -133,7 +134,6 @@ private:
 				WHITE
 			);
 
-			// Rysowanie przycisku "Sign In"
 			Texture2D buttonTex = resources.getButtonTexture();
 			Color signInColor = CheckCollisionPointRec(mouse, signInButton) ? GRAY : WHITE;
 			DrawTexturePro(
@@ -146,7 +146,6 @@ private:
 			);
 			DrawText("Sign In", static_cast<int>(signInButton.x + (signInButton.width - MeasureText("Sign In", 20)) / 2), static_cast<int>(signInButton.y + 30), 20, BLACK);
 
-			// Rysowanie przycisku "Log In"
 			Color logInColor = CheckCollisionPointRec(mouse, logInButton) ? GRAY : WHITE;
 			DrawTexturePro(
 				buttonTex,
@@ -174,7 +173,7 @@ private:
 			EndDrawing();
 		}
 		return "";
-	}
+	}*/
 
 	/**
 	* @brief Obs³uguje proces rejestracji u¿ytkownika.
@@ -183,7 +182,7 @@ private:
 	* @param resources Referencja do zasobów gry.
 	* @return Nazwa u¿ytkownika po udanej rejestracji lub pusty ci¹g.
 	*/
-	std::string handleSignIn(int screenWidth, int screenHeight, Resources& resources) {
+	std::string handleSignIn(int screenWidth, int screenHeight, Resources& resources);/* {
 		Authorization auth;
 		std::string username, password;
 		std::string errorMessage;
@@ -197,9 +196,9 @@ private:
 			BeginDrawing();
 			DrawTexturePro(
 				resources.getRegistrationBackground(),
-				Rectangle{ 0, 0, static_cast<float>(resources.getRegistrationBackground().width), static_cast<float>(resources.getRegistrationBackground().height) },
-				Rectangle{ 0, 0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
-				Vector2{ 0, 0 },
+				Rectangle{ 0.f, 0.f, static_cast<float>(resources.getRegistrationBackground().width), static_cast<float>(resources.getRegistrationBackground().height) },
+				Rectangle{ 0.f, 0.f, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
+				Vector2{ 0.f, 0.f },
 				0.0f,
 				WHITE
 			);
@@ -220,9 +219,9 @@ private:
 			Color submitColor = CheckCollisionPointRec(mouse, submitButton) ? GRAY : WHITE;
 			DrawTexturePro(
 				buttonTex,
-				Rectangle{ 0, 0, static_cast<float>(buttonTex.width), static_cast<float>(buttonTex.height) },
+				Rectangle{ 0.f, 0.f, static_cast<float>(buttonTex.width), static_cast<float>(buttonTex.height) },
 				submitButton,
-				Vector2{ 0, 0 },
+				Vector2{ 0.f, 0.f },
 				0.0f,
 				submitColor
 			);
@@ -296,7 +295,7 @@ private:
 			EndDrawing();
 		}
 		return validInput ? username : "";
-	}
+	}*/
 
 	/**
 	 * @brief Obs³uguje proces logowania u¿ytkownika.
@@ -305,7 +304,7 @@ private:
 	 * @param resources Referencja do zasobów gry.
 	 * @return Nazwa u¿ytkownika po udanym logowaniu lub pusty ci¹g.
 	 */
-	std::string handleLogIn(int screenWidth, int screenHeight, Resources& resources) {
+	std::string handleLogIn(int screenWidth, int screenHeight, Resources& resources);/* {
 		Authorization auth;
 		std::string username, password;
 		std::string errorMessage;
@@ -321,9 +320,9 @@ private:
 
 			DrawTexturePro(
 				resources.getRegistrationBackground(),
-				Rectangle{ 0, 0, static_cast<float>(resources.getRegistrationBackground().width), static_cast<float>(resources.getRegistrationBackground().height) },
-				Rectangle{ 0, 0, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
-				Vector2{ 0, 0 },
+				Rectangle{ 0.f, 0.f, static_cast<float>(resources.getRegistrationBackground().width), static_cast<float>(resources.getRegistrationBackground().height) },
+				Rectangle{ 0.f, 0.f, static_cast<float>(screenWidth), static_cast<float>(screenHeight) },
+				Vector2{ 0.f, 0.f },
 				0.0f,
 				WHITE
 			);
@@ -345,9 +344,9 @@ private:
 			Color submitColor = CheckCollisionPointRec(mouse, submitButton) ? GRAY : WHITE;
 			DrawTexturePro(
 				buttonTex,
-				Rectangle{ 0, 0, static_cast<float>(buttonTex.width), static_cast<float>(buttonTex.height) },
+				Rectangle{ 0.f, 0.f, static_cast<float>(buttonTex.width), static_cast<float>(buttonTex.height) },
 				submitButton,
-				Vector2{ 0, 0 },
+				Vector2{ 0.f, 0.f },
 				0.0f,
 				submitColor
 			);
@@ -418,5 +417,5 @@ private:
 			EndDrawing();
 		}
 		return loggedIn ? username : "";
-	}
+	}*/
 };

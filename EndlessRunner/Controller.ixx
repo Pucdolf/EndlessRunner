@@ -9,13 +9,14 @@ module;
 #include <iostream>
 #include <fstream>
 #include <random>
+#include <string>
 export module ControllerModule;
 
 import BoardModule;
 import ResourcesModule;
 import ObstacleFactoryModule;
 import ConfigModule;
-import <string>;
+
 
 /**
  * @class Controller
@@ -67,7 +68,7 @@ private:
 	/**
 	 * @brief Zapisuje wynik gracza do pliku.
 	 */
-	void saveScore() {
+	void saveScore();/* {
 		if (username.empty() || savedScore) return;
 		std::ofstream file("scores.txt", std::ios::app);
 		if (file.is_open()) {
@@ -78,7 +79,7 @@ private:
 		else {
 			std::cout << "Failed to open scores.txt for writing\n";
 		}
-	}
+	}*/
 
 public:
 	/**
@@ -96,89 +97,89 @@ public:
 	/**
 	 * @brief Uruchamia g³ówn¹ pêtlê gry.
 	 */
-	void run() {
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::uniform_int_distribution<> dis(0, 3); // 0-3, bo mamy 4 t³a
-		int backgroundChoice = dis(gen);
+	void run(); //{
+	//	std::random_device rd;
+	//	std::mt19937 gen(rd());
+	//	std::uniform_int_distribution<> dis(0, 3); 
+	//	int backgroundChoice = dis(gen);
 
-		BackgroundType bgType;
-		switch (backgroundChoice) {
-		case 0: // Pustynia dzienna
-			bgTexture = resources.getDesertBackground();
-			mgTexture = resources.getDesertMidground();
-			fgTexture = resources.getDesertForeground();
-			groundTexture = resources.getDesertGround();
-			bgType = BackgroundType::DESERT_DAY;
-			break;
-		case 1: // Pustynia noc¹
-			bgTexture = resources.getDesertNightBackground();
-			mgTexture = resources.getDesertNightMidground();
-			fgTexture = resources.getDesertNightForeground();
-			groundTexture = resources.getDesertNightGround();
-			bgType = BackgroundType::DESERT_NIGHT;
-			break;
-		case 2: // Las za dnia
-			bgTexture = resources.getForestBackground();
-			mgTexture = resources.getForestMidground();
-			fgTexture = resources.getForestForeground();
-			groundTexture = resources.getForestGround();
-			bgType = BackgroundType::FOREST_DAY;
-			break;
-		case 3: // Las noc¹
-			bgTexture = resources.getForestNightBackground();
-			mgTexture = resources.getForestNightMidground();
-			fgTexture = resources.getForestNightForeground();
-			groundTexture = resources.getForestNightGround();
-			bgType = BackgroundType::FOREST_NIGHT;
-			break;
-		default:
-			bgTexture = resources.getDesertBackground();
-			mgTexture = resources.getDesertMidground();
-			fgTexture = resources.getDesertForeground();
-			bgType = BackgroundType::DESERT_DAY;
-			break;
-		}
+	//	BackgroundType bgType;
+	//	switch (backgroundChoice) {
+	//	case 0: // Pustynia dzienna
+	//		bgTexture = resources.getDesertBackground();
+	//		mgTexture = resources.getDesertMidground();
+	//		fgTexture = resources.getDesertForeground();
+	//		groundTexture = resources.getDesertGround();
+	//		bgType = BackgroundType::DESERT_DAY;
+	//		break;
+	//	case 1: // Pustynia noc¹
+	//		bgTexture = resources.getDesertNightBackground();
+	//		mgTexture = resources.getDesertNightMidground();
+	//		fgTexture = resources.getDesertNightForeground();
+	//		groundTexture = resources.getDesertNightGround();
+	//		bgType = BackgroundType::DESERT_NIGHT;
+	//		break;
+	//	case 2: // Las za dnia
+	//		bgTexture = resources.getForestBackground();
+	//		mgTexture = resources.getForestMidground();
+	//		fgTexture = resources.getForestForeground();
+	//		groundTexture = resources.getForestGround();
+	//		bgType = BackgroundType::FOREST_DAY;
+	//		break;
+	//	case 3: // Las noc¹
+	//		bgTexture = resources.getForestNightBackground();
+	//		mgTexture = resources.getForestNightMidground();
+	//		fgTexture = resources.getForestNightForeground();
+	//		groundTexture = resources.getForestNightGround();
+	//		bgType = BackgroundType::FOREST_NIGHT;
+	//		break;
+	//	default:
+	//		bgTexture = resources.getDesertBackground();
+	//		mgTexture = resources.getDesertMidground();
+	//		fgTexture = resources.getDesertForeground();
+	//		bgType = BackgroundType::DESERT_DAY;
+	//		break;
+	//	}
 
-		board.setBackgroundType(bgType);
-		board.init(resources.getGreenDinoRun(), GetScreenWidth(), GetScreenHeight());
-		SetTargetFPS(60);
+	//	board.setBackgroundType(bgType);
+	//	board.init(resources.getGreenDinoRun(), GetScreenWidth(), GetScreenHeight());
+	//	SetTargetFPS(60);
 
-		while (!WindowShouldClose()) {
-			float dt = GetFrameTime();
+	//	while (!WindowShouldClose()) {
+	//		float dt = GetFrameTime();
 
-			BeginDrawing();
-			ClearBackground(BLACK);
+	//		BeginDrawing();
+	//		ClearBackground(BLACK);
 
-			scrollBackground(dt, GetScreenWidth(), GetScreenHeight());
+	//		scrollBackground(dt, GetScreenWidth(), GetScreenHeight());
 
-			if (!gameOver) {
-				board.update(dt, windowHeight);
-				gameOver = board.checkLoss();
-				score += dt;
-			}
+	//		if (!gameOver) {
+	//			board.update(dt, windowHeight);
+	//			gameOver = board.checkLoss();
+	//			score += dt;
+	//		}
 
-			if (gameOver) {
-				std::string gameOverText = "Game Over! Score: " + std::to_string(static_cast<int>(score));
-				DrawText(gameOverText.c_str(), windowWidth / 2 - MeasureText(gameOverText.c_str(), 40) / 2, windowHeight / 2, 40, RED);
-				if (!savedScore) {
-					saveScore();
-				}
-				DrawText("Press ENTER to return to menu", windowWidth / 2 - MeasureText("Press ENTER to return to menu", 20) / 2, windowHeight / 2 + 50, 20, WHITE);
-				if (IsKeyPressed(KEY_ENTER)) {
-					gameOver = false;
-					break;
-				}
-			}
-			else {
-				board.draw();
-			}
+	//		if (gameOver) {
+	//			std::string gameOverText = "Game Over! Score: " + std::to_string(static_cast<int>(score));
+	//			DrawText(gameOverText.c_str(), windowWidth / 2 - MeasureText(gameOverText.c_str(), 40) / 2, windowHeight / 2, 40, RED);
+	//			if (!savedScore) {
+	//				saveScore();
+	//			}
+	//			DrawText("Press ENTER to return to menu", windowWidth / 2 - MeasureText("Press ENTER to return to menu", 20) / 2, windowHeight / 2 + 50, 20, WHITE);
+	//			if (IsKeyPressed(KEY_ENTER)) {
+	//				gameOver = false;
+	//				break;
+	//			}
+	//		}
+	//		else {
+	//			board.draw();
+	//		}
 
-			drawUI();
+	//		drawUI();
 
-			EndDrawing();
-		}
-	}
+	//		EndDrawing();
+	//	}
+	//}
 
 private:
 	/**
@@ -187,64 +188,63 @@ private:
 	* @param windowWidth Szerokoœæ okna.
 	* @param windowHeight Wysokoœæ okna.
 	*/
-	void scrollBackground(float dt, int windowWidth, int windowHeight) {
-		float avgHeight = (bgTexture.height + mgTexture.height + fgTexture.height) / 3.0f;
-		float universalScale = static_cast<float>(windowHeight) / avgHeight;
+	void scrollBackground(float dt, int windowWidth, int windowHeight); //{
+	//	float avgHeight = (bgTexture.height + mgTexture.height + fgTexture.height) / 3.0f;
+	//	float universalScale = static_cast<float>(windowHeight) / avgHeight;
 
-		float bgScaledWidth = bgTexture.width * universalScale;
-		float mgScaledWidth = mgTexture.width * universalScale;
-		float fgScaledWidth = fgTexture.width * universalScale;
-		float groundScaledWidth = groundTexture.width * universalScale;
+	//	float bgScaledWidth = bgTexture.width * universalScale;
+	//	float mgScaledWidth = mgTexture.width * universalScale;
+	//	float fgScaledWidth = fgTexture.width * universalScale;
+	//	float groundScaledWidth = groundTexture.width * universalScale;
 
-		// Przesuwanie z ró¿nymi prêdkoœciami
-		bgX -= 20 * dt;
-		mgX -= 40 * dt;
-		fgX -= 60 * dt;
-		groundX -= 200 * dt;
+	//	bgX -= 20 * dt;
+	//	mgX -= 40 * dt;
+	//	fgX -= 60 * dt;
+	//	groundX -= 200 * dt;
 
-		// Resetowanie pozycji, gdy tekstura ca³kowicie wyjdzie poza ekran
-		// U¿ywamy modulo, aby zapewniæ ci¹g³oœæ
-		bgX = fmod(bgX, bgScaledWidth);
-		if (bgX > 0) bgX -= bgScaledWidth; // Zapewniamy, ¿e pierwsza instancja zaczyna siê od lewej krawêdzi
-		mgX = fmod(mgX, mgScaledWidth);
-		if (mgX > 0) mgX -= mgScaledWidth;
-		fgX = fmod(fgX, fgScaledWidth);
-		if (fgX > 0) fgX -= fgScaledWidth;
-		groundX = fmod(groundX, groundScaledWidth);
-		if (groundX > 0) groundX -= groundScaledWidth;
+	//	// resetowanie pozycji gdy tekstura ca³kowicie wyjdzie poza ekran
+	//	// U¿ywamy modulo, aby zapewniæ ci¹g³oœæ
+	//	bgX = fmod(bgX, bgScaledWidth);
+	//	if (bgX > 0) bgX -= bgScaledWidth; // Zapewniamy, ¿e pierwsza instancja zaczyna siê od lewej krawêdzi
+	//	mgX = fmod(mgX, mgScaledWidth);
+	//	if (mgX > 0) mgX -= mgScaledWidth;
+	//	fgX = fmod(fgX, fgScaledWidth);
+	//	if (fgX > 0) fgX -= fgScaledWidth;
+	//	groundX = fmod(groundX, groundScaledWidth);
+	//	if (groundX > 0) groundX -= groundScaledWidth;
 
-		auto drawTileableLayer = [&](Texture2D texture, float xPos, float scaledWidth) {
-			// Obliczamy, ile instancji tekstury potrzebujemy, aby pokryæ ekran + jedna dodatkowa
-			int numInstances = static_cast<int>(windowWidth / scaledWidth) + 2;
-			// Przesuniêcie pocz¹tkowe, aby pierwsza instancja zaczyna³a siê poza ekranem
-			float startX = xPos;
-			for (int i = 0; i < numInstances; ++i) {
-				float drawX = startX + i * scaledWidth;
-				DrawTextureEx(texture, { drawX, 0 }, 0.0f, universalScale, WHITE);
-			}
-			};
+	//	auto drawTileableLayer = [&](Texture2D texture, float xPos, float scaledWidth) {
+	//		// Obliczamy, ile instancji tekstury potrzebujemy, aby pokryæ ekran + jedna dodatkowa
+	//		int numInstances = static_cast<int>(windowWidth / scaledWidth) + 2;
+	//		// Przesuniêcie pocz¹tkowe, aby pierwsza instancja zaczyna³a siê poza ekranem
+	//		float startX = xPos;
+	//		for (int i = 0; i < numInstances; ++i) {
+	//			float drawX = startX + i * scaledWidth;
+	//			DrawTextureEx(texture, { drawX, 0.f }, 0.0f, universalScale, WHITE);
+	//		}
+	//		};
 
-		auto drawForegroundLayer = [&](Texture2D texture, float xPos, float scaledWidth) {
-			int numInstances = static_cast<int>(windowWidth / scaledWidth) + 2;
-			float startX = xPos;
-			for (int i = 0; i < numInstances; ++i) {
-				float drawX = startX + i * scaledWidth;
-				float textureHeight = texture.height * universalScale;
-				float drawY = windowHeight - textureHeight;
-				DrawTextureEx(texture, { drawX, drawY }, 0.0f, universalScale, WHITE);
-			}
-			};
+	//	auto drawForegroundLayer = [&](Texture2D texture, float xPos, float scaledWidth) {
+	//		int numInstances = static_cast<int>(windowWidth / scaledWidth) + 2;
+	//		float startX = xPos;
+	//		for (int i = 0; i < numInstances; ++i) {
+	//			float drawX = startX + i * scaledWidth;
+	//			float textureHeight = texture.height * universalScale;
+	//			float drawY = windowHeight - textureHeight;
+	//			DrawTextureEx(texture, { drawX, drawY }, 0.0f, universalScale, WHITE);
+	//		}
+	//		};
 
-		drawTileableLayer(bgTexture, bgX, bgScaledWidth);
-		drawTileableLayer(mgTexture, mgX, mgScaledWidth);
-		drawForegroundLayer(fgTexture, fgX, fgScaledWidth);
-		drawTileableLayer(groundTexture, groundX, groundScaledWidth);
-	}
+	//	drawTileableLayer(bgTexture, bgX, bgScaledWidth);
+	//	drawTileableLayer(mgTexture, mgX, mgScaledWidth);
+	//	drawForegroundLayer(fgTexture, fgX, fgScaledWidth);
+	//	drawTileableLayer(groundTexture, groundX, groundScaledWidth);
+	//}
 
 	/**
 	 * @brief Rysuje interfejs u¿ytkownika (np. wynik, ikony ¿yæ).
 	 */
-	void drawUI() {
+	void drawUI();/* {
 		Texture2D lifeFull = resources.getHeartIcon();
 		Texture2D lifeEmpty = resources.getLifeLostIcon();
 
@@ -276,5 +276,5 @@ private:
 			};
 			DrawTexturePro(numbers, src, dest, { 0, 0 }, 0.0f, WHITE);
 		}
-	}
+	}*/
 };
