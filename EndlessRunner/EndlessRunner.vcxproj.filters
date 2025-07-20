@@ -31,7 +31,7 @@
     <Filter Include="Resources\textures\Characters\Player4">
       <UniqueIdentifier>{b88ef0ce-13dc-4b69-bbf1-9cf97ea5b47e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\NewFilter1">
+    <Filter Include="Source Files\src">
       <UniqueIdentifier>{821fb38e-af9a-4aa9-a4c8-935285ab6bdd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -39,101 +39,107 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Board.ixx">
+    <ClCompile Include="cpp\AnimatedSprite.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\AuthModule.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Bat.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Board.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Controller.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Dust.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\LoadingScreen.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Menu.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Obstacle.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\ObstacleFactory.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Player.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Pterodactyl.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Resources.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Shop.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\StaticObstacle.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ixx\AnimatedSprite.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionHandling.ixx">
+    <ClCompile Include="ixx\AuthModule.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.ixx">
+    <ClCompile Include="ixx\Bat.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Resources.ixx">
+    <ClCompile Include="ixx\Board.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="AuthModule.ixx">
+    <ClCompile Include="ixx\CollisionHandling.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="LoadingScreen.ixx">
+    <ClCompile Include="ixx\Config.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.ixx">
+    <ClCompile Include="ixx\Controller.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Shop.ixx">
+    <ClCompile Include="ixx\Dust.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Dust.ixx">
+    <ClCompile Include="ixx\LoadingScreen.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Player.ixx">
+    <ClCompile Include="ixx\Menu.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Obstacle.ixx">
+    <ClCompile Include="ixx\Nebula.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Bat.ixx">
+    <ClCompile Include="ixx\Obstacle.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Pterodactyl.ixx">
+    <ClCompile Include="ixx\ObstaclesFactory.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedSprite.ixx">
+    <ClCompile Include="ixx\Player.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Config.ixx">
+    <ClCompile Include="ixx\Pterodactyl.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ObstaclesFactory.ixx">
+    <ClCompile Include="ixx\Resources.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="StaticObstacle.ixx">
+    <ClCompile Include="ixx\Shop.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="AuthModule.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
+    <ClCompile Include="ixx\StaticObstacle.ixx">
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedSprite.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Bat.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Dust.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadingScreen.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Obstacle.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="ObstacleFactory.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Pterodactyl.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Shop.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticObstacle.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
+    <ClCompile Include="ixx\Utilities.ixx">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
