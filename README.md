@@ -68,10 +68,19 @@ Projekt został napisany w C++ z użyciem biblioteki **Raylib** i C++20 Modules.
 
 ---
 
-### 🧪 Uruchomienie
+## 🚀 Kompilacja i uruchamianie
 
-1. Skompiluj pliki C++ ręcznie lub przez skrypt.
-2. Uruchom plik wykonywalny `DinoRush.exe` (Windows) lub `./DinoRush` (Linux).
+Ten projekt nie zawiera gotowego pliku wykonywalnego. Aby uruchomić grę, wykonaj poniższe kroki:
+
+1. Sklonuj repozytorium:
+
+   ```bash
+   git clone https://github.com/Pucdolf/EndlessRunner.git
+   ```
+2. Otwórz projekt w IDE obsługującym C++20 Modules, np. Visual Studio 2022 lub nowszym.
+3. Upewnij się, że masz zainstalowaną i skonfigurowaną bibliotekę Raylib.
+4. W IDE wybierz konfigurację `Debug` lub `Release` i skompiluj rozwiązanie (Build Solution).
+5. Uruchom grę (np. klawiszem F5 lub opcją "Start Debugging").
 
 ---
 
