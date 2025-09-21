@@ -64,7 +64,7 @@ Projekt został napisany w C++ z użyciem biblioteki **Raylib** i C++20 Modules.
 * C++20 (moduły)
 * [Raylib](https://www.raylib.com/)
 * System: Windows/Linux
-* Kompilator obsługujący `std::module` (np. MSVC 2022+, GCC 13+, Clang 16+)
+* Kompilator obsługujący `std::module` 
 
 ---
 
