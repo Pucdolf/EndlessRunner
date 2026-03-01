@@ -14,42 +14,23 @@ Jeśli chcesz po prostu zagrać, pobierz gotowy instalator gry. Zawiera on wszys
 
 ### 🕹️ Gameplay
 
-* Cztery różne światy: pustynia (dzień/noc), las (dzień/noc)
-* Animowane przeszkody: kaktusy, pnie, nietoperze, pterodaktyle
-* Prosta, intuicyjna rozgrywka
-* Możliwość personalizacji postaci przez sklep
-* System logowania i rejestracji użytkownika
-
-
-<table>
-  <tr>
-    <td align="center">
-      <strong>🦖 Desert – Day</strong><br>
-      <img src="https://github.com/user-attachments/assets/47be073e-584f-4ca9-b85c-3cacbfd1cdf6" alt="🦖 Desert – Day" width="300">
-    </td>
-    <td align="center">
-      <strong>🦇 Desert – Night</strong><br>
-      <img src="https://github.com/user-attachments/assets/059314da-c3d4-47f6-95a1-0b88d7328f64" alt="🦇 Desert – Night" width="300">
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <strong>🦌 Forest – Day</strong><br>
-      <img src="https://github.com/user-attachments/assets/3a4bc5f0-e65c-49a3-be62-c7956adcaae0" alt="🦌 Forest – Day" width="300">
-    </td>
-    <td align="center">
-      <strong>🦉 Forest – Night</strong><br>
-      <img src="https://github.com/user-attachments/assets/4ae8e4f6-ab47-4380-b239-f1f81f88b536" alt="🦉 Forest – Night" width="300">
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/47be073e-584f-4ca9-b85c-3cacbfd1cdf6" width="400" alt="Desert Day">
+  <img src="https://github.com/user-attachments/assets/059314da-c3d4-47f6-95a1-0b88d7328f64" width="400" alt="Desert Night">
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3a4bc5f0-e65c-49a3-be62-c7956adcaae0" width="400" alt="Forest Day">
+  <img src="https://github.com/user-attachments/assets/4ae8e4f6-ab47-4380-b239-f1f81f88b536" width="400" alt="Forest Night">
+</p>
 
 ---
 
 ### 🛍️ Shop System
 
 Gracze mogą wybrać jednego z wielu dinozaurow, którymi będą grać.
-![Shop](https://github.com/user-attachments/assets/0cb07ebe-0f76-4a9c-b8ee-741b7746e02e)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0cb07ebe-0f76-4a9c-b8ee-741b7746e02e" width="600" alt="Shop System">
+</p>
 
 ---
 
@@ -68,8 +49,9 @@ Projekt został napisany w C++ z użyciem biblioteki **Raylib** i C++20 Modules.
 ---
 
 ### 🎨 Zasoby i Licencja (Ważne!)
-To repozytorium zawiera **wyłącznie kod źródłowy** gry. Płatne assety graficzne i dźwiękowe zostały usunięte z historii Git w celu ochrony praw autorskich twórców.
-- **Dla programistów:** Aby skompilować projekt, musisz dodać własne placeholderowe assety w folderach `textures/` i `media/` lub użyć wersji z instalatora.
+To repozytorium zawiera **wyłącznie kod źródłowy** gry. 
+- **Grafiki i dźwięki:** Projekt wykorzystuje profesjonalny pakiet assetów [Dinosaur Rush Assets](https://alb-pixel-store.itch.io/dinosaur-rush-assets) autorstwa **Alb-Pixel Store**. Ze względu na licencję zabraniającą redystrybucji plików źródłowych, nie są one częścią repozytorium Git.
+- **Dla programistów:** Aby skompilować projekt, musisz dostarczyć własne assety w folderach `textures/` i `media/` lub pobrać wersję z instalatora.
 - **Dla graczy:** Pełna wersja gry z oryginalną grafiką jest dostępna wyłącznie przez [instalator w sekcji Releases](https://github.com/Pucdolf/EndlessRunner/releases/latest).
 
 ---
