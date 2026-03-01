@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp23</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
@@ -120,6 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,7 +157,7 @@
     <ClCompile Include="ixx\Menu.ixx" />
     <ClCompile Include="ixx\Nebula.ixx" />
     <ClCompile Include="ixx\Obstacle.ixx" />
-    <ClCompile Include="ixx\ObstaclesFactory.ixx" />
+    <ClCompile Include="ixx\ObstacleFactory.ixx" />
     <ClCompile Include="ixx\Player.ixx" />
     <ClCompile Include="ixx\Pterodactyl.ixx" />
     <ClCompile Include="ixx\Resources.ixx" />
@@ -188,6 +189,7 @@
     <Image Include="textures\Characters\Player 4\p4_idle.png" />
     <Image Include="textures\Characters\Player 4\p4_run.png" />
     <Image Include="textures\Characters\shadow_2.png" />
+    <Image Include="textures\dr_icon.ico" />
     <Image Include="textures\far-buildings.png" />
     <Image Include="textures\foreground.png" />
     <Image Include="textures\life_icon.png" />
@@ -209,6 +211,9 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="wisdom.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
