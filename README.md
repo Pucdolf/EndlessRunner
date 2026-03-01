@@ -4,9 +4,9 @@
 
 ---
 
-### 🎮 Pobierz i Graj (Windows)
-Nie musisz kompilować kodu! Pobierz gotowy instalator gry:
-👉 **[Pobierz Dino Rush v1.0.0](https://github.com/Pucdolf/EndlessRunner/releases/latest)**
+### 🎮 Pobierz i Graj (Dla Graczy)
+Jeśli chcesz po prostu zagrać, pobierz gotowy instalator gry. Zawiera on wszystkie niezbędne biblioteki oraz płatne assety graficzne, których nie ma w repozytorium kodu.
+👉 **[Pobierz Dino Rush v1.0.1](https://github.com/Pucdolf/EndlessRunner/releases/latest)**
 
 *Instrukcja: Pobierz plik .exe, uruchom go i podążaj za instrukcjami instalatora.*
 
@@ -67,48 +67,40 @@ Projekt został napisany w C++ z użyciem biblioteki **Raylib** i C++20 Modules.
 
 ---
 
+### 🎨 Zasoby i Licencja (Ważne!)
+To repozytorium zawiera **wyłącznie kod źródłowy** gry. Płatne assety graficzne i dźwiękowe zostały usunięte z historii Git w celu ochrony praw autorskich twórców.
+- **Dla programistów:** Aby skompilować projekt, musisz dodać własne placeholderowe assety w folderach `textures/` i `media/` lub użyć wersji z instalatora.
+- **Dla graczy:** Pełna wersja gry z oryginalną grafiką jest dostępna wyłącznie przez [instalator w sekcji Releases](https://github.com/Pucdolf/EndlessRunner/releases/latest).
+
+---
+
 ### 🛠️ Wymagania
 
 * C++20 (moduły)
 * [Raylib](https://www.raylib.com/)
 * System: Windows/Linux
-* Kompilator obsługujący moduły
+* Kompilator obsługujący moduły (np. Visual Studio 2022 v143+)
 
 ---
 
-## 🚀 Kompilacja i uruchamianie
+## 🚀 Kompilacja i uruchamianie (Dla Programistów)
 
-Ten projekt nie zawiera gotowego pliku wykonywalnego. Aby uruchomić grę, wykonaj poniższe kroki:
+Jeśli chcesz rozwijać projekt lub analizować kod, wykonaj poniższe kroki:
 
 1. Sklonuj repozytorium:
-
    ```bash
    git clone https://github.com/Pucdolf/EndlessRunner.git
    ```
 
 2. **Instalacja Raylib (zalecane przez vcpkg):**
-   Jeśli nie masz zainstalowanej biblioteki Raylib, możesz ją łatwo dodać używając `vcpkg`:
-   - Pobierz `vcpkg` (np. do folderu nadrzędnego):
-     ```bash
-     git clone https://github.com/microsoft/vcpkg.git
-     ```
-   - Uruchom skrypt instalacyjny:
-     ```powershell
-     .\vcpkg\bootstrap-vcpkg.bat
-     ```
-   - Zintegruj z Visual Studio (wymaga uprawnień administratora dla globalnej integracji):
-     ```powershell
-     .\vcpkg\vcpkg integrate install
-     ```
-   - Zainstaluj bibliotekę Raylib:
-     ```powershell
-     .\vcpkg\vcpkg install raylib:x64-windows
-     ```
+   - Pobierz `vcpkg`: `git clone https://github.com/microsoft/vcpkg.git`
+   - Zainstaluj: `.\vcpkg\bootstrap-vcpkg.bat`
+   - Zintegruj z VS: `.\vcpkg\vcpkg integrate install`
+   - Pobierz Raylib: `.\vcpkg\vcpkg install raylib:x64-windows`
 
-3. Otwórz projekt w IDE obsługującym C++20 Modules, np. Visual Studio 2022 lub nowszym.
-4. Upewnij się, że masz zainstalowaną i skonfigurowaną bibliotekę Raylib (jeśli użyłeś `vcpkg integrate install`, VS powinno ją wykryć automatycznie).
-5. W IDE wybierz konfigurację `Debug` lub `Release` i skompiluj rozwiązanie (Build Solution).
-6. Uruchom grę (np. klawiszem F5 lub opcją "Start Debugging").
+3. Otwórz projekt w Visual Studio 2022.
+4. **Uwaga:** Gra nie uruchomi się bez plików graficznych w folderze `textures/`. Musisz dostarczyć własne pliki o nazwach zgodnych z `Resources.cpp`.
+5. Wybierz konfigurację `Release` i skompiluj (Build Solution).
 
 ---
 
