@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include <filesystem>
 import MenuModule;
 import LoadingScreenModule;
 import ResourcesModule;
@@ -7,7 +8,10 @@ import ShopModule;
 import ConfigModule;
 
 int main() {
-
+    // Ustawienie katalogu roboczego na miejsce, gdzie znajduje się plik .exe
+    if (std::filesystem::exists(GetApplicationDirectory())) {
+        ChangeDirectory(GetApplicationDirectory());
+    }
 
     const int screenWidth = Config::DEFAULT_WINDOW_WIDTH;
     const int screenHeight = Config::DEFAULT_WINDOW_HEIGHT;

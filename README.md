@@ -1,10 +1,18 @@
-## 🧖 Dino Rush – Endless Runner in C++ with Raylib
+## 🧛 Dino Rush – Endless Runner in C++ with Raylib
 
 **Dino Rush** to dynamiczna gra typu **Endless Runner**, w której wcielasz się w dinozaura uciekającego przez losowo generowane, pełne przeszkód światy. Projekt został zrealizowany jako część kursu *Programowanie Komputerów* na Politechnice Śląskiej.
 
 ---
 
-### 🎮 Gameplay
+### 🎮 Pobierz i Graj (Windows)
+Nie musisz kompilować kodu! Pobierz gotowy instalator gry:
+👉 **[Pobierz Dino Rush v1.0.0](https://github.com/Pucdolf/EndlessRunner/releases/latest)**
+
+*Instrukcja: Pobierz plik .exe, uruchom go i podążaj za instrukcjami instalatora.*
+
+---
+
+### 🕹️ Gameplay
 
 * Cztery różne światy: pustynia (dzień/noc), las (dzień/noc)
 * Animowane przeszkody: kaktusy, pnie, nietoperze, pterodaktyle
@@ -16,22 +24,22 @@
 <table>
   <tr>
     <td align="center">
-      <strong>🌼 Desert – Day</strong><br>
-      <img src="https://github.com/user-attachments/assets/47be073e-584f-4ca9-b85c-3cacbfd1cdf6" alt="🌼 Desert – Day" width="300">
+      <strong>🦖 Desert – Day</strong><br>
+      <img src="https://github.com/user-attachments/assets/47be073e-584f-4ca9-b85c-3cacbfd1cdf6" alt="🦖 Desert – Day" width="300">
     </td>
     <td align="center">
-      <strong>🌙 Desert – Night</strong><br>
-      <img src="https://github.com/user-attachments/assets/059314da-c3d4-47f6-95a1-0b88d7328f64" alt="🌙 Desert – Night" width="300">
+      <strong>🦇 Desert – Night</strong><br>
+      <img src="https://github.com/user-attachments/assets/059314da-c3d4-47f6-95a1-0b88d7328f64" alt="🦇 Desert – Night" width="300">
     </td>
   </tr>
   <tr>
     <td align="center">
-      <strong>🌲 Forest – Day</strong><br>
-      <img src="https://github.com/user-attachments/assets/3a4bc5f0-e65c-49a3-be62-c7956adcaae0" alt="🌲 Forest – Day" width="300">
+      <strong>🦌 Forest – Day</strong><br>
+      <img src="https://github.com/user-attachments/assets/3a4bc5f0-e65c-49a3-be62-c7956adcaae0" alt="🦌 Forest – Day" width="300">
     </td>
     <td align="center">
-      <strong>🌌 Forest – Night</strong><br>
-      <img src="https://github.com/user-attachments/assets/4ae8e4f6-ab47-4380-b239-f1f81f88b536" alt="🌌 Forest – Night" width="300">
+      <strong>🦉 Forest – Night</strong><br>
+      <img src="https://github.com/user-attachments/assets/4ae8e4f6-ab47-4380-b239-f1f81f88b536" alt="🦉 Forest – Night" width="300">
     </td>
   </tr>
 </table>
@@ -64,7 +72,7 @@ Projekt został napisany w C++ z użyciem biblioteki **Raylib** i C++20 Modules.
 * C++20 (moduły)
 * [Raylib](https://www.raylib.com/)
 * System: Windows/Linux
-* Kompilator obsługujący moduły 
+* Kompilator obsługujący moduły
 
 ---
 
@@ -77,14 +85,34 @@ Ten projekt nie zawiera gotowego pliku wykonywalnego. Aby uruchomić grę, wykon
    ```bash
    git clone https://github.com/Pucdolf/EndlessRunner.git
    ```
-2. Otwórz projekt w IDE obsługującym C++20 Modules, np. Visual Studio 2022 lub nowszym.
-3. Upewnij się, że masz zainstalowaną i skonfigurowaną bibliotekę Raylib.
-4. W IDE wybierz konfigurację `Debug` lub `Release` i skompiluj rozwiązanie (Build Solution).
-5. Uruchom grę (np. klawiszem F5 lub opcją "Start Debugging").
+
+2. **Instalacja Raylib (zalecane przez vcpkg):**
+   Jeśli nie masz zainstalowanej biblioteki Raylib, możesz ją łatwo dodać używając `vcpkg`:
+   - Pobierz `vcpkg` (np. do folderu nadrzędnego):
+     ```bash
+     git clone https://github.com/microsoft/vcpkg.git
+     ```
+   - Uruchom skrypt instalacyjny:
+     ```powershell
+     .\vcpkg\bootstrap-vcpkg.bat
+     ```
+   - Zintegruj z Visual Studio (wymaga uprawnień administratora dla globalnej integracji):
+     ```powershell
+     .\vcpkg\vcpkg integrate install
+     ```
+   - Zainstaluj bibliotekę Raylib:
+     ```powershell
+     .\vcpkg\vcpkg install raylib:x64-windows
+     ```
+
+3. Otwórz projekt w IDE obsługującym C++20 Modules, np. Visual Studio 2022 lub nowszym.
+4. Upewnij się, że masz zainstalowaną i skonfigurowaną bibliotekę Raylib (jeśli użyłeś `vcpkg integrate install`, VS powinno ją wykryć automatycznie).
+5. W IDE wybierz konfigurację `Debug` lub `Release` i skompiluj rozwiązanie (Build Solution).
+6. Uruchom grę (np. klawiszem F5 lub opcją "Start Debugging").
 
 ---
 
-### 📁 Pliki użytkownika
+### 💾 Pliki użytkownika
 
 * `users.txt` – zapisane konta (login + hash hasła)
 * `scores.txt` – historia wyników
@@ -98,4 +126,3 @@ Politechnika Śląska, kierunek: Informatyka
 Semestr 4, 2024/2025
 
 ---
-

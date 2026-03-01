@@ -1,8 +1,8 @@
 /**
  * @file ObstacleFactory.ixx
- * @brief Modu³ definiuj¹cy klasê ObstacleFactory, tworz¹c¹ przeszkody.
+ * @brief ModuÅ‚ definiujÄ…cy klasÄ™ ObstacleFactory, tworzÄ…cÄ… przeszkody.
  *
- * Klasa ObstacleFactory generuje losowe przeszkody na podstawie typu t³a gry.
+ * Klasa ObstacleFactory generuje losowe przeszkody na podstawie typu tÅ‚a gry.
  */
 
 module;
@@ -22,9 +22,9 @@ import <vector>;
 
 /**
  * @concept ObstacleType
- * @brief Koncept dla typów przeszkód dziedzicz¹cych po klasie Obstacle.
+ * @brief Koncept dla typÃ³w przeszkÃ³d dziedziczÄ…cych po klasie Obstacle.
  *
- * Typy spe³niaj¹ce ten koncept musz¹ dziedziczyæ po Obstacle oraz implementowaæ metody `init`, `update`, `draw` i `getCollisionRec` z okreœlonymi sygnaturami.
+ * Typy speÅ‚niajÄ…ce ten koncept muszÄ… dziedziczyÄ‡ po Obstacle oraz implementowaÄ‡ metody `init`, `update`, `draw` i `getCollisionRec` z okreÅ›lonymi sygnaturami.
  * @tparam T Typ obiektu do sprawdzenia.
  */
 export template<typename T>
@@ -37,7 +37,7 @@ concept ObstacleType = std::derived_from<T, Obstacle>&& requires(T t, const Text
 
 /**
  * @enum BackgroundType
- * @brief Typy t³a gry.
+ * @brief Typy tÅ‚a gry.
  */
 export enum class BackgroundType {
     DESERT_DAY,
@@ -48,21 +48,21 @@ export enum class BackgroundType {
 
 /**
  * @class ObstacleFactory
- * @brief Klasa odpowiedzialna za tworzenie przeszkód.
+ * @brief Klasa odpowiedzialna za tworzenie przeszkÃ³d.
  *
- * Generuje losowe przeszkody (Bat, Pterodactyl, StaticObstacle) z uwzglêdnieniem typu t³a.
+ * Generuje losowe przeszkody (Bat, Pterodactyl, StaticObstacle) z uwzglÄ™dnieniem typu tÅ‚a.
  */
 export class ObstacleFactory {
 private:
-    /** @brief Referencja do zasobów gry. */
+    /** @brief Referencja do zasobÃ³w gry. */
     Resources& resources;
     /** @brief Generator liczb losowych. */
     std::random_device rd;
-    /** @brief Silnik losuj¹cy. */
+    /** @brief Silnik losujÄ…cy. */
     std::mt19937 gen{ rd() };
-    /** @brief Rozk³ad losuj¹cy prawdopodobieñstwo (0-99). */
+    /** @brief RozkÅ‚ad losujÄ…cy prawdopodobieÅ„stwo (0-99). */
     std::uniform_int_distribution<> probabilityDis{ 0, 99 };
-    /** @brief Rozk³ad losuj¹cy statyczne przeszkody (0-6). */
+    /** @brief RozkÅ‚ad losujÄ…cy statyczne przeszkody (0-6). */
     std::uniform_int_distribution<> staticDis{ 0, 6 }; 
 
    
@@ -76,16 +76,16 @@ private:
 public:
     /**
      * @brief Konstruktor klasy ObstacleFactory.
-     * @param res Referencja do zasobów gry.
+     * @param res Referencja do zasobÃ³w gry.
      */
     ObstacleFactory(Resources& res) : resources(res) {}
 
     /**
-     * @brief Tworzy now¹ przeszkodê.
-     * @param startX Pocz¹tkowa pozycja X.
-     * @param startY Pocz¹tkowa pozycja Y.
-     * @param bgType Typ t³a gry.
-     * @return Unikalny wskaŸnik do stworzonej przeszkody.
+     * @brief Tworzy nowÄ… przeszkodÄ™.
+     * @param startX PoczÄ…tkowa pozycja X.
+     * @param startY PoczÄ…tkowa pozycja Y.
+     * @param bgType Typ tÅ‚a gry.
+     * @return Unikalny wskaÅºnik do stworzonej przeszkody.
      */
     std::unique_ptr<Obstacle> createObstacle(float startX, float startY, BackgroundType bgType); /*{
         int roll = probabilityDis(gen); 

@@ -120,7 +120,7 @@
     <ClCompile Include="ixx\Obstacle.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ixx\ObstaclesFactory.ixx">
+    <ClCompile Include="ixx\ObstacleFactory.ixx">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Player.ixx">
@@ -251,6 +251,9 @@
     <Image Include="textures\pterosaur_spritesheet.png">
       <Filter>Resources\textures</Filter>
     </Image>
+    <Image Include="textures\dr_icon.ico">
+      <Filter>Resources\textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="users.txt">
@@ -264,5 +267,10 @@
     <Media Include="wisdom.mp3">
       <Filter>Resources</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
