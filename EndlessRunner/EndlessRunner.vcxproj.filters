@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Modules">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -33,6 +29,10 @@
     </Filter>
     <Filter Include="Source Files\src">
       <UniqueIdentifier>{821fb38e-af9a-4aa9-a4c8-935285ab6bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ixx">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -85,61 +85,67 @@
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="ixx\AnimatedSprite.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\AuthModule.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Bat.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Board.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\CollisionHandling.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Config.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Controller.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Dust.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\LoadingScreen.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Menu.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Nebula.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Obstacle.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\ObstacleFactory.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Player.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Pterodactyl.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Resources.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Shop.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\StaticObstacle.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="ixx\Utilities.ixx">
-      <Filter>Modules</Filter>
+      <Filter>Source Files\ixx</Filter>
+    </ClCompile>
+    <ClCompile Include="ixx\DatabaseManagerModule.ixx">
+      <Filter>Source Files\ixx</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\DatabaseManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +268,7 @@
     <Text Include="scores.txt">
       <Filter>Resources</Filter>
     </Text>
+    <Text Include="docker-compose.yml" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="wisdom.mp3">

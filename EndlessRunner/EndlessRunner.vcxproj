@@ -135,6 +135,7 @@
     <ClCompile Include="cpp\Bat.cpp" />
     <ClCompile Include="cpp\Board.cpp" />
     <ClCompile Include="cpp\Controller.cpp" />
+    <ClCompile Include="cpp\DatabaseManager.cpp" />
     <ClCompile Include="cpp\Dust.cpp" />
     <ClCompile Include="cpp\LoadingScreen.cpp" />
     <ClCompile Include="cpp\Menu.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="cpp\Resources.cpp" />
     <ClCompile Include="cpp\Shop.cpp" />
     <ClCompile Include="cpp\StaticObstacle.cpp" />
+    <ClCompile Include="ixx\DatabaseManagerModule.ixx" />
     <ClCompile Include="ixx\AnimatedSprite.ixx" />
     <ClCompile Include="ixx\AuthModule.ixx" />
     <ClCompile Include="ixx\Bat.ixx" />
@@ -206,6 +208,7 @@
     <Image Include="textures\shop_background.png" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="docker-compose.yml" />
     <Text Include="scores.txt" />
     <Text Include="users.txt" />
   </ItemGroup>
