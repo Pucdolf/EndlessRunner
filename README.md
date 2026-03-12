@@ -1,14 +1,14 @@
 ## 🧛 Dino Rush – Endless Runner in C++ with Raylib
 
-**Dino Rush** to dynamiczna gra typu **Endless Runner**, w której wcielasz się w dinozaura uciekającego przez losowo generowane, pełne przeszkód światy. Projekt został zrealizowany jako część kursu *Programowanie Komputerów* na Politechnice Śląskiej.
+**Dino Rush** is a dynamic **Endless Runner** game where you take on the role of a dinosaur running through randomly generated worlds filled with obstacles. The project was developed as part of the *Computer Programming* course at the Silesian University of Technology.
 
 ---
 
-### 🎮 Pobierz i Graj (Dla Graczy)
-Jeśli chcesz po prostu zagrać, pobierz gotowy instalator gry. Zawiera on wszystkie niezbędne biblioteki oraz płatne assety graficzne, których nie ma w repozytorium kodu.
-👉 **[Pobierz Dino Rush v1.0.1](https://github.com/Pucdolf/EndlessRunner/releases/latest)**
+### 🎮 Download and Play (For Players)
+If you just want to play, download the ready-to-use game installer. It contains all the necessary libraries and paid graphical assets that are not present in the code repository.
+👉 **[Download Dino Rush v1.0.1](https://github.com/Pucdolf/EndlessRunner/releases/latest)**
 
-*Instrukcja: Pobierz plik .exe, uruchom go i podążaj za instrukcjami instalatora.*
+*Instructions: Download the .exe file, run it, and follow the installer instructions.*
 
 ---
 
@@ -27,76 +27,76 @@ Jeśli chcesz po prostu zagrać, pobierz gotowy instalator gry. Zawiera on wszys
 
 ### 🛍️ Shop System
 
-Gracze mogą wybrać jednego z wielu dinozaurow, którymi będą grać.
+Players can choose from several dinosaurs to play as.
 <p align="center">
   <img src="https://github.com/user-attachments/assets/0cb07ebe-0f76-4a9c-b8ee-741b7746e02e" width="600" alt="Shop System">
 </p>
 
 ---
 
-### 📂 Struktura projektu
+### 📂 Project Structure
 
-Projekt został napisany w C++ z użyciem biblioteki **Raylib** i C++20 Modules. Główne moduły:
+The project is written in C++ using the **Raylib** library and C++20 Modules. Main modules:
 
-* `AnimatedSpriteModule` – obsługa animowanych sprite’ów
-* `BoardModule` – główna logika gry
-* `ObstacleFactoryModule` – dynamiczne generowanie przeszkód
-* `AuthModule` – logowanie, rejestracja z plikiem `users.txt`
-* `ShopModule` – wybór postaci
-* `ControllerModule` – sterowanie stanem gry i tłem
-* `ResourcesModule` – zarządzanie teksturami i zasobami
-
----
-
-### 🎨 Zasoby i Licencja (Ważne!)
-To repozytorium zawiera **wyłącznie kod źródłowy** gry. 
-- **Grafiki i dźwięki:** Projekt wykorzystuje profesjonalny pakiet assetów [Dinosaur Rush Assets](https://alb-pixel-store.itch.io/dinosaur-rush-assets) autorstwa **Alb-Pixel Store**. Ze względu na licencję zabraniającą redystrybucji plików źródłowych, nie są one częścią repozytorium Git.
-- **Dla programistów:** Aby skompilować projekt, musisz dostarczyć własne assety w folderach `textures/` i `media/` lub pobrać wersję z instalatora.
-- **Dla graczy:** Pełna wersja gry z oryginalną grafiką jest dostępna wyłącznie przez [instalator w sekcji Releases](https://github.com/Pucdolf/EndlessRunner/releases/latest).
+* `AnimatedSpriteModule` – handles animated sprites
+* `BoardModule` – main game logic
+* `ObstacleFactoryModule` – dynamic obstacle generation
+* `AuthModule` – login, registration with the `users.txt` file
+* `ShopModule` – character selection
+* `ControllerModule` – game state and background control
+* `ResourcesModule` – texture and resource management
 
 ---
 
-### 🛠️ Wymagania
+### 🎨 Assets and License (Important!)
+This repository contains **only the source code** of the game.
+- **Graphics and sounds:** The project uses a professional asset pack [Dinosaur Rush Assets](https://alb-pixel-store.itch.io/dinosaur-rush-assets) by **Alb-Pixel Store**. Due to the license prohibiting the redistribution of source files, they are not part of the Git repository.
+- **For developers:** To compile the project, you must provide your own assets in the `textures/` and `media/` folders or download the version from the installer.
+- **For players:** The full version of the game with original graphics is available only through the [installer in the Releases section](https://github.com/Pucdolf/EndlessRunner/releases/latest).
 
-* C++20 (moduły)
+---
+
+### 🛠️ Requirements
+
+* C++20 (modules)
 * [Raylib](https://www.raylib.com/)
-* System: Windows/Linux
-* Kompilator obsługujący moduły (np. Visual Studio 2022 v143+)
+* OS: Windows/Linux
+* Compiler supporting modules (e.g., Visual Studio 2022 v143+)
 
 ---
 
-## 🚀 Kompilacja i uruchamianie (Dla Programistów)
+## 🚀 Compilation and Running (For Developers)
 
-Jeśli chcesz rozwijać projekt lub analizować kod, wykonaj poniższe kroki:
+If you want to develop the project or analyze the code, follow these steps:
 
-1. Sklonuj repozytorium:
+1. Clone the repository:
    ```bash
    git clone https://github.com/Pucdolf/EndlessRunner.git
    ```
 
-2. **Instalacja Raylib (zalecane przez vcpkg):**
-   - Pobierz `vcpkg`: `git clone https://github.com/microsoft/vcpkg.git`
-   - Zainstaluj: `.\vcpkg\bootstrap-vcpkg.bat`
-   - Zintegruj z VS: `.\vcpkg\vcpkg integrate install`
-   - Pobierz Raylib: `.\vcpkg\vcpkg install raylib:x64-windows`
+2. **Raylib Installation (recommended via vcpkg):**
+   - Download `vcpkg`: `git clone https://github.com/microsoft/vcpkg.git`
+   - Install: `.\vcpkg\bootstrap-vcpkg.bat`
+   - Integrate with VS: `.\vcpkg\vcpkg integrate install`
+   - Download Raylib: `.\vcpkg\vcpkg install raylib:x64-windows`
 
-3. Otwórz projekt w Visual Studio 2022.
-4. **Uwaga:** Gra nie uruchomi się bez plików graficznych w folderze `textures/`. Musisz dostarczyć własne pliki o nazwach zgodnych z `Resources.cpp`.
-5. Wybierz konfigurację `Release` i skompiluj (Build Solution).
-
----
-
-### 💾 Pliki użytkownika
-
-* `users.txt` – zapisane konta (login + hash hasła)
-* `scores.txt` – historia wyników
+3. Open the project in Visual Studio 2022.
+4. **Note:** The game will not start without image files in the `textures/` folder. You must provide your own files with names matching those in `Resources.cpp`.
+5. Select the `Release` configuration and compile (Build Solution).
 
 ---
 
-### 🎓 Projekt studencki
+### 💾 User Files
 
-Zrealizowano w ramach kursu *Programowanie Komputerów*
-Politechnika Śląska, kierunek: Informatyka
-Semestr 4, 2024/2025
+* `users.txt` – saved accounts (login + password hash)
+* `scores.txt` – score history
+
+---
+
+### 🎓 Student Project
+
+Developed as part of the *Computer Programming* course
+Silesian University of Technology, major: Computer Science
+Semester 4, 2024/2025
 
 ---
