@@ -8,8 +8,10 @@ import ShopModule;
 import ConfigModule;
 
 int main() {
-    // Ustawienie katalogu roboczego na miejsce, gdzie znajduje się plik .exe
-    if (std::filesystem::exists(GetApplicationDirectory())) {
+    // Ustawienie katalogu roboczego:
+    // Jeśli folder 'textures' nie istnieje obok .exe (np. w Visual Studio), 
+    // to nie zmieniaj katalogu, aby korzystać z folderu projektu.
+    if (std::filesystem::exists(std::filesystem::path(GetApplicationDirectory()) / "textures")) {
         ChangeDirectory(GetApplicationDirectory());
     }
 

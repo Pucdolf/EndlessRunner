@@ -145,7 +145,7 @@
       <Filter>Source Files\ixx</Filter>
     </ClCompile>
     <ClCompile Include="cpp\DatabaseManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
