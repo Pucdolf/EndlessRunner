@@ -41,7 +41,7 @@ void Controller::run() {
 		groundTexture = resources.getDesertGround();
 		bgType = BackgroundType::DESERT_DAY;
 		break;
-	case 1: // Pustynia noc¹
+	case 1: // Pustynia nocÄ…
 		bgTexture = resources.getDesertNightBackground();
 		mgTexture = resources.getDesertNightMidground();
 		fgTexture = resources.getDesertNightForeground();
@@ -55,7 +55,7 @@ void Controller::run() {
 		groundTexture = resources.getForestGround();
 		bgType = BackgroundType::FOREST_DAY;
 		break;
-	case 3: // Las noc¹
+	case 3: // Las nocÄ…
 		bgTexture = resources.getForestNightBackground();
 		mgTexture = resources.getForestNightMidground();
 		fgTexture = resources.getForestNightForeground();
@@ -119,19 +119,21 @@ void Controller::scrollBackground(float dt, int windowWidth, int widnowHeight) {
 	float fgScaledWidth = fgTexture.width * universalScale;
 	float groundScaledWidth = groundTexture.width * universalScale;
 
-	bgX -= 20 * dt;
-	mgX -= 40 * dt;
-	fgX -= 60 * dt;
-	groundX -= 200 * dt;
+	if (!gameOver) {
+		bgX -= 20 * dt;
+		mgX -= 40 * dt;
+		fgX -= 60 * dt;
+		groundX -= 200 * dt;
 
-	bgX = fmod(bgX, bgScaledWidth);
-	if (bgX > 0) bgX -= bgScaledWidth;
-	mgX = fmod(mgX, mgScaledWidth);
-	if (mgX > 0) mgX -= mgScaledWidth;
-	fgX = fmod(fgX, fgScaledWidth);
-	if (fgX > 0) fgX -= fgScaledWidth;
-	groundX = fmod(groundX, groundScaledWidth);
-	if (groundX > 0) groundX -= groundScaledWidth;
+		bgX = fmod(bgX, bgScaledWidth);
+		if (bgX > 0) bgX -= bgScaledWidth;
+		mgX = fmod(mgX, mgScaledWidth);
+		if (mgX > 0) mgX -= mgScaledWidth;
+		fgX = fmod(fgX, fgScaledWidth);
+		if (fgX > 0) fgX -= fgScaledWidth;
+		groundX = fmod(groundX, groundScaledWidth);
+		if (groundX > 0) groundX -= groundScaledWidth;
+	}
 
 	auto drawTileableLayer = [&](Texture2D texture, float xPos, float scaledWidth) {
 		int numInstances = static_cast<int>(windowWidth / scaledWidth) + 2;
